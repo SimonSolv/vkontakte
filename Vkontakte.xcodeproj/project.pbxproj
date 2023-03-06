@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
+		CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
 		CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274829B002EA001F2DDE /* ViewController.swift */; };
@@ -17,6 +19,27 @@
 		CEB0275F29B002EC001F2DDE /* VkontakteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0275E29B002EC001F2DDE /* VkontakteTests.swift */; };
 		CEB0276929B002EC001F2DDE /* VkontakteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0276829B002EC001F2DDE /* VkontakteUITests.swift */; };
 		CEB0276B29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0276A29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift */; };
+		CEB0277929B005FD001F2DDE /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277829B005FD001F2DDE /* CoordinatorProtocol.swift */; };
+		CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */; };
+		CEB0277E29B00770001F2DDE /* FactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277D29B00770001F2DDE /* FactoryProtocol.swift */; };
+		CEB0278029B007F5001F2DDE /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277F29B007F5001F2DDE /* Factory.swift */; };
+		CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0278929B07B1D001F2DDE /* LandingViewController.swift */; };
+		CEB0278D29B07C3C001F2DDE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEB0278C29B07C3C001F2DDE /* SnapKit */; };
+		CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */; };
+		CEB0279229B0B644001F2DDE /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279129B0B644001F2DDE /* Customization.swift */; };
+		CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */; };
+		CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279529B12263001F2DDE /* RegisterViewModel.swift */; };
+		CEB0279829B1234D001F2DDE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279729B1234D001F2DDE /* UserModel.swift */; };
+		CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */; };
+		CEB0279D29B229A0001F2DDE /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */; };
+		CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279E29B27322001F2DDE /* UserStorage.swift */; };
+		CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A029B27448001F2DDE /* FeedViewController.swift */; };
+		CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */; };
+		CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */; };
+		CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A629B27BE2001F2DDE /* PostModel.swift */; };
+		CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A829B27CD5001F2DDE /* PostStorage.swift */; };
+		CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */; };
+		CEB027AD29B28411001F2DDE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AC29B28411001F2DDE /* UserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +76,26 @@
 		CEB0276429B002EC001F2DDE /* VkontakteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VkontakteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0276829B002EC001F2DDE /* VkontakteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkontakteUITests.swift; sourceTree = "<group>"; };
 		CEB0276A29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkontakteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CEB0277829B005FD001F2DDE /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		CEB0277D29B00770001F2DDE /* FactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryProtocol.swift; sourceTree = "<group>"; };
+		CEB0277F29B007F5001F2DDE /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		CEB0278929B07B1D001F2DDE /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CEB0279129B0B644001F2DDE /* Customization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		CEB0279529B12263001F2DDE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		CEB0279729B1234D001F2DDE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoViewController.swift; sourceTree = "<group>"; };
+		CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		CEB0279E29B27322001F2DDE /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		CEB027A029B27448001F2DDE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionHeaderView.swift; sourceTree = "<group>"; };
+		CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEB027A629B27BE2001F2DDE /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		CEB027A829B27CD5001F2DDE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
+		CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		CEB027AC29B28411001F2DDE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB0278D29B07C3C001F2DDE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +147,15 @@
 		CEB0274329B002EA001F2DDE /* Vkontakte */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
+				CEB0279B29B22979001F2DDE /* Services */,
+				CEB0279029B0B630001F2DDE /* CustomStyle */,
 				CEB0274629B002EA001F2DDE /* SceneDelegate.swift */,
+				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
+				CEB0278429B07AAD001F2DDE /* View */,
+				CEB0278329B07A94001F2DDE /* View_model */,
+				CEB0278129B07990001F2DDE /* Model */,
+				CEB0277C29B0075B001F2DDE /* Factory */,
+				CEB0277729B005E0001F2DDE /* Coordinator */,
 				CEB0274829B002EA001F2DDE /* ViewController.swift */,
 				CEB0274A29B002EA001F2DDE /* Main.storyboard */,
 				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
@@ -130,6 +183,109 @@
 			path = VkontakteUITests;
 			sourceTree = "<group>";
 		};
+		CEB0277729B005E0001F2DDE /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0277829B005FD001F2DDE /* CoordinatorProtocol.swift */,
+				CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		CEB0277C29B0075B001F2DDE /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0277D29B00770001F2DDE /* FactoryProtocol.swift */,
+				CEB0277F29B007F5001F2DDE /* Factory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		CEB0278129B07990001F2DDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279729B1234D001F2DDE /* UserModel.swift */,
+				CEB0279E29B27322001F2DDE /* UserStorage.swift */,
+				CEB027A629B27BE2001F2DDE /* PostModel.swift */,
+				CEB027A829B27CD5001F2DDE /* PostStorage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEB0278329B07A94001F2DDE /* View_model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279529B12263001F2DDE /* RegisterViewModel.swift */,
+			);
+			path = View_model;
+			sourceTree = "<group>";
+		};
+		CEB0278429B07AAD001F2DDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0278829B07AF5001F2DDE /* Feed */,
+				CEB0278729B07AEC001F2DDE /* Liked */,
+				CEB0278629B07AD8001F2DDE /* Profile */,
+				CEB0278529B07ACE001F2DDE /* Landing */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEB0278529B07ACE001F2DDE /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0278929B07B1D001F2DDE /* LandingViewController.swift */,
+				CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */,
+				CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */,
+				CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		CEB0278629B07AD8001F2DDE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CEB0278729B07AEC001F2DDE /* Liked */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Liked;
+			sourceTree = "<group>";
+		};
+		CEB0278829B07AF5001F2DDE /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				CEB027A029B27448001F2DDE /* FeedViewController.swift */,
+				CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */,
+				CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */,
+				CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */,
+				CEB027AC29B28411001F2DDE /* UserView.swift */,
+				CE4D3A2529B5234600A2E09A /* PostViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		CEB0279029B0B630001F2DDE /* CustomStyle */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279129B0B644001F2DDE /* Customization.swift */,
+			);
+			path = CustomStyle;
+			sourceTree = "<group>";
+		};
+		CEB0279B29B22979001F2DDE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +302,9 @@
 			dependencies = (
 			);
 			name = Vkontakte;
+			packageProductDependencies = (
+				CEB0278C29B07C3C001F2DDE /* SnapKit */,
+			);
 			productName = Vkontakte;
 			productReference = CEB0274129B002EA001F2DDE /* Vkontakte.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +377,9 @@
 				Base,
 			);
 			mainGroup = CEB0273829B002EA001F2DDE;
+			packageReferences = (
+				CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CEB0274229B002EA001F2DDE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,10 +423,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB0278029B007F5001F2DDE /* Factory.swift in Sources */,
+				CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */,
+				CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */,
 				CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */,
+				CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */,
+				CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */,
 				CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */,
+				CEB0277929B005FD001F2DDE /* CoordinatorProtocol.swift in Sources */,
+				CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */,
 				CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */,
+				CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */,
+				CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */,
+				CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */,
+				CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */,
+				CEB0279829B1234D001F2DDE /* UserModel.swift in Sources */,
+				CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */,
+				CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */,
+				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
+				CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */,
+				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
+				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
+				CEB0279D29B229A0001F2DDE /* LocalNotificationService.swift in Sources */,
+				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
+				CEB0279229B0B644001F2DDE /* Customization.swift in Sources */,
+				CEB0277E29B00770001F2DDE /* FactoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +790,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CEB0278C29B07C3C001F2DDE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */ = {
