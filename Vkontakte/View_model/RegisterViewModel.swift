@@ -6,18 +6,28 @@
 //
 
 import Foundation
+import UIKit
 
-class PersonViewModel {
-    private let user: User
-    
-    init(user: User) {
-        self.user = user
-    }
-    
-    var fullName: String {
-        return user.fullName
-    }
-}
+//class PersonViewModel {
+//    
+//    private let user: UserData?
+//    
+//    let coreManager = CoreDataManager.shared
+//    
+//    var userId: String
+//    
+//    init(userId: String) {
+//        self.user = coreManager.getUser(id: userId)
+//    }
+//    
+//    var fullName: String {
+//        let myUser = self.user
+//        if myUser != nil {
+//            return "\(myUser!.name) \(myUser?.lastName ?? "")"
+//        }
+//        return ""
+//    }
+//}
 
 class RegisterViewModel {
     func checkConfirmationCode(code: String?) -> Bool {
@@ -35,3 +45,22 @@ class RegisterViewModel {
         }
     }
 }
+
+//func createUser(user: User) {
+// 
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    let managedContext = appDelegate.persistentContainer.viewContext
+//    let userID = UUID().uuidString
+//    let newUser = UserData(context: managedContext)
+//    newUser.name = user.name
+//    newUser.lastName = user.lastName
+//    newUser.nickName = user.nickName
+//    newUser.jobTitle = user.jobTitle
+//    newUser.id = userID
+//    
+//    do {
+//        try managedContext.save()
+//    } catch let error as NSError {
+//        print("Could not save. \(error), \(error.userInfo)")
+//    }
+//}

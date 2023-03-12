@@ -13,6 +13,8 @@ class UsersCollectionHeaderView: UITableViewHeaderFooterView {
     
     private let cellSpacing = 10
     
+    let coreManager = CoreDataManager.shared
+    
     static let identifier = "UsersCollectionHeaderView"
     
     lazy var collectionView: UICollectionView = {
@@ -61,12 +63,12 @@ class UsersCollectionHeaderView: UITableViewHeaderFooterView {
 extension UsersCollectionHeaderView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UserStorage().users.count
+        return coreManager.users.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCollectionViewCell.identifier, for: indexPath) as! UserCollectionViewCell
-        cell.user = UserStorage().users[indexPath.row]
+        cell.user = coreManager.users[indexPath.row]
         return cell
     }
 }

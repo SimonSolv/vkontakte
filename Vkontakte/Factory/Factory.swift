@@ -20,9 +20,8 @@ class Factory: FactoryProtocol {
             controller.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "book.fill"), tag: 0)
             return controller
         case .profile:
-            let controller = UIViewController()
+            let controller = ProfileViewController()
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
-            controller.view.backgroundColor = .blue
             return controller
         case .liked:
             let controller = UIViewController()

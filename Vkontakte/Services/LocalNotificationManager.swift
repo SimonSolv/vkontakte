@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import UserNotifications
 
-class LocalNotificationService: NSObject, UNUserNotificationCenterDelegate {
+class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
        
     let center = UNUserNotificationCenter.current()
 

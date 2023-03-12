@@ -10,10 +10,10 @@ import SnapKit
 
 class UserCollectionViewCell: UICollectionViewCell {
     static let identifier = "UserCollectionViewCell"
-    
-    var user: User? {
+
+    var user: UserData? {
         didSet {
-            self.userAvatar.image = UIImage(named: user?.pictures?[0] ?? "DefaultAvatar")
+            self.userAvatar.image = UIImage(named: user?.avatar ?? "DefaultAvatar")
         }
     }
     

@@ -9,9 +9,9 @@ import UIKit
 
 class FeedViewController: UIViewController, CoordinatedProtocol {
     
-    var coordinator: CoordinatorProtocol?
+    let coreManager = CoreDataManager.shared
     
-    var storage = PostStorage()
+    var coordinator: CoordinatorProtocol?
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -24,6 +24,7 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        coreManager.fetchPosts()
         setupViews()
         setupConstraints()
     }
@@ -54,7 +55,7 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
 extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storage.posts.count
+        return coreManager.posts.count
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -68,14 +69,14 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
 //        doubleTapp.post = cellPost
 //        cell?.addGestureRecognizer(doubleTapp)
         cell?.delegate = self
-        cell?.source = storage.posts[indexPath.row]
+        cell?.source = coreManager.posts[indexPath.row]
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected")
         let controller = PostViewController()
-        controller.source = storage.posts[indexPath.row]
+        controller.source = coreManager.posts[indexPath.row]
         self.present(controller, animated: true)
         self.navigationController?.pushViewController(controller, animated: true)
     }

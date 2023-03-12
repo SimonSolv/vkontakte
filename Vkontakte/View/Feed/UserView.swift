@@ -7,14 +7,21 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class UserView: UIView {
     
-    var user: User? {
+    var userId: String? {
         didSet {
-            self.name.text = user?.fullName
-            self.job.text = user?.job ?? ""
-            self.avatar.image = UIImage(named: user?.pictures?[0] ?? "DefaultAvatar")
+            self.currentUser = CoreDataManager.shared.getUser(id: userId!)
+        }
+    }
+
+    var currentUser: UserData? {
+        didSet {
+            self.name.text = currentUser?.name
+            self.job.text = currentUser?.jobTitle ?? ""
+            self.avatar.image = UIImage(named: currentUser?.avatar ?? "DefaultAvatar")
         }
     }
     
@@ -34,9 +41,7 @@ class UserView: UIView {
     
     lazy var avatar: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 30
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
+        image.setCustomStyle(style: .avatar)
         return image
     }()
 
@@ -77,3 +82,4 @@ class UserView: UIView {
     }
     
 }
+

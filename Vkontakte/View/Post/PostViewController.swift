@@ -20,9 +20,11 @@ class PostViewController: UIViewController, CoordinatedProtocol {
             self.postTitle.text = source?.title
             self.body.text = source?.body
             self.image.image = UIImage(named: source?.image ?? "DefaultPostImage")
-            self.userView.user = source?.author
+            let coremanager = CoreDataManager.shared
+            let author = coremanager.getUser(id: (source?.author?.id)!)
+            self.userView.currentUser = author
             setupLabel(label: self.likes, image: "heart", text: "\(source?.likes ?? 0)")
-            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.comments ?? 0)")
+            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.commentsArray?.count ?? 0)")
         }
     }
     
@@ -94,8 +96,8 @@ class PostViewController: UIViewController, CoordinatedProtocol {
         scrollView.snp.makeConstraints { make in
             make.trailing.equalTo(view.snp.trailing)
             make.leading.equalTo(view.snp.leading)
-            make.top.equalTo(view.snp.top)
-            make.bottom.equalTo(view.snp.bottom)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         contentView.snp.makeConstraints { make in

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
 		CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */; };
+		CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */; };
+		CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */; };
+		CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */; };
+		CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */; };
+		CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
 		CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274829B002EA001F2DDE /* ViewController.swift */; };
@@ -29,9 +34,8 @@
 		CEB0279229B0B644001F2DDE /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279129B0B644001F2DDE /* Customization.swift */; };
 		CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */; };
 		CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279529B12263001F2DDE /* RegisterViewModel.swift */; };
-		CEB0279829B1234D001F2DDE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279729B1234D001F2DDE /* UserModel.swift */; };
 		CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */; };
-		CEB0279D29B229A0001F2DDE /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */; };
+		CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */; };
 		CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279E29B27322001F2DDE /* UserStorage.swift */; };
 		CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A029B27448001F2DDE /* FeedViewController.swift */; };
 		CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */; };
@@ -62,6 +66,11 @@
 /* Begin PBXFileReference section */
 		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
+		CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +94,8 @@
 		CEB0279129B0B644001F2DDE /* Customization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
 		CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		CEB0279529B12263001F2DDE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		CEB0279729B1234D001F2DDE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoViewController.swift; sourceTree = "<group>"; };
-		CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		CEB0279E29B27322001F2DDE /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		CEB027A029B27448001F2DDE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -124,6 +132,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE4D3A2D29BA1C1200A2E09A /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2529B5234600A2E09A /* PostViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		CE4D3A2E29BB457400A2E09A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		CEB0273829B002EA001F2DDE = {
 			isa = PBXGroup;
 			children = (
@@ -147,15 +171,15 @@
 		CEB0274329B002EA001F2DDE /* Vkontakte */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0279B29B22979001F2DDE /* Services */,
-				CEB0279029B0B630001F2DDE /* CustomStyle */,
+				CEB0277729B005E0001F2DDE /* Coordinator */,
+				CEB0277C29B0075B001F2DDE /* Factory */,
 				CEB0274629B002EA001F2DDE /* SceneDelegate.swift */,
 				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
+				CEB0279B29B22979001F2DDE /* Services */,
+				CEB0279029B0B630001F2DDE /* CustomStyle */,
 				CEB0278429B07AAD001F2DDE /* View */,
 				CEB0278329B07A94001F2DDE /* View_model */,
 				CEB0278129B07990001F2DDE /* Model */,
-				CEB0277C29B0075B001F2DDE /* Factory */,
-				CEB0277729B005E0001F2DDE /* Coordinator */,
 				CEB0274829B002EA001F2DDE /* ViewController.swift */,
 				CEB0274A29B002EA001F2DDE /* Main.storyboard */,
 				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
@@ -204,7 +228,6 @@
 		CEB0278129B07990001F2DDE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0279729B1234D001F2DDE /* UserModel.swift */,
 				CEB0279E29B27322001F2DDE /* UserStorage.swift */,
 				CEB027A629B27BE2001F2DDE /* PostModel.swift */,
 				CEB027A829B27CD5001F2DDE /* PostStorage.swift */,
@@ -216,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB0279529B12263001F2DDE /* RegisterViewModel.swift */,
+				CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */,
 			);
 			path = View_model;
 			sourceTree = "<group>";
@@ -223,6 +247,8 @@
 		CEB0278429B07AAD001F2DDE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE4D3A2E29BB457400A2E09A /* Login */,
+				CE4D3A2D29BA1C1200A2E09A /* Post */,
 				CEB0278829B07AF5001F2DDE /* Feed */,
 				CEB0278729B07AEC001F2DDE /* Liked */,
 				CEB0278629B07AD8001F2DDE /* Profile */,
@@ -246,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
+				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -265,7 +292,6 @@
 				CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */,
 				CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */,
 				CEB027AC29B28411001F2DDE /* UserView.swift */,
-				CE4D3A2529B5234600A2E09A /* PostViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -281,7 +307,9 @@
 		CEB0279B29B22979001F2DDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0279C29B229A0001F2DDE /* LocalNotificationService.swift */,
+				CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */,
+				CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */,
+				CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -423,12 +451,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */,
 				CEB0278029B007F5001F2DDE /* Factory.swift in Sources */,
 				CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */,
 				CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */,
 				CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */,
 				CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */,
 				CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */,
+				CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */,
+				CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */,
 				CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */,
 				CEB0277929B005FD001F2DDE /* CoordinatorProtocol.swift in Sources */,
 				CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */,
@@ -437,7 +468,6 @@
 				CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */,
 				CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */,
 				CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */,
-				CEB0279829B1234D001F2DDE /* UserModel.swift in Sources */,
 				CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */,
 				CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */,
 				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
@@ -445,8 +475,10 @@
 				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
 				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
-				CEB0279D29B229A0001F2DDE /* LocalNotificationService.swift in Sources */,
+				CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */,
 				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
+				CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */,
+				CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */,
 				CEB0279229B0B644001F2DDE /* Customization.swift in Sources */,
 				CEB0277E29B00770001F2DDE /* FactoryProtocol.swift in Sources */,
 			);

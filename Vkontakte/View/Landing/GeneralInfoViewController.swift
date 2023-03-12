@@ -14,7 +14,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     var coordinator: CoordinatorProtocol?
     
-    var user: User?
+    var user: UserData?
     
     weak var bottomConstraint: NSLayoutConstraint!
     

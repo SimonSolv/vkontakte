@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
         
     }
     
-    var localNotification: LocalNotificationService?
+    var localNotification: LocalNotificationManager?
     
     var scroll = UIScrollView()
     
@@ -145,7 +145,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
     
     @objc private func nextButtonTapped() {
         coordinator?.ivent(action: .requestNotifications, iniciator: self)
-        let service = LocalNotificationService()
+        let service = LocalNotificationManager()
         service.registerNotificationTimeInterval(title: "Verification code", body: "Your code: 0000", interval: 2)
 
         coordinator?.ivent(action: .showRegistrationConfirmation, iniciator: self)

@@ -15,12 +15,12 @@ class PostTableViewCell: UITableViewCell {
     
     var source: Post? {
         didSet {
+            self.userView.userId = source?.author?.id
             self.title.text = source?.title
             self.body.text = source?.body
             self.image.image = UIImage(named: source?.image ?? "DefaultPostImage")
-            self.userView.user = source?.author
             setupLabel(label: self.likes, image: "heart", text: "\(source?.likes ?? 0)")
-            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.comments ?? 0)")
+            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.commentsArray?.count ?? 0)")
         }
     }
     

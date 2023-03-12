@@ -5,7 +5,7 @@ class AppCoordinator: CoordinatorProtocol {
     
     private let tabBarController: UITabBarController
     private let factory: Factory
-    var notificationService: LocalNotificationService?
+    var notificationService: LocalNotificationManager?
 
     init(tabBarController: UITabBarController, factory: Factory) {
         self.tabBarController = tabBarController
@@ -42,6 +42,9 @@ class AppCoordinator: CoordinatorProtocol {
             notificationService?.registerNotificationTimeInterval(title: "VerificationCode", body: "Your verification code is: 0000", interval: 2)
         case .openPost:
             let controller = factory.createController(type: .post, coordinator: self)
+            iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .loginSuccess:
+            let controller = factory.createController(type: .profile, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         }
     }

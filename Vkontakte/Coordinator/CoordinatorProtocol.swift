@@ -16,4 +16,5 @@ enum ActionType {
     case requestNotifications
     case sendNotification
     case openPost
+    case loginSuccess
 }

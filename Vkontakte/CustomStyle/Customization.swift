@@ -3,12 +3,13 @@ import UIKit
 enum ButtonStyle {
     case main
     case action
-    case plain
+    case orangeish
+    case line
 }
 
 enum TextFieldStyle {
     case phoneField
-    case other
+    case login
     case subGeneral
 }
 
@@ -31,9 +32,14 @@ extension UIButton {
         case .action:
             self.backgroundColor = .systemBlue
             self.layer.cornerRadius = 15
-        case .plain:
-            self.backgroundColor = .systemMint
+        case .orangeish:
+            self.backgroundColor = .orange
             self.layer.cornerRadius = 15
+            self.titleLabel?.font = .systemFont(ofSize: 20)
+            self.setTitleColor(.white, for: .normal)
+        case .line:
+            self.setTitleColor(.gray, for: .normal)
+            self.titleLabel?.font = .systemFont(ofSize: 15)
         }
     }
     
@@ -45,6 +51,24 @@ extension UIButton {
     func makeDisable() {
         self.isEnabled = false
         self.layer.backgroundColor = UIColor.systemGray.cgColor
+    }
+}
+
+final class CustomButton: UIButton {
+    private var onTap: () -> Void
+
+    init(title: String, titleColor: UIColor, onTap: @escaping () -> Void) {
+        self.onTap = onTap
+        super.init(frame: .zero)
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(titleColor, for: .normal)
+        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    required init?(coder: NSCoder) {
+        nil
+    }
+    @objc private func buttonTapped() {
+        self.onTap()
     }
 }
 
@@ -68,8 +92,14 @@ extension UITextField {
             self.keyboardType = .default
             self.textColor = .black
             self.addLeftPadding(10)
-        case .other:
-            self.layer.backgroundColor = UIColor.systemGreen.cgColor
+        case .login:
+            self.backgroundColor = .systemGray6
+            self.layer.borderWidth = 0.5
+            self.layer.borderColor = UIColor.lightGray.cgColor
+            self.font = .systemFont(ofSize: 16)
+            self.textColor = .black
+            self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+            self.leftViewMode = .always
         }
     }
 
@@ -111,6 +141,21 @@ extension UILabel {
             self.font = UIFont.systemFont(ofSize: 15)
             self.textColor = .black
             self.textAlignment = .left
+        }
+    }
+}
+
+enum UIImageViewStyle {
+    case avatar
+}
+
+extension UIImageView {
+    func setCustomStyle(style: UIImageViewStyle) {
+        switch style {
+        case .avatar:
+            self.layer.cornerRadius = 30
+            self.clipsToBounds = true
+            self.contentMode = .scaleAspectFill
         }
     }
 }

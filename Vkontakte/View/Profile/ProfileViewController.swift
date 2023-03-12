@@ -6,24 +6,38 @@
 //
 
 import UIKit
+import SnapKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, CoordinatedProtocol {
+    
+    var coordinator: CoordinatorProtocol?
+    
+    private lazy var header: ProfileUserView = {
+        let view = ProfileUserView()
+        let coreManager = CoreDataManager.shared
+        view.user = coreManager.getUserByName(name: "Kate")
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupView()
+        setupConstraints()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupView() {
+        view.addSubview(header)
     }
-    */
+    
+    private func setupConstraints() {
+        header.snp.makeConstraints {make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(300)
+            make.trailing.equalTo(view.snp.trailing)
+            make.leading.equalTo(view.snp.leading)
+        }
+    }
+
+
 
 }
