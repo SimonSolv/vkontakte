@@ -11,16 +11,25 @@ class PostTableViewCell: UITableViewCell {
     
     var delegate: PostTableViewCellDelegate?
     
+    let coreManager = CoreDataManager.shared
+    
     static let identifier = "PostTableViewCell"
     
-    var source: Post? {
+    var post: Post?
+    
+    var postId: String? {
         didSet {
-            self.userView.userId = source?.author?.id
-            self.title.text = source?.title
-            self.body.text = source?.body
-            self.image.image = UIImage(named: source?.image ?? "DefaultPostImage")
-            setupLabel(label: self.likes, image: "heart", text: "\(source?.likes ?? 0)")
-            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.commentsArray?.count ?? 0)")
+            guard let source = coreManager.getPost(id: postId!) else {
+                print ("Couldnt get post in PostTableViewCell")
+                return
+            }
+            post = source
+            userView.userId = source.author?.id
+            title.text = source.title
+            body.text = source.body
+            image.image = UIImage(named: source.image ?? "DefaultPostImage")
+            setupLabel(label: self.likes, image: "heart", text: "\(source.likes )")
+            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source.commentsArray?.count ?? 0)")
         }
     }
     
@@ -69,23 +78,25 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
-
+        let tapOnLikes = UITapGestureRecognizer(target: self, action: #selector(likesTapped))
+        let tapOnComment = UITapGestureRecognizer(target: self, action: #selector(commentsTapped))
+        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(userTapped))
+        let tapOnBody = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
+        let tapOnTitle = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
+        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
+        userView.avatar.addGestureRecognizer(tapOnUser)
+        body.addGestureRecognizer(tapOnBody)
+        image.addGestureRecognizer(tapOnImage)
+        title.addGestureRecognizer(tapOnTitle)
+        likes.addGestureRecognizer(tapOnLikes)
+        comments.addGestureRecognizer(tapOnComment)
+        self.selectionStyle = .none
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
     //MARK: - Setup
     private func setupViews() {
         contentView.addSubview(userView)
@@ -94,17 +105,18 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(image)
         contentView.addSubview(likes)
         contentView.addSubview(comments)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(likesTapped))
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(commentsTapped))
-        likes.addGestureRecognizer(tapGesture)
-        comments.addGestureRecognizer(tapGesture2)
+        userView.isUserInteractionEnabled = true
+        body.isUserInteractionEnabled = true
+        image.isUserInteractionEnabled = true
+        title.isUserInteractionEnabled = true
+        likes.isUserInteractionEnabled = true
+        comments.isUserInteractionEnabled = true
     }
     
     private func setupConstraints() {
         
         userView.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(5)
-       //     make.height.equalTo(60)
             make.leading.equalTo(contentView.snp.leading)
             make.trailing.equalTo(contentView.snp.trailing)
         }
@@ -153,21 +165,49 @@ class PostTableViewCell: UITableViewCell {
         attributedString.append(NSAttributedString(string: " " + text))
         label.attributedText = attributedString
     }
-                                                
+    
+    @objc private func bodyTapped() {
+        print("Body tapped for PostTableViewCell")
+        guard (self.postId != nil) else
+        {
+            print("Error to get PostId in PostTableViewCell")
+            return
+        }
+        delegate?.openPost(id: postId!)
+    }
+    
     @objc private func likesTapped() {
         updateLikes(state: true)
     }
     
+    @objc private func userTapped() {
+        print("User tapped for PostTableViewCell")
+        guard (self.postId != nil) else
+        {
+            print("Error to get PostId in PostTableViewCell")
+            return
+        }
+        let coreManager = CoreDataManager.shared
+        let post = coreManager.getPost(id: postId!)
+        let author = post!.author
+        delegate?.openAuthor(id: (author?.id)!)
+    }
+    
     @objc private func commentsTapped() {
-        self.delegate?.openPost(comment: true)
+        print("Comments tapped for PostTableViewCell")
+        guard (self.postId != nil) else
+        {
+            print("Error to get PostId in PostTableViewCell")
+            return
+        }
+        self.delegate?.openPost(id: postId!)
     }
     
     private func updateLikes(state: Bool) {
-        self.delegate?.liked(status: state)
+        if state == true {
+            setupLabel(label: likes, image: "heart.fill", text: "\(post!.likes + 1)")
+        } else {
+            setupLabel(label: likes, image: "heart", text: "\(post!.likes - 1)")
+        }
     }
-}
-
-protocol PostTableViewCellDelegate {
-    func openPost(comment: Bool)
-    func liked(status: Bool)
 }

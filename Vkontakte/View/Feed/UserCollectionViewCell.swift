@@ -9,8 +9,9 @@ import UIKit
 import SnapKit
 
 class UserCollectionViewCell: UICollectionViewCell {
+    
     static let identifier = "UserCollectionViewCell"
-
+    
     var user: UserData? {
         didSet {
             self.userAvatar.image = UIImage(named: user?.avatar ?? "DefaultAvatar")
@@ -33,6 +34,8 @@ class UserCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        contentView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     required init?(coder: NSCoder) {
@@ -42,13 +45,23 @@ class UserCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        addSubview(userAvatar)
+        contentView.addSubview(userAvatar)
     }
     
     private func setupConstraints() {
         userAvatar.snp.makeConstraints { make in
-            make.width.equalTo(60)
+            make.edges.equalToSuperview()
             make.height.equalTo(60)
+            make.width.equalTo(60)
         }
+    }
+    
+    @objc private func handleTap() {
+        let notificationName = Notification.Name("ShowProfile")
+        // Create the notification
+        let notification = Notification(name: notificationName, object: nil, userInfo: ["id": user!.id!])
+        // Post the notification to the notification center
+        NotificationCenter.default.post(notification)
+
     }
 }

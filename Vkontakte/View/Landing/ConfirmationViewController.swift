@@ -20,6 +20,13 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
         }
     }
     
+    private lazy var checkMark: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "CheckMark")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 25)
@@ -93,6 +100,7 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
         view.addSubview(enterCodeLabel)
         view.addSubview(codeEnteringTextView)
         view.addSubview(confirmButton)
+        view.addSubview(checkMark)
     }
     
     private func setupConstraints() {
@@ -137,11 +145,18 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
             make.width.equalTo(view.snp.width).offset(-100)
             make.height.equalTo(50)
         }
+        
+        checkMark.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.bottom).offset(-220)
+            make.centerX.equalTo(view.snp.centerX)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        }
     }
     
     @objc private func confirmButtonTapped() {
         if self.delegate.checkConfirmationCode(code: self.codeEnteringTextView.text) == true {
-            self.coordinator?.ivent(action: .registerSuccess, iniciator: self)
+            self.coordinator?.ivent(action: .addGeneralInfo, iniciator: self)
         } else {
             //resolve problem
             print ("Code is not valid")

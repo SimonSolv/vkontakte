@@ -8,14 +8,13 @@
 import UIKit
 
 class FeedViewController: UIViewController, CoordinatedProtocol {
-    
+
     let coreManager = CoreDataManager.shared
     
     var coordinator: CoordinatorProtocol?
     
     lazy var tableView: UITableView = {
         let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
@@ -24,9 +23,11 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        coreManager.fetchPosts()
         setupViews()
         setupConstraints()
+        let notificationName = Notification.Name("ShowProfile")
+        // Add observer for the notification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
     }
     
     //MARK: - Setup
@@ -48,6 +49,14 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
         }
     }
     
+    //Handle notification to open profile when tapped on user in collectionView
+    @objc func handleNotification(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            let id = userInfo["id"] as! String
+            self.coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+        }
+    }
+    
 }
 
 //MARK: - TableViewDelegate
@@ -63,34 +72,31 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
-//        let doubleTapp = CustomJestureRecognizer(target: self, action: #selector(ProfileViewController.handleTap(_:)))
-//        doubleTapp.numberOfTapsRequired = 2
-//        doubleTapp.post = cellPost
-//        cell?.addGestureRecognizer(doubleTapp)
-        cell?.delegate = self
-        cell?.source = coreManager.posts[indexPath.row]
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected")
-        let controller = PostViewController()
-        controller.source = coreManager.posts[indexPath.row]
-        self.present(controller, animated: true)
-        self.navigationController?.pushViewController(controller, animated: true)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        let id = coreManager.posts[indexPath.row].id
+        guard let id = id else {
+            print("Id, transfered to cell is nil in FeedViewController")
+            print("Id is \(id)")
+            return UITableViewCell()
+        }
+        cell.postId = id
+        cell.delegate = self
+        return cell
     }
 
 }
 
 extension FeedViewController: PostTableViewCellDelegate {
-    func openPost(comment: Bool) {
-        self.coordinator?.ivent(action: .openPost, iniciator: self)
+    func openPost(id: String) {
+        coordinator?.ivent(action: .openPost(id: id), iniciator: self)
+    }
+    
+    func openAuthor(id: String) {
+        coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
     }
     
     func liked(status: Bool) {
-        print("Liked tapped")
+        
     }
-    
-    
 }

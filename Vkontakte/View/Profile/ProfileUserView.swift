@@ -9,167 +9,216 @@ import UIKit
 import CoreData
 import SnapKit
 
-class ProfileUserView: UIView {
+class ProfileUserView: UIView, UserContainsProtocol {
     
-    var user: UserData? {
-        didSet {
-            self.avatar.image = UIImage(named: user?.avatar ?? "DefaultAvatar")
-            self.name.text = "\(user!.name ?? "Unknown") \(user!.lastName ?? "")"
-            self.job.text = "\(user!.jobTitle ?? "")"
-        }
-    }
+    var isCurrentUser: Bool
     
-    lazy var avatar: UIImageView = {
+    var dataSource: UserContainsProtocol
+    
+    var userId: String
+    
+    var user: UserData
+    
+    private lazy var avatar: UIImageView = {
         let image = UIImageView()
         image.setCustomStyle(style: .avatar)
+        image.image = UIImage(named: user.avatar ?? "DefaultAvatar")
         return image
     }()
     
-    lazy var name: UILabel = {
+    private lazy var name: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
+        label.text = "\(user.name ?? "Unknown User") \(user.lastName ?? "")"
         return label
     }()
     
-    lazy var job: UILabel = {
+    private lazy var job: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .grayMedium)
         label.textAlignment = .left
+        label.text = "\(user.jobTitle ?? "")"
         return label
     }()
     
-    lazy var additionalInfoButton: UIButton = {
+    private lazy var additionalInfoButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Additional info", for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 20)
+        btn.titleLabel?.font = .systemFont(ofSize: 15)
         btn.setTitleColor(.black, for: .normal)
         btn.contentHorizontalAlignment = .left
         return btn
     }()
     
-    lazy var i_image: UIImageView = {
+    private lazy var i_image: UIImageView = {
         let imgview = UIImageView()
         let img = UIImage(systemName: "info.circle.fill")
-        img?.withTintColor(.orange)
+        imgview.tintColor = .orange
         imgview.image = img
         return imgview
     }()
     
-    lazy var editButton: UIButton = {
+    private lazy var editButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .orangeish)
         btn.setTitle("Edit", for: .normal)
         return btn
     }()
     
-    lazy var messageButton: UIButton = {
+    private lazy var messageButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .main)
         btn.setTitle("Message", for: .normal)
         return btn
     }()
     
-    lazy var callButton: UIButton = {
+    private lazy var callButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .main)
         btn.setTitle("Call", for: .normal)
         btn.isEnabled = false
         return btn
     }()
+    
+    private var hStack: UIStackView = UIStackView()
+
+    private lazy var publicationsLabel: UILabel = {
+        let label = UILabel()
+        label.setCustomStyle(style: .feedBody)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "\(user.posts?.count ?? 0)\nposts"
+        return label
+    }()
+    
+    private lazy var subscribersLabel: UILabel = {
+        let label = UILabel()
+        label.setCustomStyle(style: .feedBody)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "\(user.subscriptions?.count ?? 0)\nsubscriptions"
+        return label
+    }()
+    
+    private lazy var subscriptionsLabel: UILabel = {
+        let label = UILabel()
+        label.setCustomStyle(style: .feedBody)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "\(user.subscribers?.count ?? 0)\nsubscribers"
+        return label
+    }()
 
     //MARK: - Setup
     
-    override init(frame: CGRect) {
+    init(dataSource: UserContainsProtocol) {
+        self.dataSource = dataSource
+        self.userId = dataSource.userId
+        self.user = CoreDataManager.shared.getUser(id: userId)!
+        self.isCurrentUser = user.isLogged
         super.init(frame: .zero)
-        let current = getViewType()
-        setupView(current: current)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(current: Bool) {
+    private func setupView() {
         addSubview(avatar)
         addSubview(name)
         addSubview(job)
         addSubview(i_image)
         addSubview(additionalInfoButton)
-        switch current {
+        switch isCurrentUser {
         case true:
             addSubview(editButton)
         case false:
             addSubview(messageButton)
             addSubview(callButton)
+        default:
+            addSubview(messageButton)
+            addSubview(callButton)
         }
-        setupConstraints(current: current)
+        hStack = UIStackView(arrangedSubviews: [ publicationsLabel,subscribersLabel, subscriptionsLabel])
+        hStack.axis = .horizontal
+        addSubview(hStack)
+        setupConstraints()
     }
     
     //MARK: - Constraints
     
-    func setupConstraints(current: Bool) {
+    private func setupConstraints() {
         
         avatar.snp.makeConstraints {make in
-            make.top.equalTo(snp.top).offset(5)
+            make.top.equalTo(snp.top).offset(20)
             make.height.equalTo(60)
             make.width.equalTo(60)
-            make.leading.equalTo(snp.leading).offset(15)
+            make.leading.equalTo(snp.leading).offset(20)
         }
         
         name.snp.makeConstraints {make in
-            make.top.equalTo(avatar.snp.top).offset(5)
+            make.top.equalTo(avatar.snp.top).offset(-5)
             make.trailing.equalTo(snp.trailing).offset(-15)
-            make.leading.equalTo(avatar.snp.trailing).offset(15)
+            make.leading.equalTo(avatar.snp.trailing).offset(20)
         }
         
         job.snp.makeConstraints {make in
-            make.top.equalTo(name.snp.bottom).offset(10)
+            make.top.equalTo(name.snp.bottom).offset(5)
             make.trailing.equalTo(snp.trailing).offset(-15)
-            make.leading.equalTo(avatar.snp.trailing).offset(15)
+            make.leading.equalTo(avatar.snp.trailing).offset(20)
         }
         
         i_image.snp.makeConstraints {make in
-            make.top.equalTo(job.snp.bottom).offset(10)
+            make.top.equalTo(job.snp.bottom).offset(5)
             make.height.equalTo(20)
             make.width.equalTo(20)
-            make.leading.equalTo(avatar.snp.trailing).offset(15)
+            make.leading.equalTo(avatar.snp.trailing).offset(20)
         }
         
         additionalInfoButton.snp.makeConstraints {make in
             make.centerY.equalTo(i_image.snp.centerY)
-            make.height.equalTo(60)
             make.trailing.equalTo(snp.trailing).offset(-15)
-            make.leading.equalTo(i_image.snp.trailing).offset(2)
+            make.leading.equalTo(i_image.snp.trailing).offset(4)
         }
         
-        switch current {
-        case true:
+        if isCurrentUser == true {
             editButton.snp.makeConstraints {make in
-                make.top.equalTo(additionalInfoButton.snp.bottom).offset(10)
-                make.height.equalTo(60)
-                make.trailing.equalTo(snp.trailing).offset(-15)
-                make.leading.equalTo(avatar.snp.trailing).offset(15)
+                make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
+                make.height.equalTo(50)
+                make.leading.equalTo(snp.leading).offset(20)
+                make.trailing.equalTo(snp.trailing).offset(-20)
             }
-        case false:
+            
+            hStack.snp.makeConstraints { make in
+                make.top.equalTo(editButton.snp.bottom).offset(15)
+                make.left.equalTo(snp.left)
+                make.right.equalTo(snp.right)
+                make.bottom.equalTo(snp.bottom).offset(-15)
+            }
+        } else {
             messageButton.snp.makeConstraints {make in
-                make.top.equalTo(additionalInfoButton.snp.bottom).offset(10)
-                make.leading.equalTo(avatar.snp.trailing).offset(15)
-                make.width.equalTo(100)
+                make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
+                make.leading.equalTo(snp.leading).offset(20)
+                make.trailing.equalTo(callButton.snp.leading).offset(-20)
                 make.height.equalTo(50)
             }
             
             callButton.snp.makeConstraints {make in
-                make.top.equalTo(additionalInfoButton.snp.bottom).offset(10)
-                make.leading.equalTo(messageButton.snp.trailing).offset(15)
-                make.width.equalTo(100)
+                make.top.equalTo(messageButton.snp.top)
+                make.trailing.equalTo(snp.trailing).offset(-20)
                 make.height.equalTo(50)
+                make.width.equalTo(messageButton.snp.width)
+            }
+            
+            hStack.snp.makeConstraints { make in
+                make.top.equalTo(callButton.snp.bottom).offset(15)
+                make.left.equalTo(snp.left)
+                make.right.equalTo(snp.right)
+                make.bottom.equalTo(snp.bottom).offset(-15)
             }
         }
     }
-    
-    func getViewType() -> Bool {
-        return false
-    }
-    
 }

@@ -17,7 +17,7 @@ class UsersCollectionHeaderView: UITableViewHeaderFooterView {
     
     static let identifier = "UsersCollectionHeaderView"
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -50,12 +50,9 @@ class UsersCollectionHeaderView: UITableViewHeaderFooterView {
     }
     
     private func setupConstraints() {
-        collectionView.snp.makeConstraints {make in
-            make.top.equalTo(contentView.snp.top)
-            make.bottom.equalTo(contentView.snp.bottom)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
-            make.height.equalTo(90)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(80)
         }
     }
 }

@@ -15,6 +15,9 @@ class CoreDataManager {
     
     init() {
         fetchUsers()
+        fetchPosts()
+        fetchComments()
+        getCurrentUser()
     }
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -48,6 +51,8 @@ class CoreDataManager {
     
     var comments: [Comment] = []
     
+    var currentUser: UserData?
+    
  //   var pictures: [Picture] = []
     
     func fetchUsers() {
@@ -56,8 +61,8 @@ class CoreDataManager {
         self.users = users
     }
     
-    func createUser(name: String, lastName: String?, jobTitle: String, nickName: String, dateOfBirth: Date, avatar: String?) {
-        var newUser = UserData(context: persistentContainer.viewContext)
+    func createUser(name: String, lastName: String?, jobTitle: String, nickName: String, dateOfBirth: Date, avatar: String?, isLogged: Bool) {
+        let newUser = UserData(context: persistentContainer.viewContext)
         newUser.id = UUID().uuidString
         newUser.name = name
         newUser.lastName = lastName
@@ -65,8 +70,17 @@ class CoreDataManager {
         newUser.nickName = nickName
         newUser.dateOfBirth = dateOfBirth
         newUser.avatar = avatar ?? "DefaultAvatar"
+        newUser.isLogged = isLogged
         saveContext()
         fetchUsers()
+    }
+    
+    func getCurrentUser() {
+        for user in users {
+            if user.isLogged == true {
+                self.currentUser = user
+            }
+        }
     }
     
     func editUserData(userId: String, newData: UserData) {
@@ -80,7 +94,7 @@ class CoreDataManager {
                 saveContext()
                 fetchUsers()
             } else {
-                print("Error: Cannot find user via id provided")
+                print("Error: Cannot find user via id provided in EditUserData")
             }
         }
     }
@@ -92,7 +106,7 @@ class CoreDataManager {
                 saveContext()
                 fetchUsers()
             } else {
-                print("Error: Cannot find user via id provided")
+                print("Error: Cannot find user via id provided in deleteUser")
             }
         }
     }
@@ -101,6 +115,16 @@ class CoreDataManager {
         var data: UserData? = nil
         for user in users {
             if user.id == id {
+                data = user
+            }
+        }
+        return data
+    }
+    
+    func getUserByNick (nickName: String) -> UserData? {
+        var data: UserData? = nil
+        for user in users {
+            if user.nickName == nickName {
                 data = user
             }
         }
@@ -118,6 +142,10 @@ class CoreDataManager {
         return data
     }
     
+    func setCurrentUser(id: String) {
+        self.currentUser = getUser(id: id)
+    }
+    
     
     //MARK: - Posts
     
@@ -127,8 +155,18 @@ class CoreDataManager {
         self.posts = posts
     }
     
+    func fetchPostsFor(user id: String) -> [Post] {
+        var answer: [Post] = []
+        for post in self.posts {
+            if post.author?.id == id {
+                answer.append(post)
+            }
+        }
+        return answer
+    }
+    
     func createPost(title: String, body: String, image: String, authorId: String) {
-        var newPost = Post(context: persistentContainer.viewContext)
+        let newPost = Post(context: persistentContainer.viewContext)
         newPost.id = UUID().uuidString
         newPost.image = image
         newPost.likes = Int64(arc4random_uniform(600))
@@ -150,7 +188,7 @@ class CoreDataManager {
                 saveContext()
                 fetchPosts()
             } else {
-                print("Error: Cannot find post via id provided")
+                print("Error: Cannot find post via id provided in editPost")
             }
         }
     }
@@ -162,18 +200,21 @@ class CoreDataManager {
                 saveContext()
                 fetchPosts()
             } else {
-                print("Error: Cannot find user via id provided")
+                print("Error: Cannot find post via id provided in deletePost")
             }
         }
     }
     
     func getPost(id: String) -> Post? {
-        var data: Post? = Post()
+        fetchPosts()
+        var data: Post?
+        print("\(posts.count)")
         for post in posts {
             if post.id == id {
                 data = post
             } else {
-                print("Error: Cannot find user via id provided")
+                print("Error: Cannot find post via id provided in getPost")
+                print ("Id provided: \(id)")
                 data = nil
             }
         }

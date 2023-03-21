@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CoordinatorProtocol {
-    func start()
+    func start(scene: SceneStatus)
     func ivent(action: ActionType, iniciator: UIViewController)
 }
 
@@ -12,9 +12,10 @@ protocol CoordinatedProtocol {
 enum ActionType {
     case showRegisterPage
     case showRegistrationConfirmation
-    case registerSuccess
+    case addGeneralInfo
     case requestNotifications
     case sendNotification
-    case openPost
+    case openPost(id: String)
     case loginSuccess
+    case showProfile(userId: String)
 }

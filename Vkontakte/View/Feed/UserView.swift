@@ -13,15 +13,18 @@ class UserView: UIView {
     
     var userId: String? {
         didSet {
-            self.currentUser = CoreDataManager.shared.getUser(id: userId!)
-        }
-    }
-
-    var currentUser: UserData? {
-        didSet {
-            self.name.text = currentUser?.name
-            self.job.text = currentUser?.jobTitle ?? ""
-            self.avatar.image = UIImage(named: currentUser?.avatar ?? "DefaultAvatar")
+            guard let id = userId else {
+                print("Id, provided in UserView is nil")
+                return
+            }
+            let currentUser = CoreDataManager.shared.getUser(id: id)
+            guard let currentUser = currentUser else {
+                print("Couldnt get user via id provided in UserView")
+                return
+            }
+            self.name.text = currentUser.name
+            self.job.text = currentUser.jobTitle ?? ""
+            self.avatar.image = UIImage(named: currentUser.avatar ?? "DefaultAvatar")
         }
     }
     
@@ -55,9 +58,9 @@ class UserView: UIView {
     }
     
     private func setupView() {
+        addSubview(avatar)
         addSubview(name)
         addSubview(job)
-        addSubview(avatar)
         
         avatar.snp.makeConstraints {make in
             make.top.equalTo(snp.top).offset(5)

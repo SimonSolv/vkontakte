@@ -10,15 +10,28 @@ import SnapKit
 
 class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
+    enum FieldCheckerAlert {
+        case wrongName
+        case wrongNickName
+        case notAllFilled
+        case allGood
+    }
+    
     //MARK: - Properties
     
     var coordinator: CoordinatorProtocol?
     
-    var user: UserData?
-    
     weak var bottomConstraint: NSLayoutConstraint!
     
     private var scroll = UIScrollView()
+    
+    var dateOfBirth: Date?
+    
+    let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        return picker
+    }()
     
     private lazy var confirmButton: UIButton = {
         let btn = UIButton()
@@ -71,6 +84,14 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name*"
+        label.setCustomStyle(style: .subtitle)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var dateOfBirthLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Date of Birth*"
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -130,11 +151,23 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         scroll.addSubview(nickNameLabel)
         scroll.addSubview(nickNameTextField)
         scroll.addSubview(annotationLabel)
+        scroll.addSubview(dateOfBirthLabel)
+        scroll.addSubview(datePicker)
         scroll.addSubview(confirmButton)
         nameTextField.delegate = self
         lastNameTextField.delegate = self
         jobTextField.delegate = self
         nickNameTextField.delegate = self
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let maxDateComponents = DateComponents(year: -18)
+        let minDateComponents = DateComponents(year: -100)
+        let maxDate = calendar.date(byAdding: maxDateComponents, to: currentDate)
+        let minDate = calendar.date(byAdding: minDateComponents, to: currentDate)
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        datePicker.maximumDate = maxDate
+        datePicker.minimumDate = minDate
+        datePicker.date = maxDate ?? currentDate
     }
     
     private func setupConstraints() {
@@ -150,14 +183,11 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
             make.top.equalTo(scroll.snp.top).offset(20)
             make.centerX.equalTo(scroll.snp.centerX)
             make.width.equalTo(scroll.snp.width).offset(-40)
-            make.height.equalTo(50)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             make.leading.equalTo(scroll.snp.leading).offset(20)
-            make.width.equalTo(scroll.snp.width).offset(-40)
-            make.height.equalTo(40)
         }
         
         nameTextField.snp.makeConstraints { make in
@@ -170,8 +200,6 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         lastNameLabel.snp.makeConstraints { make in
             make.top.equalTo(nameTextField.snp.bottom).offset(20)
             make.leading.equalTo(scroll.snp.leading).offset(20)
-            make.width.equalTo(scroll.snp.width).offset(-40)
-            make.height.equalTo(40)
         }
         
         lastNameTextField.snp.makeConstraints { make in
@@ -184,8 +212,6 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         nickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(lastNameTextField.snp.bottom).offset(20)
             make.leading.equalTo(scroll.snp.leading).offset(20)
-            make.width.equalTo(scroll.snp.width).offset(-40)
-            make.height.equalTo(40)
         }
         
         nickNameTextField.snp.makeConstraints { make in
@@ -198,8 +224,6 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         jobLabel.snp.makeConstraints { make in
             make.top.equalTo(nickNameTextField.snp.bottom).offset(20)
             make.leading.equalTo(scroll.snp.leading).offset(20)
-            make.width.equalTo(scroll.snp.width).offset(-40)
-            make.height.equalTo(40)
         }
         
         jobTextField.snp.makeConstraints { make in
@@ -209,8 +233,21 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
             make.height.equalTo(40)
         }
         
-        annotationLabel.snp.makeConstraints { make in
+        dateOfBirthLabel.snp.makeConstraints { make in
             make.top.equalTo(jobTextField.snp.bottom).offset(20)
+            make.leading.equalTo(scroll.snp.leading).offset(20)
+            make.width.equalTo(scroll.snp.width).offset(-40)
+            make.height.equalTo(40)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(dateOfBirthLabel.snp.bottom).offset(2)
+            make.leading.equalTo(scroll.snp.leading).offset(20)
+            make.trailing.equalTo(scroll.snp.trailing).offset(-20)
+        }
+        
+        annotationLabel.snp.makeConstraints { make in
+            make.top.equalTo(datePicker.snp.bottom).offset(20)
             make.leading.equalTo(scroll.snp.leading).offset(20)
             make.width.equalTo(scroll.snp.width).offset(-40)
             make.height.equalTo(40)
@@ -229,16 +266,62 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     //MARK: - Methods
     
     @objc private func confirmButtonTapped() {
-        if let appDelegate = UIApplication.shared.delegate,
-        
-            let sceneDelegate = appDelegate as? SceneDelegate {
-            // Access the SceneDelegate and call showMainScene()
-            sceneDelegate.showMainScene()
-        } else {
-            print("\(type(of: UIApplication.shared.delegate))")
-            // Handle the case where the delegate is not of type SceneDelegate
-            print("Error: The app delegate is not of type SceneDelegate")
+        let isAllFilled = checkNeccessaryFields()
+        switch isAllFilled {
+        case .wrongNickName:
+            CustomAlert.showAlert(title: "Warning!", message: "Sorry, this Nickname is taken by other user", okActionTitle: "Ok", viewController: self)
+        case .notAllFilled:
+            CustomAlert.showAlert(title: "Warning!", message: "Please, fill all neccessary fields", okActionTitle: "Ok", viewController: self)
+        case .wrongName:
+            CustomAlert.showAlert(title: "Warning!", message: "Please, fill all neccessary fields", okActionTitle: "Ok", viewController: self)
+        case .allGood:
+            let coreManager = CoreDataManager.shared
+            coreManager.createUser(name: nameTextField.text!, lastName: lastNameTextField.text ?? "", jobTitle: jobTextField.text ?? "", nickName: nickNameTextField.text!, dateOfBirth: datePicker.date, avatar: "", isLogged: true)
+            coreManager.fetchUsers()
+            coreManager.getCurrentUser()
+            CustomAlert.showAlert(title: "Success!", message: "You have now account in our app", okActionTitle: "Ok",okActionHandler: {
+                self.coordinator?.ivent(action: .loginSuccess, iniciator: self)
+            }, viewController: self)
         }
+    }
+    
+    private func checkNeccessaryFields() -> FieldCheckerAlert {
+        var state: FieldCheckerAlert = .allGood
+        var first = true
+        var second = true
+        var third = true
+        if nameTextField.text == "" {
+            nameTextField.setCustomStyle(.notFilled)
+            first = false
+        } else {
+            nameTextField.setCustomStyle(.subGeneral)
+        }
+        if nickNameTextField.text == "" {
+            nickNameTextField.setCustomStyle(.notFilled)
+            second = false
+        } else if nickNameTextField.text != "" {
+            let coreManager = CoreDataManager.shared
+            let users = coreManager.users
+            for user in users {
+                if user.nickName == nickNameTextField.text {
+                    third = false
+                }
+            }
+        } else {
+            nickNameTextField.setCustomStyle( .subGeneral)
+        }
+        if first == false {
+            state = .notAllFilled
+        } else if second == false {
+            state = .notAllFilled
+        } else if third == false {
+            state = .wrongNickName
+        }
+        return state
+    }
+    
+    @objc func datePickerValueChanged() {
+        self.dateOfBirth = datePicker.date
     }
     
     deinit {

@@ -7,31 +7,43 @@
 
 import UIKit
 
-class PostViewController: UIViewController, CoordinatedProtocol {
-    
+class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCellDelegate {
+
     var coordinator: CoordinatorProtocol?
     
     let scrollView = UIScrollView()
     
     let contentView = UIView()
-
-    var source: Post? {
+    
+    var postId: String? {
         didSet {
-            self.postTitle.text = source?.title
-            self.body.text = source?.body
-            self.image.image = UIImage(named: source?.image ?? "DefaultPostImage")
-            let coremanager = CoreDataManager.shared
-            let author = coremanager.getUser(id: (source?.author?.id)!)
-            self.userView.currentUser = author
-            setupLabel(label: self.likes, image: "heart", text: "\(source?.likes ?? 0)")
-            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source?.commentsArray?.count ?? 0)")
+            let coreManager = CoreDataManager.shared
+            guard postId != nil else {
+                print("Couldnt set postId in PostViewController")
+                return
+            }
+            let post = coreManager.getPost(id: postId!)
+            guard let post = post else {
+                print("Couldnt find post via id provided in PostViewController")
+                return
+            }
+            userView = {
+                let view = UserView()
+                view.userId = post.author?.id
+                return view
+            }()
+            postTitle.text = post.title
+            image.image = UIImage(named: post.image ?? "DefaultPostImage")
+            body.text = post.body
+            setupLabel(label: self.likes, image: "heart", text: "\(post.likes )")
+            
+            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(post.commentsArray?.count ?? 0)")
         }
     }
     
-    lazy var userView: UserView = {
-        let view = UserView()
-        return view
-    }()
+    var authorId: String?
+    
+    var userView: UserView = UserView()
     
     lazy var postTitle: UILabel = {
         let label = UILabel()
@@ -68,6 +80,7 @@ class PostViewController: UIViewController, CoordinatedProtocol {
     }()
     
     //MARK: - Lifecycle
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +181,18 @@ class PostViewController: UIViewController, CoordinatedProtocol {
     }
     
     private func updateLikes(state: Bool) {
+        
+    }
+    
+    func openPost(id: String) {
+        self.coordinator?.ivent(action: .openPost(id: id), iniciator: self)
+    }
+    
+    func openAuthor(id: String) {
+        self.coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+    }
+    
+    func liked(status: Bool) {
         
     }
 }

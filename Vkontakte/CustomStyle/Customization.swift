@@ -11,6 +11,7 @@ enum TextFieldStyle {
     case phoneField
     case login
     case subGeneral
+    case notFilled
 }
 
 enum LabelStyle {
@@ -92,6 +93,8 @@ extension UITextField {
             self.keyboardType = .default
             self.textColor = .black
             self.addLeftPadding(10)
+        case .notFilled:
+            self.layer.borderColor = UIColor.red.cgColor
         case .login:
             self.backgroundColor = .systemGray6
             self.layer.borderWidth = 0.5

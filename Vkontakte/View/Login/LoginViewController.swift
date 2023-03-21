@@ -234,9 +234,9 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     
     @objc func loginButtonTapped() {
         if self.loginTextField.text != "" && self.passwordTextField.text != "" {
-            inspector.checkCredentials(email: self.loginTextField.text!, password: self.passwordTextField.text!, iniciator: self, realm: true)
+//            inspector.checkCredentials(email: self.loginTextField.text!, password: self.passwordTextField.text!, iniciator: self, realm: true)
         } else {
-            self.present(loginAlert(), animated: true, completion: nil)
+//            self.present(loginAlert(), animated: true, completion: nil)
             return
         }
     }

@@ -2,13 +2,14 @@ import UIKit
 
 enum ControllerType {
     case feed
-    case profile
+    case profile(userId: String)
     case liked
     case landing
     case registration
     case confirmation
     case generalInfo
-    case post
+    case post(id: String)
+    case login
 }
 
 class Factory: FactoryProtocol {
@@ -19,8 +20,8 @@ class Factory: FactoryProtocol {
             controller.coordinator = coordinator
             controller.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "book.fill"), tag: 0)
             return controller
-        case .profile:
-            let controller = ProfileViewController()
+        case let .profile(userId):
+            let controller = ProfileViewController(userId: userId)
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             return controller
         case .liked:
@@ -35,6 +36,7 @@ class Factory: FactoryProtocol {
         case .landing:
             let controller = LandingViewController()
             controller.coordinator = coordinator
+            controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             let navController = UINavigationController(rootViewController: controller)
             return navController
         case .registration:
@@ -45,9 +47,15 @@ class Factory: FactoryProtocol {
             let controller = GeneralInfoViewController()
             controller.coordinator = coordinator
             return controller
-        case .post:
+        case .post(let id):
             let controller = PostViewController()
+            controller.postId = id
             controller.coordinator = coordinator
+            return controller
+        case .login:
+            let controller = LoginViewController()
+            controller.coordinator = coordinator
+            controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             return controller
         }
     }

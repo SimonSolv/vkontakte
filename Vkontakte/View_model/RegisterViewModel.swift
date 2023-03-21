@@ -46,21 +46,3 @@ class RegisterViewModel {
     }
 }
 
-//func createUser(user: User) {
-// 
-//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//    let managedContext = appDelegate.persistentContainer.viewContext
-//    let userID = UUID().uuidString
-//    let newUser = UserData(context: managedContext)
-//    newUser.name = user.name
-//    newUser.lastName = user.lastName
-//    newUser.nickName = user.nickName
-//    newUser.jobTitle = user.jobTitle
-//    newUser.id = userID
-//    
-//    do {
-//        try managedContext.save()
-//    } catch let error as NSError {
-//        print("Could not save. \(error), \(error.userInfo)")
-//    }
-//}

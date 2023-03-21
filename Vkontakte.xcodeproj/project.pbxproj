@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */; };
 		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
 		CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */; };
 		CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */; };
@@ -14,6 +15,11 @@
 		CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */; };
 		CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */; };
 		CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */; };
+		CE4D3A3929BDCD2C00A2E09A /* ProfileUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */; };
+		CE4D3A4129C09B1300A2E09A /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */; };
+		CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */; };
+		CE4D3A4529C10A3A00A2E09A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */; };
+		CE4D3A4829C1B33F00A2E09A /* OtherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4729C1B33F00A2E09A /* OtherProtocols.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
 		CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274829B002EA001F2DDE /* ViewController.swift */; };
@@ -64,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFiller.swift; sourceTree = "<group>"; };
 		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
@@ -71,6 +78,11 @@
 		CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserTableViewCell.swift; sourceTree = "<group>"; };
+		CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE4D3A4729C1B33F00A2E09A /* OtherProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProtocols.swift; sourceTree = "<group>"; };
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4D3A2529B5234600A2E09A /* PostViewController.swift */,
+				CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -146,6 +159,26 @@
 				CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		CE4D3A3729BDCD0100A2E09A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */,
+				CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */,
+				CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CE4D3A4629C1B32E00A2E09A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A4729C1B33F00A2E09A /* OtherProtocols.swift */,
+				CEB0277829B005FD001F2DDE /* CoordinatorProtocol.swift */,
+				CEB0277D29B00770001F2DDE /* FactoryProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		CEB0273829B002EA001F2DDE = {
@@ -171,10 +204,11 @@
 		CEB0274329B002EA001F2DDE /* Vkontakte */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0277729B005E0001F2DDE /* Coordinator */,
-				CEB0277C29B0075B001F2DDE /* Factory */,
 				CEB0274629B002EA001F2DDE /* SceneDelegate.swift */,
 				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
+				CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */,
+				CEB0277F29B007F5001F2DDE /* Factory.swift */,
+				CE4D3A4629C1B32E00A2E09A /* Protocol */,
 				CEB0279B29B22979001F2DDE /* Services */,
 				CEB0279029B0B630001F2DDE /* CustomStyle */,
 				CEB0278429B07AAD001F2DDE /* View */,
@@ -186,6 +220,7 @@
 				CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */,
 				CEB0275529B002EC001F2DDE /* Info.plist */,
 				CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */,
+				CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */,
 			);
 			path = Vkontakte;
 			sourceTree = "<group>";
@@ -205,24 +240,6 @@
 				CEB0276A29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift */,
 			);
 			path = VkontakteUITests;
-			sourceTree = "<group>";
-		};
-		CEB0277729B005E0001F2DDE /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				CEB0277829B005FD001F2DDE /* CoordinatorProtocol.swift */,
-				CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		CEB0277C29B0075B001F2DDE /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				CEB0277D29B00770001F2DDE /* FactoryProtocol.swift */,
-				CEB0277F29B007F5001F2DDE /* Factory.swift */,
-			);
-			path = Factory;
 			sourceTree = "<group>";
 		};
 		CEB0278129B07990001F2DDE /* Model */ = {
@@ -273,6 +290,7 @@
 			children = (
 				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
 				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
+				CE4D3A3729BDCD0100A2E09A /* Cells */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -290,7 +308,6 @@
 				CEB027A029B27448001F2DDE /* FeedViewController.swift */,
 				CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */,
 				CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */,
-				CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */,
 				CEB027AC29B28411001F2DDE /* UserView.swift */,
 			);
 			path = Feed;
@@ -300,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB0279129B0B644001F2DDE /* Customization.swift */,
+				CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */,
 			);
 			path = CustomStyle;
 			sourceTree = "<group>";
@@ -451,11 +469,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4D3A4129C09B1300A2E09A /* CustomAlert.swift in Sources */,
 				CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */,
 				CEB0278029B007F5001F2DDE /* Factory.swift in Sources */,
+				CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */,
 				CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */,
 				CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */,
 				CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */,
+				CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */,
 				CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */,
 				CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */,
 				CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */,
@@ -469,8 +490,11 @@
 				CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */,
 				CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */,
 				CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */,
+				CE4D3A3929BDCD2C00A2E09A /* ProfileUserTableViewCell.swift in Sources */,
+				CE4D3A4529C10A3A00A2E09A /* PhotoCollectionViewCell.swift in Sources */,
 				CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */,
 				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
+				CE4D3A4829C1B33F00A2E09A /* OtherProtocols.swift in Sources */,
 				CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */,
 				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
