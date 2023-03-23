@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     
     lazy var logoImageView: UIView = {
         let image: UIImageView = UIImageView()
-        image.image = UIImage(named: "VKlogo")
+        image.image = UIImage(named: "landingImage")
         image.sizeToFit()
         return image
     }()
@@ -46,6 +46,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
         var btn = UIButton()
         btn.setCustomStyle(style: .orangeish)
         btn.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        btn.setTitle("Log in", for: .normal)
         return btn
     }()
     

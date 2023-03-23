@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */; };
+		CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */; };
 		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
 		CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */; };
 		CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFiller.swift; sourceTree = "<group>"; };
+		CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
 				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
 				CE4D3A3729BDCD0100A2E09A /* Cells */,
+				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
 				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
+				CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */,
 				CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */,
 				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
 				CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */,

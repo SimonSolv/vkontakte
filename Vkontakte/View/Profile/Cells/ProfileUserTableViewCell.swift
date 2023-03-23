@@ -8,21 +8,28 @@
 import UIKit
 import SnapKit
 
-class ProfileUserTableViewCell: UITableViewCell, UserContainsProtocol {
+class ProfileUserTableViewCell: UITableViewCell {
     
     static let identifier = "ProfileUserTableViewCell"
     
-    var userId: String
+    var id: String? {
+        didSet {
+            userView.userId = id
+        }
+    }
+    
+    var delegate: ProfileUserViewDelegate?
     
     private lazy var userView: ProfileUserView = {
-        let view = ProfileUserView(dataSource: self)
+        let view = ProfileUserView()
+        view.delegate = self.delegate
         return view
     }()
 
-    init(userId: String, reuseIdentifier: String?) {
-        self.userId = userId
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
+        self.selectionStyle = .none
     }
 
     required init?(coder: NSCoder) {

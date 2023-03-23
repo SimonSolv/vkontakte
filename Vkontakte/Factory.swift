@@ -2,7 +2,7 @@ import UIKit
 
 enum ControllerType {
     case feed
-    case profile(userId: String)
+    case profile(id: String)
     case liked
     case landing
     case registration
@@ -10,6 +10,7 @@ enum ControllerType {
     case generalInfo
     case post(id: String)
     case login
+    case additionalInfo(id: String)
 }
 
 class Factory: FactoryProtocol {
@@ -20,8 +21,8 @@ class Factory: FactoryProtocol {
             controller.coordinator = coordinator
             controller.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "book.fill"), tag: 0)
             return controller
-        case let .profile(userId):
-            let controller = ProfileViewController(userId: userId)
+        case .profile(let id):
+            let controller = ProfileViewController(userId: id)
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             return controller
         case .liked:
@@ -56,6 +57,11 @@ class Factory: FactoryProtocol {
             let controller = LoginViewController()
             controller.coordinator = coordinator
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            return controller
+        case .additionalInfo(let id):
+            let controller = AdditionalInfoViewController()
+            controller.userId = id
+            controller.coordinator = coordinator
             return controller
         }
     }

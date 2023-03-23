@@ -14,3 +14,12 @@ protocol PostTableViewCellDelegate {
     func openAuthor(id: String)
     func liked(status: Bool)
 }
+
+protocol ProfileUserViewDelegate {
+    func additionalInfoTapped(id: String)
+    func messageButtonTapped(id: String)
+    func editButtonTapped(id: String)
+    func postsTapped(id: String)
+    func subscribersTapped(id: String)
+    func subscriptionsTapped(id: String)
+}

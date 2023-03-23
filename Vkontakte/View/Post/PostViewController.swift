@@ -189,7 +189,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     }
     
     func openAuthor(id: String) {
-        self.coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+        self.coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
     }
     
     func liked(status: Bool) {

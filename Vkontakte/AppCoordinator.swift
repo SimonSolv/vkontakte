@@ -2,10 +2,17 @@ import UIKit
 
 class AppCoordinator: CoordinatorProtocol {
 
+    enum AppTab {
+        case profile
+        case feed
+        case liked
+    }
     
     private let tabBarController: UITabBarController
     private let factory: Factory
     var notificationService: LocalNotificationManager?
+    let coreManager = CoreDataManager.shared
+    var currentUser: UserData?
 
     init(tabBarController: UITabBarController, factory: Factory) {
         self.tabBarController = tabBarController
@@ -30,7 +37,8 @@ class AppCoordinator: CoordinatorProtocol {
             tabBarController.selectedIndex = 1
             tabBarController.tabBar.isHidden = true
         case .logged:
-            let profileViewController = factory.createController(type: .profile(userId: CoreDataManager.shared.getUserByName(name: "Kate")!.id!), coordinator: self)
+            currentUser = coreManager.getCurrentUser()
+            let profileViewController = factory.createController(type: .profile(id: (currentUser?.id)!), coordinator: self)
             let profileNavVc = UINavigationController(rootViewController: profileViewController)
             profileNavVc.navigationBar.isHidden = true
             tabBarController.viewControllers = [feedNavVc, profileNavVc, likedViewController]
@@ -63,12 +71,34 @@ class AppCoordinator: CoordinatorProtocol {
             let controller = factory.createController(type: .post(id: id), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .loginSuccess:
-            let controller = factory.createController(type: .profile(userId: (CoreDataManager.shared.currentUser?.id)!), coordinator: self)
+            let controller = factory.createController(type: .profile(id: (CoreDataManager.shared.currentUser?.id)!), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
             self.tabBarController.tabBar.isHidden = false
         case .showProfile(let userId):
-            let controller = factory.createController(type: .profile(userId: userId), coordinator: self)
+            let currentUser = coreManager.getUser(id: userId)
+            if currentUser?.isLogged == true {
+                setTabTo(tab: .profile)
+            } else {
+                let controller = factory.createController(type: .profile(id: userId), coordinator: self)
+                iniciator.navigationController?.pushViewController(controller, animated: true)
+            }
+        case .showAdditionalInfo(let id):
+            let controller = factory.createController(type: .additionalInfo(id: id), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .hasAccount:
+            let controller = factory.createController(type: .login, coordinator: self)
+            iniciator.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func setTabTo(tab: AppTab) {
+        switch tab {
+        case .liked:
+            self.tabBarController.selectedIndex = 2
+        case .feed:
+            self.tabBarController.selectedIndex = 0
+        case .profile:
+            self.tabBarController.selectedIndex = 1
         }
     }
 

@@ -49,11 +49,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userDefaults = UserDefaults.standard
         if !userDefaults.bool(forKey: hasCreatedPostsKey) {
-  //          sceneStatus = .firstTime
+            sceneStatus = .firstTime
             createUsers()
             createPosts()
-            coreManager.getCurrentUser()
-            sceneStatus = .logged
+ //           sceneStatus = .logged
             userDefaults.set(true, forKey: hasCreatedPostsKey)
         } else {
             sceneStatus = getSceneStatus()

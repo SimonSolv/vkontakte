@@ -94,12 +94,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = ProfileUserTableViewCell(userId: self.userId, reuseIdentifier: "UserCell")
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileUserTableViewCell.identifier) as? ProfileUserTableViewCell
+            cell?.id = self.userId
+            cell?.delegate = self
+            return cell!
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as? PhotosTableViewCell
             cell?.user = self.user!
-            print("Coheared user \(user?.name)")
             return cell!
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
@@ -127,10 +128,39 @@ extension ProfileViewController: PostTableViewCellDelegate {
     }
     
     func openAuthor(id: String) {
-        coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+        coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
     }
 
     func liked(status: Bool) {
         print("Liked tapped")
     }
+}
+
+extension ProfileViewController: ProfileUserViewDelegate {
+    
+    func additionalInfoTapped(id: String) {
+        print("additional tapped")
+        coordinator?.ivent(action: .showAdditionalInfo(id: userId), iniciator: self)
+    }
+    
+    func messageButtonTapped(id: String) {
+        print("Message tapped")
+    }
+    
+    func editButtonTapped(id: String) {
+        print("Edit tapped")
+    }
+    
+    func postsTapped(id: String) {
+        print("Posts tapped")
+    }
+    
+    func subscribersTapped(id: String) {
+        print("Subscribers tapped")
+    }
+    
+    func subscriptionsTapped(id: String) {
+        print("Subscriptions tapped")
+    }
+    
 }

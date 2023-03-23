@@ -9,20 +9,32 @@ import UIKit
 import CoreData
 import SnapKit
 
-class ProfileUserView: UIView, UserContainsProtocol {
+class ProfileUserView: UIView {
     
-    var isCurrentUser: Bool
+    var isCurrentUser: Bool?
     
-    var dataSource: UserContainsProtocol
+    var userId: String? {
+        didSet {
+            let coreManager = CoreDataManager.shared
+            guard let id = userId else { return }
+            let user = coreManager.getUser(id: id)
+            guard let user = user else { return }
+            self.isCurrentUser = user.isLogged
+            setupView()
+            avatar.image = UIImage(named: user.avatar ?? "DefaultAvatar")
+            name.text = "\(user.name ?? "Unknown User") \(user.lastName ?? "")"
+            job.text = "\(user.jobTitle ?? "")"
+            publicationsLabel.text = "\(user.posts?.count ?? 0)\nposts"
+            subscriptionsLabel.text = "\(user.subscriptions?.count ?? 0)\nsubscriptions"
+            subscribersLabel.text = "\(user.subscribers?.count ?? 0)\nsubscribers"
+        }
+    }
     
-    var userId: String
-    
-    var user: UserData
+    var delegate: ProfileUserViewDelegate?
     
     private lazy var avatar: UIImageView = {
         let image = UIImageView()
         image.setCustomStyle(style: .avatar)
-        image.image = UIImage(named: user.avatar ?? "DefaultAvatar")
         return image
     }()
     
@@ -30,7 +42,6 @@ class ProfileUserView: UIView, UserContainsProtocol {
         let label = UILabel()
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
-        label.text = "\(user.name ?? "Unknown User") \(user.lastName ?? "")"
         return label
     }()
     
@@ -38,7 +49,6 @@ class ProfileUserView: UIView, UserContainsProtocol {
         let label = UILabel()
         label.setCustomStyle(style: .grayMedium)
         label.textAlignment = .left
-        label.text = "\(user.jobTitle ?? "")"
         return label
     }()
     
@@ -48,6 +58,7 @@ class ProfileUserView: UIView, UserContainsProtocol {
         btn.titleLabel?.font = .systemFont(ofSize: 15)
         btn.setTitleColor(.black, for: .normal)
         btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action: #selector(additionalTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -88,7 +99,6 @@ class ProfileUserView: UIView, UserContainsProtocol {
         label.setCustomStyle(style: .feedBody)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "\(user.posts?.count ?? 0)\nposts"
         return label
     }()
     
@@ -97,7 +107,6 @@ class ProfileUserView: UIView, UserContainsProtocol {
         label.setCustomStyle(style: .feedBody)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "\(user.subscriptions?.count ?? 0)\nsubscriptions"
         return label
     }()
     
@@ -106,20 +115,14 @@ class ProfileUserView: UIView, UserContainsProtocol {
         label.setCustomStyle(style: .feedBody)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "\(user.subscribers?.count ?? 0)\nsubscribers"
         return label
     }()
 
     //MARK: - Setup
     
-    init(dataSource: UserContainsProtocol) {
-        self.dataSource = dataSource
-        self.userId = dataSource.userId
-        self.user = CoreDataManager.shared.getUser(id: userId)!
-        self.isCurrentUser = user.isLogged
+    init() {
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        setupView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -132,13 +135,12 @@ class ProfileUserView: UIView, UserContainsProtocol {
         addSubview(job)
         addSubview(i_image)
         addSubview(additionalInfoButton)
-        switch isCurrentUser {
-        case true:
+        additionalInfoButton.isUserInteractionEnabled = true
+        if isCurrentUser == true {
             addSubview(editButton)
-        case false:
-            addSubview(messageButton)
-            addSubview(callButton)
-        default:
+            editButton.isUserInteractionEnabled = true
+        }
+            else {
             addSubview(messageButton)
             addSubview(callButton)
         }
@@ -220,5 +222,11 @@ class ProfileUserView: UIView, UserContainsProtocol {
                 make.bottom.equalTo(snp.bottom).offset(-15)
             }
         }
+    }
+    
+    //MARK: - Actions
+    
+    @objc private func additionalTapped() {
+        delegate?.additionalInfoTapped(id: userId!)
     }
 }

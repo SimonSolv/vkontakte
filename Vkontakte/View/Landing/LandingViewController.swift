@@ -32,6 +32,7 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
         let btn = UIButton()
         btn.setTitle("Have an account", for: .normal)
         btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(hasAccountTapped), for: .touchUpInside)
         return btn
     }()
 
@@ -51,14 +52,14 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
     private func setupConstraints() {
         
         landingPicture.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(100)
+            make.top.equalTo(view.snp.top).offset(50)
             make.leading.equalTo(view.snp.leading).offset(20)
             make.trailing.equalTo(view.snp.trailing).offset(-20)
             make.height.equalTo(400)
         }
         
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(landingPicture.snp.bottom).offset(100)
+            make.top.equalTo(landingPicture.snp.bottom).offset(50)
             make.leading.equalTo(view.snp.leading).offset(20)
             make.trailing.equalTo(view.snp.trailing).offset(-20)
             make.height.equalTo(50)
@@ -73,5 +74,9 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
     
     @objc private func registerButtonTapped() {
         coordinator?.ivent(action: .showRegisterPage, iniciator: self)
+    }
+    
+    @objc private func hasAccountTapped() {
+        coordinator?.ivent(action: .hasAccount, iniciator: self)
     }
 }

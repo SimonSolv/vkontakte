@@ -122,7 +122,7 @@ class PostTableViewCell: UITableViewCell {
         }
         
         title.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(70)
+            make.top.equalTo(contentView.snp.top).offset(75)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.trailing.equalTo(contentView.snp.trailing).offset(-20)
         }

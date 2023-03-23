@@ -53,7 +53,7 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
     @objc func handleNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             let id = userInfo["id"] as! String
-            self.coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+            self.coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
         }
     }
     
@@ -93,7 +93,7 @@ extension FeedViewController: PostTableViewCellDelegate {
     }
     
     func openAuthor(id: String) {
-        coordinator?.ivent(action: .showProfile(userId: id), iniciator: self)
+        coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
     }
     
     func liked(status: Bool) {

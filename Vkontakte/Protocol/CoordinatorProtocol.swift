@@ -17,5 +17,7 @@ enum ActionType {
     case sendNotification
     case openPost(id: String)
     case loginSuccess
-    case showProfile(userId: String)
+    case showProfile(id: String)
+    case showAdditionalInfo(id: String)
+    case hasAccount
 }

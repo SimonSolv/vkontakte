@@ -75,12 +75,15 @@ class CoreDataManager {
         fetchUsers()
     }
     
-    func getCurrentUser() {
+    func getCurrentUser() -> UserData? {
+        var answer: UserData?
         for user in users {
             if user.isLogged == true {
                 self.currentUser = user
+                answer = user
             }
         }
+        return answer
     }
     
     func editUserData(userId: String, newData: UserData) {
