@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCellDelegate {
 
@@ -15,14 +16,8 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     
     let contentView = UIView()
     
-    var postId: String? {
+    var post: Post? {
         didSet {
-            let coreManager = CoreDataManager.shared
-            guard postId != nil else {
-                print("Couldnt set postId in PostViewController")
-                return
-            }
-            let post = coreManager.getPost(id: postId!)
             guard let post = post else {
                 print("Couldnt find post via id provided in PostViewController")
                 return
@@ -89,6 +84,12 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.backItem?.title = "Feed"
+        self.navigationController?.navigationBar.tintColor = .orange
+    }
     //MARK: - Setup
     private func setupViews() {
         view.addSubview(scrollView)
@@ -115,7 +116,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         
         contentView.snp.makeConstraints { make in
             make.width.equalTo(scrollView.snp.width)
-            make.height.greaterThanOrEqualTo(scrollView.snp.height)
+            //make.height.greaterThanOrEqualTo(scrollView.snp.height)
             make.trailing.equalTo(scrollView.snp.trailing)
             make.leading.equalTo(scrollView.snp.leading)
             make.top.equalTo(scrollView.snp.top)
@@ -138,8 +139,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
             make.top.equalTo(postTitle.snp.bottom).offset(10)
             make.centerX.equalTo(contentView.snp.centerX)
             make.width.equalTo(contentView.snp.width).offset(-40)
-           // make.height.equalTo(postTitle.snp.width).multipliedBy(3/4)
-            make.height.equalTo(200)
+            make.height.equalTo(image.snp.width).multipliedBy(3.0 / 4.0)
         }
         
         body.snp.makeConstraints { make in
@@ -184,8 +184,8 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         
     }
     
-    func openPost(id: String) {
-        self.coordinator?.ivent(action: .openPost(id: id), iniciator: self)
+    func openPost(source post: Post) {
+        self.coordinator?.ivent(action: .openPost(post: post), iniciator: self)
     }
     
     func openAuthor(id: String) {

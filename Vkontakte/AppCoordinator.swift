@@ -27,13 +27,13 @@ class AppCoordinator: CoordinatorProtocol {
         let newsViewController = factory.createController(type: .feed, coordinator: self)
         
         let feedNavVc = UINavigationController(rootViewController: newsViewController)
-        feedNavVc.navigationBar.isHidden = true
 
         let likedViewController = factory.createController(type: .liked, coordinator: self)
+        let likesNavVc = UINavigationController(rootViewController: likedViewController)
         switch scene {
         case .firstTime:
             let landing = factory.createController(type: .landing, coordinator: self)
-            tabBarController.viewControllers = [feedNavVc, landing, likedViewController]
+            tabBarController.viewControllers = [feedNavVc, landing, likesNavVc]
             tabBarController.selectedIndex = 1
             tabBarController.tabBar.isHidden = true
         case .logged:
@@ -41,11 +41,11 @@ class AppCoordinator: CoordinatorProtocol {
             let profileViewController = factory.createController(type: .profile(id: (currentUser?.id)!), coordinator: self)
             let profileNavVc = UINavigationController(rootViewController: profileViewController)
             profileNavVc.navigationBar.isHidden = true
-            tabBarController.viewControllers = [feedNavVc, profileNavVc, likedViewController]
+            tabBarController.viewControllers = [feedNavVc, profileNavVc, likesNavVc]
         case .unlogged:
             let loginViewController = factory.createController(type: .login, coordinator: self)
             let loginNavVc = UINavigationController(rootViewController: loginViewController)
-            tabBarController.viewControllers = [feedNavVc, loginNavVc, likedViewController]
+            tabBarController.viewControllers = [feedNavVc, loginNavVc, likesNavVc]
             tabBarController.selectedIndex = 1
         }
     }
@@ -67,11 +67,11 @@ class AppCoordinator: CoordinatorProtocol {
             notificationService?.registeForLatestUpdatesIfPossible()
         case .sendNotification:
             notificationService?.registerNotificationTimeInterval(title: "VerificationCode", body: "Your verification code is: 0000", interval: 2)
-        case .openPost(let id):
-            let controller = factory.createController(type: .post(id: id), coordinator: self)
+        case .openPost(let post):
+            let controller = factory.createController(type: .post(source: post), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
-        case .loginSuccess:
-            let controller = factory.createController(type: .profile(id: (CoreDataManager.shared.currentUser?.id)!), coordinator: self)
+        case .loginSuccess(let id):
+            let controller = factory.createController(type: .profile(id: id), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
             self.tabBarController.tabBar.isHidden = false
         case .showProfile(let userId):

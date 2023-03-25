@@ -13,6 +13,11 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
+    enum UserSorting {
+        case name
+        case isLogged
+    }
+    
     init() {
         fetchUsers()
         fetchPosts()
@@ -69,7 +74,11 @@ class CoreDataManager {
         newUser.jobTitle = jobTitle
         newUser.nickName = nickName
         newUser.dateOfBirth = dateOfBirth
-        newUser.avatar = avatar ?? "DefaultAvatar"
+        if avatar == "" || avatar == nil {
+            newUser.avatar = "DefaultAvatar"
+        } else {
+            newUser.avatar = avatar!
+        }
         newUser.isLogged = isLogged
         saveContext()
         fetchUsers()
@@ -147,6 +156,15 @@ class CoreDataManager {
     
     func setCurrentUser(id: String) {
         self.currentUser = getUser(id: id)
+    }
+    
+    func getUsersSorted(by: UserSorting) -> [UserData] {
+        switch by {
+        case .isLogged:
+            return users.sorted(by: {$0.isLogged && !$1.isLogged})
+        case.name:
+            return users.sorted(by: {$0.name! > $1.name!})
+        }
     }
     
     

@@ -101,6 +101,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
         biometricIDAuthentification.canEvaluate {result, type, error in
             guard result else {
                 return
@@ -279,7 +280,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
                         okActionTitle: "Confirm")
                     return
                 }
-                self!.coordinator?.ivent(action: .loginSuccess, iniciator: self!)
+//                self!.coordinator?.ivent(action: .loginSuccess, iniciator: self!)
             }
         }
     }

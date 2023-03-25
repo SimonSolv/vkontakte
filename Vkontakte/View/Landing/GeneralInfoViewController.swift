@@ -277,10 +277,10 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         case .allGood:
             let coreManager = CoreDataManager.shared
             coreManager.createUser(name: nameTextField.text!, lastName: lastNameTextField.text ?? "", jobTitle: jobTextField.text ?? "", nickName: nickNameTextField.text!, dateOfBirth: datePicker.date, avatar: "", isLogged: true)
+            let current = coreManager.getUserByNick(nickName: nickNameTextField.text!)
             coreManager.fetchUsers()
-            coreManager.getCurrentUser()
             CustomAlert.showAlert(title: "Success!", message: "You have now account in our app", okActionTitle: "Ok",okActionHandler: {
-                self.coordinator?.ivent(action: .loginSuccess, iniciator: self)
+                self.coordinator?.ivent(action: .loginSuccess(id: (current?.id)!), iniciator: self)
             }, viewController: self)
         }
     }
@@ -370,7 +370,6 @@ extension GeneralInfoViewController: UITextFieldDelegate {
         default:
             break
         }
-
         return true
     }
 }

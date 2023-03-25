@@ -65,7 +65,7 @@ extension UsersCollectionHeaderView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCollectionViewCell.identifier, for: indexPath) as! UserCollectionViewCell
-        cell.user = coreManager.users[indexPath.row]
+        cell.user = coreManager.getUsersSorted(by: .isLogged)[indexPath.row]
         return cell
     }
 }

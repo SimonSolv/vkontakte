@@ -30,6 +30,12 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     //MARK: - Setup
     
     private func setupViews() {
@@ -74,13 +80,7 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        let id = coreManager.posts[indexPath.row].id
-        guard let id = id else {
-            print("Id, transfered to cell is nil in FeedViewController")
-            print("Id is \(id)")
-            return UITableViewCell()
-        }
-        cell.postId = id
+        cell.post = coreManager.posts[indexPath.row]
         cell.delegate = self
         return cell
     }
@@ -88,8 +88,8 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension FeedViewController: PostTableViewCellDelegate {
-    func openPost(id: String) {
-        coordinator?.ivent(action: .openPost(id: id), iniciator: self)
+    func openPost(source: Post) {
+        coordinator?.ivent(action: .openPost(post: source), iniciator: self)
     }
     
     func openAuthor(id: String) {

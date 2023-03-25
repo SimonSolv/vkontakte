@@ -8,7 +8,7 @@ enum ControllerType {
     case registration
     case confirmation
     case generalInfo
-    case post(id: String)
+    case post(source: Post)
     case login
     case additionalInfo(id: String)
 }
@@ -24,11 +24,12 @@ class Factory: FactoryProtocol {
         case .profile(let id):
             let controller = ProfileViewController(userId: id)
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            controller.coordinator = coordinator
             return controller
         case .liked:
-            let controller = UIViewController()
+            let controller = LikedViewController()
             controller.tabBarItem = UITabBarItem(title: "Liked", image: UIImage(systemName: "heart.fill"), tag: 2)
-            controller.view.backgroundColor = .orange
+            controller.coordinator = coordinator
             return controller
         case .confirmation:
             let controller = ConfirmationViewController()
@@ -48,9 +49,9 @@ class Factory: FactoryProtocol {
             let controller = GeneralInfoViewController()
             controller.coordinator = coordinator
             return controller
-        case .post(let id):
+        case .post(let post):
             let controller = PostViewController()
-            controller.postId = id
+            controller.post = post
             controller.coordinator = coordinator
             return controller
         case .login:

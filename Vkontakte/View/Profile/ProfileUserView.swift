@@ -74,6 +74,7 @@ class ProfileUserView: UIView {
         let btn = UIButton()
         btn.setCustomStyle(style: .orangeish)
         btn.setTitle("Edit", for: .normal)
+        btn.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -187,6 +188,7 @@ class ProfileUserView: UIView {
         }
         
         if isCurrentUser == true {
+            
             editButton.snp.makeConstraints {make in
                 make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
                 make.height.equalTo(50)
@@ -200,7 +202,9 @@ class ProfileUserView: UIView {
                 make.right.equalTo(snp.right)
                 make.bottom.equalTo(snp.bottom).offset(-15)
             }
+            
         } else {
+            
             messageButton.snp.makeConstraints {make in
                 make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
                 make.leading.equalTo(snp.leading).offset(20)
@@ -229,4 +233,10 @@ class ProfileUserView: UIView {
     @objc private func additionalTapped() {
         delegate?.additionalInfoTapped(id: userId!)
     }
+    
+    @objc private func editTapped() {
+        delegate?.editButtonTapped(id: userId!)
+    }
+    
+    
 }

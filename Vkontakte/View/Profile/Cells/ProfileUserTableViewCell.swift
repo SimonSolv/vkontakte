@@ -18,11 +18,15 @@ class ProfileUserTableViewCell: UITableViewCell {
         }
     }
     
-    var delegate: ProfileUserViewDelegate?
+    var delegate: ProfileUserViewDelegate? {
+        didSet {
+            userView.delegate = delegate
+        }
+    }
     
     private lazy var userView: ProfileUserView = {
         let view = ProfileUserView()
-        view.delegate = self.delegate
+        view.isUserInteractionEnabled = true
         return view
     }()
 
@@ -33,11 +37,13 @@ class ProfileUserTableViewCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupView()
+        self.selectionStyle = .none
     }
     
     private func setupView() {
-        addSubview(userView)
+        contentView.addSubview(userView)
         userView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

@@ -23,7 +23,6 @@
 		CE4D3A4829C1B33F00A2E09A /* OtherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4729C1B33F00A2E09A /* OtherProtocols.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
-		CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274829B002EA001F2DDE /* ViewController.swift */; };
 		CEB0274C29B002EA001F2DDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0274A29B002EA001F2DDE /* Main.storyboard */; };
 		CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */; };
 		CEB0275129B002EC001F2DDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0275029B002EC001F2DDE /* Assets.xcassets */; };
@@ -51,6 +50,8 @@
 		CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A829B27CD5001F2DDE /* PostStorage.swift */; };
 		CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */; };
 		CEB027AD29B28411001F2DDE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AC29B28411001F2DDE /* UserView.swift */; };
+		CEC0F93529CC72130065FFCE /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F93429CC72130065FFCE /* LikedViewController.swift */; };
+		CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +89,6 @@
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEB0274829B002EA001F2DDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CEB0274B29B002EA001F2DDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEB0274E29B002EA001F2DDE /* Vkontakte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vkontakte.xcdatamodel; sourceTree = "<group>"; };
 		CEB0275029B002EC001F2DDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +118,8 @@
 		CEB027A829B27CD5001F2DDE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
 		CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CEB027AC29B28411001F2DDE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		CEC0F93429CC72130065FFCE /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,19 +212,18 @@
 				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
 				CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */,
 				CEB0277F29B007F5001F2DDE /* Factory.swift */,
+				CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */,
 				CE4D3A4629C1B32E00A2E09A /* Protocol */,
 				CEB0279B29B22979001F2DDE /* Services */,
 				CEB0279029B0B630001F2DDE /* CustomStyle */,
 				CEB0278429B07AAD001F2DDE /* View */,
 				CEB0278329B07A94001F2DDE /* View_model */,
 				CEB0278129B07990001F2DDE /* Model */,
-				CEB0274829B002EA001F2DDE /* ViewController.swift */,
 				CEB0274A29B002EA001F2DDE /* Main.storyboard */,
 				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
 				CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */,
 				CEB0275529B002EC001F2DDE /* Info.plist */,
 				CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */,
-				CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */,
 			);
 			path = Vkontakte;
 			sourceTree = "<group>";
@@ -290,10 +291,11 @@
 		CEB0278629B07AD8001F2DDE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CEC0F93329CC4A520065FFCE /* Additional_Info */,
 				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
 				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
 				CE4D3A3729BDCD0100A2E09A /* Cells */,
-				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
+				CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -301,6 +303,7 @@
 		CEB0278729B07AEC001F2DDE /* Liked */ = {
 			isa = PBXGroup;
 			children = (
+				CEC0F93429CC72130065FFCE /* LikedViewController.swift */,
 			);
 			path = Liked;
 			sourceTree = "<group>";
@@ -333,6 +336,14 @@
 				CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		CEC0F93329CC4A520065FFCE /* Additional_Info */ = {
+			isa = PBXGroup;
+			children = (
+				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
+			);
+			path = Additional_Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,7 +489,6 @@
 				CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */,
 				CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */,
 				CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */,
-				CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */,
 				CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */,
 				CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */,
 				CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */,
@@ -499,11 +509,13 @@
 				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
 				CE4D3A4829C1B33F00A2E09A /* OtherProtocols.swift in Sources */,
 				CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */,
+				CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */,
 				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
 				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
 				CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */,
 				CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */,
+				CEC0F93529CC72130065FFCE /* LikedViewController.swift in Sources */,
 				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
 				CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */,
 				CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */,

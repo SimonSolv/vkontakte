@@ -14,7 +14,14 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     var user: UserData? {
         didSet {
-            self.userAvatar.image = UIImage(named: user?.avatar ?? "DefaultAvatar")
+            guard let user = user else {
+                print("User is nil in UserCollectionViewCell")
+                return
+            }
+            self.userAvatar.image = UIImage(named: user.avatar ?? "DefaultAvatar")
+            if user.isLogged == true {
+                addGreenCircle()
+            }
         }
     }
     
@@ -53,6 +60,23 @@ class UserCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
             make.height.equalTo(60)
             make.width.equalTo(60)
+        }
+    }
+    
+    private func addGreenCircle() {
+        let view = UIImageView()
+        view.image = UIImage(systemName: "circle.fill")
+        view.tintColor = .green
+        view.layer.borderColor = UIColor.orange.cgColor
+        view.layer.borderWidth = 1
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 7
+        contentView.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.top.equalTo(userAvatar.snp.top).offset(45)
+            make.centerX.equalTo(userAvatar.snp.centerX).offset(21)
+            make.height.equalTo(14)
+            make.width.equalTo(14)
         }
     }
     

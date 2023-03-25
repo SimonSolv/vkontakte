@@ -30,7 +30,8 @@
         <relationship name="commentsArray" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="post" inverseEntity="Comment"/>
     </entity>
     <entity name="UserData" representedClassName="UserData" syncable="YES" codeGenerationType="class">
-        <attribute name="avatar" optional="YES" attributeType="String"/>
+        <attribute name="avatar" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String" defaultValueString="&quot;Unknown&quot;"/>
         <attribute name="dateOfBirth" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="isLogged" attributeType="Boolean" usesScalarValueType="YES"/>

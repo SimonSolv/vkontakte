@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostTableViewCell: UITableViewCell {
     
@@ -15,21 +16,18 @@ class PostTableViewCell: UITableViewCell {
     
     static let identifier = "PostTableViewCell"
     
-    var post: Post?
-    
-    var postId: String? {
+    var post: Post? {
         didSet {
-            guard let source = coreManager.getPost(id: postId!) else {
-                print ("Couldnt get post in PostTableViewCell")
+            guard let post = post else {
+                print("Post is nil in PostTableViewCell")
                 return
             }
-            post = source
-            userView.userId = source.author?.id
-            title.text = source.title
-            body.text = source.body
-            image.image = UIImage(named: source.image ?? "DefaultPostImage")
-            setupLabel(label: self.likes, image: "heart", text: "\(source.likes )")
-            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(source.commentsArray?.count ?? 0)")
+            userView.userId = post.author?.id
+            title.text = post.title
+            body.text = post.body
+            image.image = UIImage(named: post.image ?? "DefaultPostImage")
+            setupLabel(label: self.likes, image: "heart", text: "\(post.likes )")
+            setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(post.commentsArray?.count ?? 0)")
         }
     }
     
@@ -84,7 +82,7 @@ class PostTableViewCell: UITableViewCell {
         let tapOnBody = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
         let tapOnTitle = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
         let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
-        userView.avatar.addGestureRecognizer(tapOnUser)
+        userView.addGestureRecognizer(tapOnUser)
         body.addGestureRecognizer(tapOnBody)
         image.addGestureRecognizer(tapOnImage)
         title.addGestureRecognizer(tapOnTitle)
@@ -129,9 +127,9 @@ class PostTableViewCell: UITableViewCell {
         
         image.snp.makeConstraints { make in
             make.top.equalTo(title.snp.bottom).offset(10)
-            make.height.equalTo(self.bounds.width/4*3)
             make.centerX.equalTo(contentView.snp.centerX)
             make.width.equalTo(contentView.snp.width).offset(-40)
+            make.height.equalTo(image.snp.width).multipliedBy(3.0 / 4.0)
         }
         
         body.snp.makeConstraints { make in
@@ -167,13 +165,12 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc private func bodyTapped() {
-        print("Body tapped for PostTableViewCell")
-        guard (self.postId != nil) else
+        guard (self.post != nil) else
         {
             print("Error to get PostId in PostTableViewCell")
             return
         }
-        delegate?.openPost(id: postId!)
+        delegate?.openPost(source: post!)
     }
     
     @objc private func likesTapped() {
@@ -181,26 +178,23 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc private func userTapped() {
-        print("User tapped for PostTableViewCell")
-        guard (self.postId != nil) else
+        guard (self.post != nil) else
         {
             print("Error to get PostId in PostTableViewCell")
             return
         }
-        let coreManager = CoreDataManager.shared
-        let post = coreManager.getPost(id: postId!)
         let author = post!.author
         delegate?.openAuthor(id: (author?.id)!)
     }
     
     @objc private func commentsTapped() {
         print("Comments tapped for PostTableViewCell")
-        guard (self.postId != nil) else
+        guard (self.post != nil) else
         {
             print("Error to get PostId in PostTableViewCell")
             return
         }
-        self.delegate?.openPost(id: postId!)
+        self.delegate?.openPost(source: post!)
     }
     
     private func updateLikes(state: Bool) {

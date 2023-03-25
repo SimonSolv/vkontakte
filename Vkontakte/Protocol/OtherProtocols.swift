@@ -10,7 +10,7 @@ protocol UserContainsProtocol {
 }
 
 protocol PostTableViewCellDelegate {
-    func openPost(id: String)
+    func openPost(source: Post)
     func openAuthor(id: String)
     func liked(status: Bool)
 }

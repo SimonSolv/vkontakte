@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
         self.userId = userId
         self.user = coreManager.getUser(id: self.userId)!
         super.init(nibName: nil, bundle: nil)
-        title = self.user?.nickName
         view.backgroundColor = .white
         setupView()
         setupConstraints()
@@ -50,6 +49,23 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if user?.isLogged == false {
+            self.navigationController?.navigationBar.isHidden = false
+            self.navigationController?.navigationBar.backItem?.title = "Feed"
+            self.navigationController?.navigationBar.tintColor = .orange
+        } else {
+            self.navigationController?.navigationBar.isHidden = true
+            // Disable swipe-to-go-back gesture in the current view controller
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+        }
+        
+    }
+    
+    //MARK: - Setup
     
     private func setupView() {
         view.addSubview(titleLabel)
@@ -84,7 +100,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             return user?.posts?.count ?? 0
         }
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,10 +119,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell!
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
+            var posts: [Post] = []
+            posts = coreManager.fetchPostsFor(user: userId)
             cell?.delegate = self
-            let data = user?.posts
-            let posts: [Post] = data?.allObjects as? [Post] ?? []
-            cell?.postId = posts[indexPath.row].id
+            cell?.post = posts[indexPath.row]
             return cell!
         }
     }
@@ -123,12 +138,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ProfileViewController: PostTableViewCellDelegate {
-    func openPost(id: String) {
-        coordinator?.ivent(action: .openPost(id: id), iniciator: self)
+    
+    func openPost(source: Post) {
+        coordinator?.ivent(action: .openPost(post: source), iniciator: self)
     }
     
     func openAuthor(id: String) {
-        coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
+        //coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
     }
 
     func liked(status: Bool) {
@@ -139,7 +155,6 @@ extension ProfileViewController: PostTableViewCellDelegate {
 extension ProfileViewController: ProfileUserViewDelegate {
     
     func additionalInfoTapped(id: String) {
-        print("additional tapped")
         coordinator?.ivent(action: .showAdditionalInfo(id: userId), iniciator: self)
     }
     
