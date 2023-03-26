@@ -22,7 +22,7 @@ class CoreDataManager {
         fetchUsers()
         fetchPosts()
         fetchComments()
-        getCurrentUser()
+        self.currentUser = getCurrentUser()
     }
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -58,7 +58,7 @@ class CoreDataManager {
     
     var currentUser: UserData?
     
- //   var pictures: [Picture] = []
+    var pictures: [Picture] = []
     
     func fetchUsers() {
         let request = UserData.fetchRequest()
@@ -88,7 +88,6 @@ class CoreDataManager {
         var answer: UserData?
         for user in users {
             if user.isLogged == true {
-                self.currentUser = user
                 answer = user
             }
         }
@@ -284,4 +283,19 @@ class CoreDataManager {
             }
         }
     }
+    
+    //MARK: - Pictures
+    
+//    func createPicture(url: URL, name: String, user: UserData?, album: Album?) {
+//        let picture = Picture(context: persistentContainer.viewContext)
+//        picture.url = url
+//        picture.name = name
+//        if user != nil {
+//            picture.user = user
+//        }
+//        if album != nil {
+//            picture.album = album
+//        }
+//        saveContext()
+//    }
 }

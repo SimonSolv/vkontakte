@@ -12,14 +12,9 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     
     var coordinator: CoordinatorProtocol?
     
-    private let coreManager = CoreDataManager.shared
+    weak var delegate: ProfileViewControllerDelegate?
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "@\(self.user?.nickName ?? "nickNameHasntBeenSetUp")"
-        label.setCustomStyle(style: .feedTitle)
-        return label
-    }()
+    private let coreManager = CoreDataManager.shared
     
     var userId: String
     
@@ -30,6 +25,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
         table.register(ProfileUserTableViewCell.self, forCellReuseIdentifier: ProfileUserTableViewCell.identifier)
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         table.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        table.register(PostsHeaderTableViewCell.self, forCellReuseIdentifier: PostsHeaderTableViewCell.identifier)
         table.delegate = self
         table.dataSource = self
         return table
@@ -42,6 +38,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
         self.user = coreManager.getUser(id: self.userId)!
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .white
+        self.title = "@\(self.user?.nickName ?? "nickName")"
         setupView()
         setupConstraints()
     }
@@ -57,10 +54,10 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
             self.navigationController?.navigationBar.backItem?.title = "Feed"
             self.navigationController?.navigationBar.tintColor = .orange
         } else {
-            self.navigationController?.navigationBar.isHidden = true
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(menuButtonTapped))
+            self.navigationController?.navigationBar.isHidden = false
             // Disable swipe-to-go-back gesture in the current view controller
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-
         }
         
     }
@@ -68,25 +65,21 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     //MARK: - Setup
     
     private func setupView() {
-        view.addSubview(titleLabel)
         view.addSubview(tableView)
     }
     
     private func setupConstraints() {
         
-        titleLabel.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.height.equalTo(25)
-            make.trailing.equalTo(view.snp.trailing).offset(-20)
-            make.leading.equalTo(view.snp.leading).offset(20)
-        }
-        
         tableView.snp.makeConstraints {make in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.trailing.equalTo(view.snp.trailing)
             make.leading.equalTo(view.snp.leading)
         }
+    }
+    
+    @objc private func menuButtonTapped() {
+        self.delegate?.menuButtonTapped()
     }
 }
 
@@ -95,7 +88,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section < 2 {
+        if section < 3 {
             return 1
         } else {
             return user?.posts?.count ?? 0
@@ -103,7 +96,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        4
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,6 +109,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as? PhotosTableViewCell
             cell?.user = self.user!
+            return cell!
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostsHeaderTableViewCell.identifier, for: indexPath) as? PostsHeaderTableViewCell
+            cell?.user = self.user
+            cell?.delegate = self
             return cell!
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
@@ -152,14 +150,19 @@ extension ProfileViewController: PostTableViewCellDelegate {
     }
 }
 
-extension ProfileViewController: ProfileUserViewDelegate {
+extension ProfileViewController: ProfileUserViewDelegate, PostsHeaderTableViewCellDelegate {
+    
+    func createPost() {
+        coordinator?.ivent(action: .createPostTapped, iniciator: self)
+    }
+    
     
     func additionalInfoTapped(id: String) {
         coordinator?.ivent(action: .showAdditionalInfo(id: userId), iniciator: self)
     }
     
     func messageButtonTapped(id: String) {
-        print("Message tapped")
+        coordinator?.ivent(action: .messageTapped, iniciator: self)
     }
     
     func editButtonTapped(id: String) {

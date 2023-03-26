@@ -12,6 +12,11 @@ enum TextFieldStyle {
     case login
     case subGeneral
     case notFilled
+    case plain
+}
+
+enum TextViewStyle {
+    case plain
 }
 
 enum LabelStyle {
@@ -73,6 +78,20 @@ final class CustomButton: UIButton {
     }
 }
 
+extension UITextView {
+    func setStyle(_ style: TextViewStyle) {
+        switch style {
+        case .plain:
+            self.isEditable = true
+            self.isScrollEnabled = true
+            self.font = UIFont.systemFont(ofSize: 18.0)
+            self.layer.backgroundColor = UIColor.white.cgColor
+            self.layer.cornerRadius = 10
+            self.clipsToBounds = true
+        }
+    }
+}
+
 extension UITextField {
     func setCustomStyle(_ style: TextFieldStyle) {
         switch style {
@@ -103,6 +122,13 @@ extension UITextField {
             self.textColor = .black
             self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
             self.leftViewMode = .always
+        case .plain:
+            self.backgroundColor = .white
+            self.font = .systemFont(ofSize: 16)
+            self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+            self.leftViewMode = .always
+            self.layer.cornerRadius = 10
+            self.clipsToBounds = true
         }
     }
 

@@ -30,7 +30,7 @@ class ProfileUserView: UIView {
         }
     }
     
-    var delegate: ProfileUserViewDelegate?
+    weak var delegate: ProfileUserViewDelegate?
     
     private lazy var avatar: UIImageView = {
         let image = UIImageView()
@@ -79,10 +79,11 @@ class ProfileUserView: UIView {
     }()
     
     private lazy var messageButton: UIButton = {
-        let btn = UIButton()
-        btn.setCustomStyle(style: .main)
-        btn.setTitle("Message", for: .normal)
-        return btn
+        let view = UIButton()
+        view.setCustomStyle(style: .main)
+        view.setTitle("Message", for: .normal)
+        view.addTarget(self, action: #selector(messageTapped), for: .touchUpInside)
+        return view
     }()
     
     private lazy var callButton: UIButton = {
@@ -236,6 +237,10 @@ class ProfileUserView: UIView {
     
     @objc private func editTapped() {
         delegate?.editButtonTapped(id: userId!)
+    }
+    
+    @objc private func messageTapped() {
+        delegate?.messageButtonTapped(id: "00")
     }
     
     

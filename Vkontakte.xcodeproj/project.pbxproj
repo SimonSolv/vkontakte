@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0B0F7029CEDC7E00357BF0 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */; };
+		CE0B0F7429CEE70B00357BF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0B0F7329CEE70B00357BF0 /* Main.storyboard */; };
+		CE0B0F7629CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */; };
+		CE0B0F7829D0369B00357BF0 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */; };
+		CE0B0F7A29D0507100357BF0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */; };
 		CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */; };
 		CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */; };
 		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
@@ -23,7 +28,6 @@
 		CE4D3A4829C1B33F00A2E09A /* OtherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4729C1B33F00A2E09A /* OtherProtocols.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
-		CEB0274C29B002EA001F2DDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0274A29B002EA001F2DDE /* Main.storyboard */; };
 		CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */; };
 		CEB0275129B002EC001F2DDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0275029B002EC001F2DDE /* Assets.xcassets */; };
 		CEB0275429B002EC001F2DDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */; };
@@ -72,6 +76,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		CE0B0F7329CEE70B00357BF0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFiller.swift; sourceTree = "<group>"; };
 		CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +98,6 @@
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEB0274B29B002EA001F2DDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEB0274E29B002EA001F2DDE /* Vkontakte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vkontakte.xcdatamodel; sourceTree = "<group>"; };
 		CEB0275029B002EC001F2DDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB0275329B002EC001F2DDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -171,6 +179,7 @@
 				CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */,
 				CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */,
 				CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */,
+				CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -219,11 +228,11 @@
 				CEB0278429B07AAD001F2DDE /* View */,
 				CEB0278329B07A94001F2DDE /* View_model */,
 				CEB0278129B07990001F2DDE /* Model */,
-				CEB0274A29B002EA001F2DDE /* Main.storyboard */,
 				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
 				CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */,
 				CEB0275529B002EC001F2DDE /* Info.plist */,
 				CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */,
+				CE0B0F7329CEE70B00357BF0 /* Main.storyboard */,
 			);
 			path = Vkontakte;
 			sourceTree = "<group>";
@@ -291,11 +300,14 @@
 		CEB0278629B07AD8001F2DDE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				CEC0F93329CC4A520065FFCE /* Additional_Info */,
+				CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */,
 				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
 				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
-				CE4D3A3729BDCD0100A2E09A /* Cells */,
+				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
+				CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */,
 				CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */,
+				CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */,
+				CE4D3A3729BDCD0100A2E09A /* Cells */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -336,14 +348,6 @@
 				CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		CEC0F93329CC4A520065FFCE /* Additional_Info */ = {
-			isa = PBXGroup;
-			children = (
-				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
-			);
-			path = Additional_Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,9 +460,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0B0F7429CEE70B00357BF0 /* Main.storyboard in Resources */,
 				CEB0275429B002EC001F2DDE /* LaunchScreen.storyboard in Resources */,
 				CEB0275129B002EC001F2DDE /* Assets.xcassets in Resources */,
-				CEB0274C29B002EA001F2DDE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4D3A4129C09B1300A2E09A /* CustomAlert.swift in Sources */,
+				CE0B0F7029CEDC7E00357BF0 /* CreatePostViewController.swift in Sources */,
 				CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */,
 				CEB0278029B007F5001F2DDE /* Factory.swift in Sources */,
 				CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */,
@@ -495,8 +500,10 @@
 				CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */,
 				CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */,
 				CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */,
+				CE0B0F7829D0369B00357BF0 /* SideMenuViewController.swift in Sources */,
 				CEB0277929B005FD001F2DDE /* CoordinatorProtocol.swift in Sources */,
 				CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */,
+				CE0B0F7A29D0507100357BF0 /* ContainerViewController.swift in Sources */,
 				CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */,
 				CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */,
 				CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */,
@@ -512,6 +519,7 @@
 				CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */,
 				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
+				CE0B0F7629CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift in Sources */,
 				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
 				CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */,
 				CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */,
@@ -557,14 +565,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CEB0274A29B002EA001F2DDE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEB0274B29B002EA001F2DDE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -700,6 +700,7 @@
 				DEVELOPMENT_TEAM = TDYKKCNQAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vkontakte/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use your biometry to give you fast and easy access to enter the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -728,6 +729,7 @@
 				DEVELOPMENT_TEAM = TDYKKCNQAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vkontakte/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use your biometry to give you fast and easy access to enter the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

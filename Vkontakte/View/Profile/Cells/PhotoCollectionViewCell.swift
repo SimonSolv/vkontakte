@@ -18,6 +18,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
                 self.picture.tintColor = .orange
                 self.picture.layer.borderColor = UIColor.orange.cgColor
                 self.picture.layer.borderWidth = 1
+                self.picture.contentMode = .center
             } else {
                 self.picture.image = UIImage(named: source!)
             }
@@ -26,10 +27,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     private lazy var picture: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
-        view.backgroundColor = .green
         return view
     }()
     

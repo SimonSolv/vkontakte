@@ -11,6 +11,7 @@ enum ControllerType {
     case post(source: Post)
     case login
     case additionalInfo(id: String)
+    case createPost
 }
 
 class Factory: FactoryProtocol {
@@ -62,6 +63,10 @@ class Factory: FactoryProtocol {
         case .additionalInfo(let id):
             let controller = AdditionalInfoViewController()
             controller.userId = id
+            controller.coordinator = coordinator
+            return controller
+        case .createPost:
+            let controller = CreatePostViewController()
             controller.coordinator = coordinator
             return controller
         }

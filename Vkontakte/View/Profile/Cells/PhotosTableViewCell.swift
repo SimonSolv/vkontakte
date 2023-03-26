@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
     
@@ -63,7 +64,7 @@ class PhotosTableViewCell: UITableViewCell {
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(70)
@@ -76,15 +77,27 @@ class PhotosTableViewCell: UITableViewCell {
 extension PhotosTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.user?.images?.count ?? 3
+        switch self.user?.images?.count {
+        case 0:
+            return 1
+        case nil:
+            return 1
+        default:
+            return user!.images!.count
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
-        let photos = user?.images?.allObjects as? [Picture]
-        cell.source = photos?[indexPath.row].name ?? "plus"
-        print(cell.source)
-        return cell
+        if user?.images?.count == 0 || user?.images?.count == nil {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
+            cell.source = "plus"
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
+            let photos = user?.images?.allObjects as? [Picture]
+            cell.source = photos?[indexPath.row].name ?? "plus"
+            return cell
+        }
     }
 }
 

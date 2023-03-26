@@ -1,12 +1,6 @@
 import UIKit
 
 class AppCoordinator: CoordinatorProtocol {
-
-    enum AppTab {
-        case profile
-        case feed
-        case liked
-    }
     
     private let tabBarController: UITabBarController
     private let factory: Factory
@@ -16,9 +10,9 @@ class AppCoordinator: CoordinatorProtocol {
 
     init(tabBarController: UITabBarController, factory: Factory) {
         self.tabBarController = tabBarController
-        tabBarController.tabBar.backgroundColor = .clear
         tabBarController.view.backgroundColor = .white
         tabBarController.tabBar.tintColor = .orange
+        tabBarController.tabBar.backgroundColor = .white
         self.factory = factory
     }
 
@@ -38,10 +32,14 @@ class AppCoordinator: CoordinatorProtocol {
             tabBarController.tabBar.isHidden = true
         case .logged:
             currentUser = coreManager.getCurrentUser()
-            let profileViewController = factory.createController(type: .profile(id: (currentUser?.id)!), coordinator: self)
-            let profileNavVc = UINavigationController(rootViewController: profileViewController)
-            profileNavVc.navigationBar.isHidden = true
-            tabBarController.viewControllers = [feedNavVc, profileNavVc, likesNavVc]
+            let containerVC = ContainerViewController()
+            containerVC.coordinator = self
+            containerVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            let sideVC = SideMenuViewController()
+            let profileViewController = factory.createController(type: .profile(id: (currentUser?.id)!), coordinator: self) as? ProfileViewController
+            containerVC.profileVC = profileViewController
+            containerVC.sideMenuVC = sideVC
+            tabBarController.viewControllers = [feedNavVc, containerVC, likesNavVc]
         case .unlogged:
             let loginViewController = factory.createController(type: .login, coordinator: self)
             let loginNavVc = UINavigationController(rootViewController: loginViewController)
@@ -87,6 +85,14 @@ class AppCoordinator: CoordinatorProtocol {
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .hasAccount:
             let controller = factory.createController(type: .login, coordinator: self)
+            iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .messageTapped:
+            print("Sending message")
+        case .createPostTapped:
+            let controller = factory.createController(type: .createPost, coordinator: self)
+            iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .showSettings:
+            let controller = factory.createController(type: .createPost, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         }
     }

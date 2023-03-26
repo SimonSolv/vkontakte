@@ -3,6 +3,7 @@ import UIKit
 protocol CoordinatorProtocol {
     func start(scene: SceneStatus)
     func ivent(action: ActionType, iniciator: UIViewController)
+    func setTabTo(tab: AppTab)
 }
 
 protocol CoordinatedProtocol {
@@ -20,4 +21,13 @@ enum ActionType {
     case showProfile(id: String)
     case showAdditionalInfo(id: String)
     case hasAccount
+    case messageTapped
+    case createPostTapped
+    case showSettings
+}
+
+enum AppTab {
+    case profile
+    case feed
+    case liked
 }
