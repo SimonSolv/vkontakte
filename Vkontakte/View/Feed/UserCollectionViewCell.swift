@@ -18,7 +18,7 @@ class UserCollectionViewCell: UICollectionViewCell {
                 print("User is nil in UserCollectionViewCell")
                 return
             }
-            self.userAvatar.image = UIImage(named: user.avatar ?? "DefaultAvatar")
+            self.userAvatar.image = CoreDataManager.shared.unpackPicture(picture: user.avatar!) ?? UIImage(named: "DefaultAvatar")!
             if user.isLogged == true {
                 addGreenCircle()
             }

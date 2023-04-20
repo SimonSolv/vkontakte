@@ -1,12 +1,45 @@
 import UIKit
 
+protocol CoordinatorProtocol {
+    func start(scene: SceneStatus)
+    func ivent(action: ActionType, iniciator: UIViewController)
+    func setTabTo(tab: AppTab)
+}
+
+protocol CoordinatedProtocol {
+    var coordinator: CoordinatorProtocol? { get set }
+}
+
+enum ActionType {
+    case showRegisterPage
+    case showRegistrationConfirmation
+    case addGeneralInfo
+    case requestNotifications
+    case sendNotification
+    case openPost(post: Post)
+    case loginSuccess(user: UserData)
+    case showProfile(user: UserData)
+    case showAdditionalInfo(user: UserData)
+    case hasAccount
+    case messageTapped
+    case createPostTapped
+    case editProfileTapped
+    case openSettings
+}
+
+enum AppTab {
+    case profile
+    case feed
+    case liked
+}
+
+
 class AppCoordinator: CoordinatorProtocol {
     
     private let tabBarController: UITabBarController
     private let factory: Factory
     var notificationService: LocalNotificationManager?
     let coreManager = CoreDataManager.shared
-    var currentUser: UserData?
 
     init(tabBarController: UITabBarController, factory: Factory) {
         self.tabBarController = tabBarController
@@ -31,14 +64,7 @@ class AppCoordinator: CoordinatorProtocol {
             tabBarController.selectedIndex = 1
             tabBarController.tabBar.isHidden = true
         case .logged:
-            currentUser = coreManager.getCurrentUser()
-            let containerVC = ContainerViewController()
-            containerVC.coordinator = self
-            containerVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
-            let sideVC = SideMenuViewController()
-            let profileViewController = factory.createController(type: .profile(id: (currentUser?.id)!), coordinator: self) as? ProfileViewController
-            containerVC.profileVC = profileViewController
-            containerVC.sideMenuVC = sideVC
+            let containerVC = factory.createController(type: .profileContainer(user: coreManager.currentUser!), coordinator: self)
             tabBarController.viewControllers = [feedNavVc, containerVC, likesNavVc]
         case .unlogged:
             let loginViewController = factory.createController(type: .login, coordinator: self)
@@ -68,20 +94,19 @@ class AppCoordinator: CoordinatorProtocol {
         case .openPost(let post):
             let controller = factory.createController(type: .post(source: post), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
-        case .loginSuccess(let id):
-            let controller = factory.createController(type: .profile(id: id), coordinator: self)
+        case .loginSuccess(let user):
+            let controller = factory.createController(type: .profileContainer(user: user), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
             self.tabBarController.tabBar.isHidden = false
-        case .showProfile(let userId):
-            let currentUser = coreManager.getUser(id: userId)
-            if currentUser?.isLogged == true {
+        case .showProfile(let user):
+            if user.isLogged == true {
                 setTabTo(tab: .profile)
             } else {
-                let controller = factory.createController(type: .profile(id: userId), coordinator: self)
+                let controller = factory.createController(type: .profile(user: user), coordinator: self)
                 iniciator.navigationController?.pushViewController(controller, animated: true)
             }
-        case .showAdditionalInfo(let id):
-            let controller = factory.createController(type: .additionalInfo(id: id), coordinator: self)
+        case .showAdditionalInfo(let user):
+            let controller = factory.createController(type: .additionalInfo(user: user), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .hasAccount:
             let controller = factory.createController(type: .login, coordinator: self)
@@ -91,8 +116,11 @@ class AppCoordinator: CoordinatorProtocol {
         case .createPostTapped:
             let controller = factory.createController(type: .createPost, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
-        case .showSettings:
-            let controller = factory.createController(type: .createPost, coordinator: self)
+        case .openSettings:
+            let controller = factory.createController(type: .settings, coordinator: self)
+            iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .editProfileTapped:
+            let controller = factory.createController(type: .editProfile, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         }
     }

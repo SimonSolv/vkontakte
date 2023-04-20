@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol PostsHeaderTableViewCellDelegate {
+    func createPost()
+}
+
 class PostsHeaderTableViewCell: UITableViewCell {
     
     static let identifier = "PostsHeaderTableViewCell"

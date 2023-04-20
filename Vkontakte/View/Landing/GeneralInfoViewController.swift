@@ -276,11 +276,12 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
             CustomAlert.showAlert(title: "Warning!", message: "Please, fill all neccessary fields", okActionTitle: "Ok", viewController: self)
         case .allGood:
             let coreManager = CoreDataManager.shared
-            coreManager.createUser(name: nameTextField.text!, lastName: lastNameTextField.text ?? "", jobTitle: jobTextField.text ?? "", nickName: nickNameTextField.text!, dateOfBirth: datePicker.date, avatar: "", isLogged: true)
+            coreManager.createUser(name: nameTextField.text!, lastName: lastNameTextField.text ?? "", jobTitle: jobTextField.text ?? "", nickName: nickNameTextField.text!, dateOfBirth: datePicker.date, avatar: coreManager.defaultAvatar, isLogged: true)
             let current = coreManager.getUserByNick(nickName: nickNameTextField.text!)
+            coreManager.currentUser = current
             coreManager.fetchUsers()
             CustomAlert.showAlert(title: "Success!", message: "You have now account in our app", okActionTitle: "Ok",okActionHandler: {
-                self.coordinator?.ivent(action: .loginSuccess(id: (current?.id)!), iniciator: self)
+                self.coordinator?.ivent(action: .loginSuccess(user: current!), iniciator: self)
             }, viewController: self)
         }
     }

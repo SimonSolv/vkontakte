@@ -12,16 +12,10 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
     
     var coordinator: CoordinatorProtocol?
     
-    var userId: String? {
+    var user: UserData? {
         didSet {
-            let coreManager = CoreDataManager.shared
-            guard let id = userId else {
-                print("User id is nil in AdditionalViewController")
-                return
-            }
-            self.user = coreManager.getUser(id: id)
             guard let user = user else {
-                print("User is not returned by coreManager (nil) in AdditionalViewController")
+                print("User ir (nil) in AdditionalViewController")
                 return
             }
             setupView()
@@ -30,8 +24,6 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
     }
     
     var scroll = UIScrollView()
-    
-    var user: UserData?
     
     private lazy var avatar: UIImageView = {
         let view = UIImageView()
@@ -94,7 +86,7 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
     }
     
     private func setupData(user: UserData) {
-        avatar.image = UIImage(named: user.avatar!)
+        avatar.image = CoreDataManager.shared.unpackPicture(picture: user.avatar!)
         avatar.layer.cornerRadius = 15
         avatar.clipsToBounds = true
         name.text = "\(user.name ?? "User") \(user.lastName ?? "")"

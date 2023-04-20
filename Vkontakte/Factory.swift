@@ -2,7 +2,7 @@ import UIKit
 
 enum ControllerType {
     case feed
-    case profile(id: String)
+    case profile(user: UserData)
     case liked
     case landing
     case registration
@@ -10,8 +10,15 @@ enum ControllerType {
     case generalInfo
     case post(source: Post)
     case login
-    case additionalInfo(id: String)
+    case additionalInfo(user: UserData)
     case createPost
+    case profileContainer(user: UserData)
+    case editProfile
+    case settings
+}
+
+protocol FactoryProtocol {
+    func createController(type: ControllerType, coordinator: CoordinatorProtocol) -> UIViewController
 }
 
 class Factory: FactoryProtocol {
@@ -22,8 +29,8 @@ class Factory: FactoryProtocol {
             controller.coordinator = coordinator
             controller.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "book.fill"), tag: 0)
             return controller
-        case .profile(let id):
-            let controller = ProfileViewController(userId: id)
+        case .profile(let user):
+            let controller = ProfileViewController(user: user)
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             controller.coordinator = coordinator
             return controller
@@ -60,13 +67,31 @@ class Factory: FactoryProtocol {
             controller.coordinator = coordinator
             controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             return controller
-        case .additionalInfo(let id):
+        case .additionalInfo(let user):
             let controller = AdditionalInfoViewController()
-            controller.userId = id
+            controller.user = user
             controller.coordinator = coordinator
             return controller
         case .createPost:
             let controller = CreatePostViewController()
+            controller.coordinator = coordinator
+            return controller
+        case .profileContainer(let user):
+            let containerVC = ContainerViewController()
+            containerVC.coordinator = coordinator
+            containerVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            let sideVC = SideMenuViewController()
+            sideVC.delegate = containerVC
+            let profileViewController = self.createController(type: .profile(user: user), coordinator: coordinator) as? ProfileViewController
+            containerVC.profileVC = profileViewController
+            containerVC.sideMenuVC = sideVC
+            return containerVC
+        case .editProfile:
+            let controller = EditProfileViewController()
+            controller.coordinator = coordinator
+            return controller
+        case .settings:
+            let controller = SettingsViewController()
             controller.coordinator = coordinator
             return controller
         }

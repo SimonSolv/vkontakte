@@ -32,6 +32,7 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //tableView.reloadData()
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -55,14 +56,14 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
         }
     }
     
-    //Handle notification to open profile when tapped on user in collectionView
     @objc func handleNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             let id = userInfo["id"] as! String
-            self.coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
+            let user = coreManager.getUser(id: id)
+            guard let user = user else { return }
+            self.coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
         }
     }
-    
 }
 
 //MARK: - TableViewDelegate
@@ -80,20 +81,25 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.post = coreManager.posts[indexPath.row]
+        let source: [Post] = coreManager.getSortedPosts(by: .date)
+        cell.post = source[indexPath.row]
         cell.delegate = self
         return cell
     }
-
 }
 
 extension FeedViewController: PostTableViewCellDelegate {
+    
+    func postMenuButtonTapped() {
+        print("Tapped Menu")
+    }
+    
     func openPost(source: Post) {
         coordinator?.ivent(action: .openPost(post: source), iniciator: self)
     }
     
-    func openAuthor(id: String) {
-        coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
+    func openAuthor(user: UserData) {
+        coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
     }
     
     func liked(status: Bool) {

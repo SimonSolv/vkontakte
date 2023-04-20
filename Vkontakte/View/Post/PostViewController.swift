@@ -16,6 +16,8 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     
     let contentView = UIView()
     
+    let coreManager = CoreDataManager.shared
+    
     var post: Post? {
         didSet {
             guard let post = post else {
@@ -28,33 +30,36 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
                 return view
             }()
             postTitle.text = post.title
-            image.image = UIImage(named: post.image ?? "DefaultPostImage")
+            image.image = coreManager.unpackPicture(picture: post.image!) ?? UIImage(named: "DefaultPostImage")!
             body.text = post.body
             setupLabel(label: self.likes, image: "heart", text: "\(post.likes )")
             
             setupLabel(label: self.comments, image: "bubble.middle.bottom", text: "\(post.commentsArray?.count ?? 0)")
+            if post.author?.isLogged == true {
+                addMenuButton()
+            }
         }
     }
     
     var authorId: String?
     
-    var userView: UserView = UserView()
+    private var userView: UserView = UserView()
     
-    lazy var postTitle: UILabel = {
+    private lazy var postTitle: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedTitle)
         label.numberOfLines = 0
         return label
     }()
     
-    lazy var body: UILabel = {
+    private lazy var body: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
         label.numberOfLines = 0
         return label
     }()
     
-    lazy var image: UIImageView = {
+    private lazy var image: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 10
@@ -62,20 +67,26 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         return view
     }()
     
-    lazy var likes: UILabel = {
+    private lazy var likes: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
         return label
     }()
     
-    lazy var comments: UILabel = {
+    private lazy var comments: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
         return label
+    }()
+    
+    private lazy var menuButton: UIButton = {
+        let view = UIButton(image: UIImage(systemName: "ellipsis")!) {
+            self.postMenuButtonTapped()
+        }
+        return view
     }()
     
     //MARK: - Lifecycle
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +101,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         self.navigationController?.navigationBar.backItem?.title = "Feed"
         self.navigationController?.navigationBar.tintColor = .orange
     }
+    
     //MARK: - Setup
     private func setupViews() {
         view.addSubview(scrollView)
@@ -149,7 +161,6 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         }
         
         likes.snp.makeConstraints { make in
-            
             make.top.equalTo(body.snp.bottom).offset(5)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.width.equalTo(60)
@@ -172,6 +183,21 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         label.attributedText = attributedString
     }
     
+    private func addMenuButton() {
+        contentView.addSubview(menuButton)
+        
+        menuButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-15)
+            make.height.equalTo(10)
+            make.width.equalTo(40)
+        }
+    }
+    
+    internal func postMenuButtonTapped() {
+        print("TappedMenu")
+    }
+    
     @objc private func likesTapped() {
         updateLikes(state: true)
     }
@@ -188,8 +214,8 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         self.coordinator?.ivent(action: .openPost(post: post), iniciator: self)
     }
     
-    func openAuthor(id: String) {
-        self.coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
+    func openAuthor(user: UserData) {
+        self.coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
     }
     
     func liked(status: Bool) {

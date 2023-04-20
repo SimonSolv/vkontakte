@@ -9,21 +9,29 @@ import UIKit
 import CoreData
 import SnapKit
 
+protocol ProfileUserViewDelegate: AnyObject {
+    func additionalInfoTapped(user: UserData)
+    func messageButtonTapped(user: UserData)
+    func editButtonTapped(user: UserData)
+    func postsTapped(user: UserData)
+    func subscribersTapped(user: UserData)
+    func subscriptionsTapped(user: UserData)
+}
+
 class ProfileUserView: UIView {
     
     var isCurrentUser: Bool?
     
-    var userId: String? {
+    let coreManager = CoreDataManager.shared
+    
+    var user: UserData? {
         didSet {
-            let coreManager = CoreDataManager.shared
-            guard let id = userId else { return }
-            let user = coreManager.getUser(id: id)
             guard let user = user else { return }
             self.isCurrentUser = user.isLogged
             setupView()
-            avatar.image = UIImage(named: user.avatar ?? "DefaultAvatar")
+            avatar.image = coreManager.unpackPicture(picture: user.avatar!) ?? UIImage(named: "DefaultAvatar")!
             name.text = "\(user.name ?? "Unknown User") \(user.lastName ?? "")"
-            job.text = "\(user.jobTitle ?? "")"
+            job.text = "\(user.jobTitle ?? "  ")"
             publicationsLabel.text = "\(user.posts?.count ?? 0)\nposts"
             subscriptionsLabel.text = "\(user.subscriptions?.count ?? 0)\nsubscriptions"
             subscribersLabel.text = "\(user.subscribers?.count ?? 0)\nsubscribers"
@@ -232,15 +240,24 @@ class ProfileUserView: UIView {
     //MARK: - Actions
     
     @objc private func additionalTapped() {
-        delegate?.additionalInfoTapped(id: userId!)
+        guard let user = user else {
+            return
+        }
+        delegate?.additionalInfoTapped(user: user)
     }
     
     @objc private func editTapped() {
-        delegate?.editButtonTapped(id: userId!)
+        guard let user = user else {
+            return
+        }
+        delegate?.editButtonTapped(user: user)
     }
     
     @objc private func messageTapped() {
-        delegate?.messageButtonTapped(id: "00")
+        guard let user = user else {
+            return
+        }
+        delegate?.messageButtonTapped(user: user)
     }
     
     

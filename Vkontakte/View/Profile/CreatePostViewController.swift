@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFieldDelegate {
     
@@ -20,17 +21,17 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
     
     private var bodyText: String?
     
-    private var imageName: String? {
-        didSet {
-            addImageView()
-        }
-    }
+    private let imagePicker = UIImagePickerController()
+    
+    private var postImage: Picture?
+    
+    private var postImageData: UIImage?
     
     // MARK: - Views
     
     private lazy var contentView = UIScrollView()
     
-    private lazy var postImage = UIImageView()
+    private lazy var postImageView = UIImageView()
 
     private lazy var titleTextField: UITextView = {
         let view = UITextView()
@@ -147,10 +148,12 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
     //MARK: - Methods
     
     @objc private func addImageTapped() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     @objc private func cancelTapped() {
@@ -158,36 +161,66 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
     }
     
     @objc private func createButtonTapped() {
-        
+        let picture = getPictureForPost()
+        var bodyText: String? = nil
+        if bodyTextField.text != "Enter text here..." {
+            bodyText = bodyTextField.text
+        }
+        coreManager.createPost(title: titleTextField.text, body: bodyText, image: picture, authorId: coreManager.currentUser!.id!)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         textField.sizeToFit()
     }
     
-    private func addImageView() {
-        contentView.addSubview(postImage)
-        postImage.image = UIImage(named: imageName ?? "DefaultPostImage")
-        postImage.backgroundColor = .green
-        postImage.contentMode = .scaleAspectFill
+    func getPictureForPost() -> Picture? {
+        var answer: Picture? = nil
+        if let binaryData = postImageView.image?.jpegData(compressionQuality: 0.9) {
+            answer = coreManager.savePicture(at: binaryData)
+            
+        }
+        return answer
         
-        postImage.snp.makeConstraints { make in
-            make.top.equalTo(bodyTextField.snp.bottom).offset(10)
+        
+        
+//        if imageURL != nil  {
+//            let picture: Picture? = coreManager.checkExistance(picURL: imageURL!)
+//            if picture != nil {
+//                return picture
+//            } else {
+//                let picture = coreManager.createPicture(name: imageSaveName, path: imageURL!, user: coreManager.currentUser, album: nil)
+//                return picture
+//            }
+//        } else {
+//            print("Something is nil to create picture")
+//            return nil
+//        }
+    }
+    
+    private func addImageView() {
+        contentView.addSubview(postImageView)
+        postImageView.backgroundColor = .green
+        postImageView.contentMode = .scaleAspectFill
+        if let addedImage = postImageData {
+            postImageView.image = addedImage
+        }
+        postImageView.snp.makeConstraints { make in
+            make.top.equalTo(bodyTextField.snp.bottom).offset(20)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
     }
-
 }
 
 extension CreatePostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            self.imageName = imageUrl.lastPathComponent
+        dismiss(animated: true, completion: nil)
+        if let image = info[.originalImage] as? UIImage {
+            self.postImageData = image
             self.addImageView()
         }
-        dismiss(animated: true, completion: nil)
     }
 }
 

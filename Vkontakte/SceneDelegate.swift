@@ -37,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Instantiate a tabBar controller and a tab factory
         let tabBarController = UITabBarController()
         let factory = Factory()
+        coreManager.getCurrentUser()
         
         // Instantiate a coordinator with the tab bar controller and tab factory
         let appCoordinator = AppCoordinator(tabBarController: tabBarController, factory: factory)
@@ -50,8 +51,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let userDefaults = UserDefaults.standard
         if !userDefaults.bool(forKey: hasCreatedPostsKey) {
             sceneStatus = .firstTime
-            createUsers()
-            createPosts()
+            let filler = DataFiller()
+            filler.createUsers()
+            filler.createPosts()
  //           sceneStatus = .logged
             userDefaults.set(true, forKey: hasCreatedPostsKey)
         } else {

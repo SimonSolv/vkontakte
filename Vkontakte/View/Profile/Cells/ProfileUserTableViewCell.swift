@@ -12,9 +12,13 @@ class ProfileUserTableViewCell: UITableViewCell {
     
     static let identifier = "ProfileUserTableViewCell"
     
-    var id: String? {
+    var user: UserData? {
         didSet {
-            userView.userId = id
+            guard let user = user else {
+                print("User is nil in ProfileUserTableViewCell")
+                return
+            }
+            userView.user = user
         }
     }
     

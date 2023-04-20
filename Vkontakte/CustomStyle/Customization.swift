@@ -68,12 +68,12 @@ final class CustomButton: UIButton {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        self.addTarget(self, action: #selector(myButtonTapped), for: .touchUpInside)
     }
     required init?(coder: NSCoder) {
         nil
     }
-    @objc private func buttonTapped() {
+    @objc private func myButtonTapped() {
         self.onTap()
     }
 }
@@ -90,6 +90,34 @@ extension UITextView {
             self.clipsToBounds = true
         }
     }
+}
+
+extension UIButton {
+    
+    convenience init(image: UIImage, action: @escaping () -> Void) {
+        self.init()
+        self.setImage(image, for: .normal)
+        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        self.action = action
+    }
+    
+    private var action: (() -> Void)? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.action) as? () -> Void
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.action, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    @objc private func buttonTapped() {
+        self.action?()
+    }
+    
+    private struct AssociatedKeys {
+        static var action = "action"
+    }
+    
 }
 
 extension UITextField {

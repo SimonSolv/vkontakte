@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-class ProfileViewController: UIViewController, CoordinatedProtocol, UserContainsProtocol {
+protocol ProfileViewControllerDelegate: AnyObject {
+    func menuButtonTapped()
+}
+
+class ProfileViewController: UIViewController, CoordinatedProtocol {
     
     var coordinator: CoordinatorProtocol?
     
@@ -16,9 +20,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     
     private let coreManager = CoreDataManager.shared
     
-    var userId: String
-    
-    private var user: UserData?
+    var user: UserData
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -33,14 +35,12 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     
     //MARK: - Lifecycle
     
-    init(userId: String) {
-        self.userId = userId
-        self.user = coreManager.getUser(id: self.userId)!
+    init(user: UserData) {
+        self.user = user
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .white
-        self.title = "@\(self.user?.nickName ?? "nickName")"
+        self.title = "@\(self.user.nickName ?? "nickName")"
         setupView()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +49,9 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if user?.isLogged == false {
+        self.title = "@\(user.nickName ?? "")"
+        tableView.reloadData()
+        if user.isLogged == false {
             self.navigationController?.navigationBar.isHidden = false
             self.navigationController?.navigationBar.backItem?.title = "Feed"
             self.navigationController?.navigationBar.tintColor = .orange
@@ -66,9 +68,6 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
     
     private func setupView() {
         view.addSubview(tableView)
-    }
-    
-    private func setupConstraints() {
         
         tableView.snp.makeConstraints {make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -78,7 +77,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol, UserContains
         }
     }
     
-    @objc private func menuButtonTapped() {
+    @objc internal func menuButtonTapped() {
         self.delegate?.menuButtonTapped()
     }
 }
@@ -91,7 +90,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if section < 3 {
             return 1
         } else {
-            return user?.posts?.count ?? 0
+            return user.posts?.count ?? 0
         }
     }
     
@@ -103,12 +102,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileUserTableViewCell.identifier) as? ProfileUserTableViewCell
-            cell?.id = self.userId
+            cell?.user = self.user
             cell?.delegate = self
             return cell!
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as? PhotosTableViewCell
-            cell?.user = self.user!
+            cell?.user = self.user
             return cell!
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostsHeaderTableViewCell.identifier, for: indexPath) as? PostsHeaderTableViewCell
@@ -118,30 +117,25 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
             var posts: [Post] = []
-            posts = coreManager.fetchPostsFor(user: userId)
+            posts = coreManager.fetchPostsFor(user: user.id!)
             cell?.delegate = self
             cell?.post = posts[indexPath.row]
             return cell!
         }
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("Selected")
-//        let controller = PostViewController()
-//        controller.source = coreManager.posts[indexPath.row]
-//        self.present(controller, animated: true)
-//        self.navigationController?.pushViewController(controller, animated: true)
-//    }
-
 }
 
 extension ProfileViewController: PostTableViewCellDelegate {
+    
+    func postMenuButtonTapped() {
+        print("Menu Tapped")
+    }
     
     func openPost(source: Post) {
         coordinator?.ivent(action: .openPost(post: source), iniciator: self)
     }
     
-    func openAuthor(id: String) {
+    func openAuthor(user: UserData) {
         //coordinator?.ivent(action: .showProfile(id: id), iniciator: self)
     }
 
@@ -150,6 +144,7 @@ extension ProfileViewController: PostTableViewCellDelegate {
     }
 }
 
+//MARK: - ProfileUserViewDelegate
 extension ProfileViewController: ProfileUserViewDelegate, PostsHeaderTableViewCellDelegate {
     
     func createPost() {
@@ -157,27 +152,27 @@ extension ProfileViewController: ProfileUserViewDelegate, PostsHeaderTableViewCe
     }
     
     
-    func additionalInfoTapped(id: String) {
-        coordinator?.ivent(action: .showAdditionalInfo(id: userId), iniciator: self)
+    func additionalInfoTapped(user: UserData) {
+        coordinator?.ivent(action: .showAdditionalInfo(user: user), iniciator: self)
     }
     
-    func messageButtonTapped(id: String) {
+    func messageButtonTapped(user: UserData) {
         coordinator?.ivent(action: .messageTapped, iniciator: self)
     }
     
-    func editButtonTapped(id: String) {
-        print("Edit tapped")
+    func editButtonTapped(user: UserData) {
+        coordinator?.ivent(action: .editProfileTapped, iniciator: self)
     }
     
-    func postsTapped(id: String) {
+    func postsTapped(user: UserData) {
         print("Posts tapped")
     }
     
-    func subscribersTapped(id: String) {
+    func subscribersTapped(user: UserData) {
         print("Subscribers tapped")
     }
     
-    func subscriptionsTapped(id: String) {
+    func subscriptionsTapped(user: UserData) {
         print("Subscriptions tapped")
     }
     

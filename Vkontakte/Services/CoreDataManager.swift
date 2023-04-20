@@ -11,7 +11,16 @@ import UIKit
 
 class CoreDataManager {
     
+    var defaultAvatar: Picture?
+    
+    var defaultPostPicture: Picture?
+    
     static let shared = CoreDataManager()
+    
+    enum PostSorting {
+        case date
+        case author (user: UserData)
+    }
     
     enum UserSorting {
         case name
@@ -19,6 +28,7 @@ class CoreDataManager {
     }
     
     init() {
+        createDefaults()
         fetchUsers()
         fetchPosts()
         fetchComments()
@@ -34,6 +44,7 @@ class CoreDataManager {
         })
         return container
     }()
+    
     //MARK: - CoreData saving support
     
     func saveContext() {
@@ -46,6 +57,24 @@ class CoreDataManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func createDefaults() {
+        let picture = Picture(context: persistentContainer.viewContext)
+        if let path = Bundle.main.path(forResource: "DefaultAvatar", ofType: "jpg") {
+            if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+                self.defaultAvatar = savePicture(at: imageData))
+            }
+        }
+        
+        let picture2 = Picture(context: persistentContainer.viewContext)
+        if let imagePath = Bundle.main.path(forResource: "DefaultPostImage", ofType: "jpg") {
+            picture2.path = URL(fileURLWithPath: imagePath).deletingLastPathComponent()
+        }
+        picture2.name = "DefaultAvatar"
+        saveContext()
+        self.defaultPostPicture = picture2
+        
     }
     
     //MARK: - Users
@@ -66,7 +95,7 @@ class CoreDataManager {
         self.users = users
     }
     
-    func createUser(name: String, lastName: String?, jobTitle: String, nickName: String, dateOfBirth: Date, avatar: String?, isLogged: Bool) {
+    func createUser(name: String, lastName: String?, jobTitle: String, nickName: String, dateOfBirth: Date, avatar: Picture?, isLogged: Bool) {
         let newUser = UserData(context: persistentContainer.viewContext)
         newUser.id = UUID().uuidString
         newUser.name = name
@@ -74,14 +103,12 @@ class CoreDataManager {
         newUser.jobTitle = jobTitle
         newUser.nickName = nickName
         newUser.dateOfBirth = dateOfBirth
-        if avatar == "" || avatar == nil {
-            newUser.avatar = "DefaultAvatar"
-        } else {
+        if avatar != nil {
             newUser.avatar = avatar!
+            newUser.isLogged = isLogged
+            saveContext()
+            fetchUsers()
         }
-        newUser.isLogged = isLogged
-        saveContext()
-        fetchUsers()
     }
     
     func getCurrentUser() -> UserData? {
@@ -94,20 +121,28 @@ class CoreDataManager {
         return answer
     }
     
-    func editUserData(userId: String, newData: UserData) {
-        for user in users {
-            if user.id == userId {
-                user.name = user.name
-                user.lastName = user.lastName
-                user.jobTitle = user.jobTitle
-                user.nickName = user.nickName
-                user.dateOfBirth = user.dateOfBirth
-                saveContext()
-                fetchUsers()
-            } else {
-                print("Error: Cannot find user via id provided in EditUserData")
+    func editUserData(newData: [String?] ) {
+        for i in newData.indices {
+            guard let value = newData[i] else {
+                return
+            }
+            print(value)
+            switch i {
+            case 0:
+                currentUser?.name = value
+            case 1:
+                currentUser?.lastName = value
+            case 2:
+                currentUser?.nickName = value
+            case 3:
+                currentUser?.city = value
+            default:
+                break
             }
         }
+        saveContext()
+        fetchUsers()
+        //currentUser = getCurrentUser()
     }
     
     func deleteUser(userId: String) {
@@ -153,10 +188,6 @@ class CoreDataManager {
         return data
     }
     
-    func setCurrentUser(id: String) {
-        self.currentUser = getUser(id: id)
-    }
-    
     func getUsersSorted(by: UserSorting) -> [UserData] {
         switch by {
         case .isLogged:
@@ -175,6 +206,17 @@ class CoreDataManager {
         self.posts = posts
     }
     
+    func getSortedPosts(by: PostSorting?) -> [Post] {
+        var answer: [Post] = []
+        switch by {
+        case .date:
+            answer = self.posts.sorted(by: {$0.dateOfPublishing! > $1.dateOfPublishing!})
+        default:
+            return self.posts
+        }
+        return answer
+    }
+    
     func fetchPostsFor(user id: String) -> [Post] {
         var answer: [Post] = []
         for post in self.posts {
@@ -185,17 +227,26 @@ class CoreDataManager {
         return answer
     }
     
-    func createPost(title: String, body: String, image: String, authorId: String) {
+    func createPost(title: String, body: String?, image: Picture?, authorId: String) -> Bool {
         let newPost = Post(context: persistentContainer.viewContext)
         newPost.id = UUID().uuidString
+        guard image != nil else {
+            print("No image for creating post")
+            return false
+        }
         newPost.image = image
         newPost.likes = Int64(arc4random_uniform(600))
         newPost.body = body
         newPost.title = title
-        newPost.dateOfPublishing = Date()
-        newPost.author = getUser(id: authorId)
+        newPost.dateOfPublishing = Date(timeIntervalSinceNow: 0.0)
+        guard let author = getUser(id: authorId) else {
+            print("Couldnt get author")
+            return false
+        }
+        newPost.author = author
         saveContext()
         fetchPosts()
+        return true
     }
     
     func editPost(postId: String, newData: Post) {
@@ -286,9 +337,45 @@ class CoreDataManager {
     
     //MARK: - Pictures
     
-//    func createPicture(url: URL, name: String, user: UserData?, album: Album?) {
+    func fillPictures(names: [String]) -> [Picture] {
+        var answer: [Picture] = []
+        for name in names {
+            guard let sourceURL = Bundle.main.url(forResource: name, withExtension: "jpg") else {
+                print("Cannot get sourcw url for name \(name)")
+                return answer
+            }
+            
+            if let path = Bundle.main.path(forResource: name, ofType: "jpeg") {
+                if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+                    answer.append(savePicture(at: imageData))
+                }
+            }
+//            let picture = Picture(context: persistentContainer.viewContext)
+//            picture.path = sourceURL
+//            print("\(String(describing: picture.path))")
+//            picture.name = name
+//            saveContext()
+//            answer.append(picture)
+        }
+        return answer
+    }
+    
+    func fetchPictures() {
+        
+    }
+    
+    func savePicture(at imgData: Data) -> Picture {
+        let picture = Picture(context: persistentContainer.viewContext)
+        picture.name = imageSaveName
+        picture.img = imgData
+        picture.user = currentUser
+        saveContext()
+        return picture
+    }
+    
+//    func createPicture(name: String, path: URL, user: UserData?, album: Album?) -> Picture {
 //        let picture = Picture(context: persistentContainer.viewContext)
-//        picture.url = url
+//        picture.path = path
 //        picture.name = name
 //        if user != nil {
 //            picture.user = user
@@ -297,5 +384,57 @@ class CoreDataManager {
 //            picture.album = album
 //        }
 //        saveContext()
+//        return picture
 //    }
+    
+    func unpackPicture(picture: Picture) -> UIImage? {
+        var answer: UIImage?
+        do {
+            let imageData = try Data(contentsOf: picture.path!)
+            answer = UIImage(data: imageData)
+        } catch {
+            print("Ошибка при получении данных из файла: \(error)")
+        }
+        return answer
+    }
+    
+    func showPicture(url: URL) -> UIImage? {
+        var answer: UIImage?
+        do {
+            let imageData = try Data(contentsOf: url)
+            answer = UIImage(data: imageData)
+        } catch {
+            print("Ошибка при получении данных из файла: \(error)")
+        }
+        return answer
+    }
+    
+    func checkExistance(picURL: URL) -> Picture? {
+        var answer: Picture? = nil
+        let request = Picture.fetchRequest()
+        let pictures = (try? persistentContainer.viewContext.fetch(request)) ?? []
+        for picture in pictures {
+            if picture.path == picURL {
+                answer = picture
+            }
+        }
+        return answer
+    }
+    
+    func getPicture(named: String) -> Picture? {
+        var answer: Picture? = nil
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Picture> = Picture.fetchRequest()
+        do {
+            let pictures = try context.fetch(fetchRequest)
+            for picture in pictures {
+                while picture.name == named {
+                    answer = picture
+                }
+            }
+        } catch let error as NSError {
+            print("Error fetching users: \(error), \(error.userInfo)")
+        }
+        return answer
+    }
 }
