@@ -34,6 +34,7 @@ class ContainerViewController: UIViewController, CoordinatedProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = AppColor().background
         addChildControllers()
     }
 
@@ -75,8 +76,6 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
                     return
                 }
                 strongSelf.addSettings()
-            case .logOut:
-                break
             case .home:
                 guard let strongSelf = self else {
                     return

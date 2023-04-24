@@ -1,0 +1,97 @@
+/*
+  Localizable.strings
+  Navigation
+
+  Created by Simon Pegg on 18.01.2023.
+  
+*/
+
+//TabBar
+"News" = "Лента";
+"Profile" = "Профиль";
+"Liked" = "Понравилось";
+
+//Login
+"Press to use biometry" = "Использовать биометрию";
+"Log in" = "Войти";
+"Email or phone" = "Email или телефон";
+"Password" = "Пароль";
+"Incorrect login or password" = "Неверный логин или пароль";
+"Cancel" = "Отмена";
+"Settings" = "Настройки";
+"Go to Settings?" = "Перейти в настройки?";
+"Setup your biometry" = "Настроить биометрию";
+"Error" = "Ошибка";
+"Face ID/Touch ID may not be configured" = "Face ID/Touch ID невозможно настроить";
+"Confirm" = "Хорошо";
+" Use FaceID" = " Использовать FaceID";
+" Use TouchID" = " Использовать TouchID";
+
+//Settings
+"Settings" = "Настройки";
+"Dark Mode" = "Темная тема";
+"Language" = "Язык";
+"Log Out" = "Выйти";
+"Select language" = "Выберите язык";
+"English" = "Английский";
+"Russian" = "Русский";
+
+//Profile
+"\nposts" = "\nпостов";
+"\nsubscriptions" = "\nподписок";
+"\nsubscribers" = "\nподписчиков";
+"Additional info" = "Подробнее";
+"Edit" = "Редактировать";
+"Message" = "Сообщение";
+"Call" = "Позвонить";
+
+//Additional info
+"Job title" = "Профессия";
+"Unknown" = "Неизвестно";
+"Date of birth" = "Дата рождения";
+"City:" = "Город:";
+
+//Create post
+"Enter title here..." = "Введите заголовок...";
+"Enter text here..." = "Введите текст...";
+"Create" = "Создать";
+"Create post" = "Создать пост";
+
+//Edit profile
+"Edit profile" = "Редактировать";
+"Save" = "Сохранить";
+"First Name" = "Имя";
+"Last Name" = "Фамилия";
+"Nick-name" = "Ник";
+"Are you sure?" = "Вы уверены?";
+"This saves all changes" = "Все изменения будут сохранены";
+
+//Photos
+"Photos" = "Фото";
+" photos" = " фото";
+"Posts" = "Посты";
+
+//Landing
+"Register" = "Зарегистрироваться";
+"Have an account" = "У меня есть аккаунт";
+"Registration" = "Регистрация";
+"Phone number" = "Телефон";
+"To use your phone number for entering the app" = "Нужен для подтверждения входа в приложение";
+"Next" = "Далее";
+"Pressing Next you are agree with our Agreement Licence and Privacy Policy" = "Нажимая Далее вы соглашаетесь с Лицензионным соглашением и Политикой конфиденциальности";
+"Registration confirmation" = "Подтверждение регистрации";
+"Sending SMS on your phone" = "Отправили СМС на телефон";
+"Please, enter code from SMS" = "Введите код из СМС";
+"Confirm" = "Подтвердить";
+"Please, tell about yourself" = "Пожалуйста, расскажите о себе";
+"* Fields are neccessary to fill" = "* Поля обязательные для заполнения";
+"Nickname*" = "Ник*";
+"Name*" = "Имя*";
+"Date of Birth*" = "Дата родения*";
+
+//Registration alerts
+"Warning!" = "Внимание!";
+"Sorry, this Nickname is taken by other user" = "Извините, этот ник уже занят другим пользователем";
+"Please, fill all neccessary fields" = "Пожалуйстя, заполните все необходимые поля";
+"Success!" = "Ура!";
+"You have now account in our app" = "У вас теперь есть аккаунт в приложении";

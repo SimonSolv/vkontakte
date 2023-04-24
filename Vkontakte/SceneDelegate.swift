@@ -39,6 +39,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let factory = Factory()
         coreManager.getCurrentUser()
         
+        let isDarkModeEnabled = UserDefaults.standard.bool(forKey: "isDarkModeEnabled")
+        
+        if isDarkModeEnabled {
+            window?.overrideUserInterfaceStyle = .dark
+        } else {
+            window?.overrideUserInterfaceStyle = .light
+        }
         // Instantiate a coordinator with the tab bar controller and tab factory
         let appCoordinator = AppCoordinator(tabBarController: tabBarController, factory: factory)
         appCoordinator.notificationService = notificationService
@@ -64,31 +71,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator.start(scene: sceneStatus)
         window.makeKeyAndVisible()
     }
-    
-    func showMainScene() {
-        guard let windowScene = (self.window?.windowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
+   
         
-        notificationService = LocalNotificationManager()
-        
-        // Instantiate a tabBar controller and a tab factory
-        
-        let tabBarController = UITabBarController()
-        let factory = Factory()
-        
-        // Instantiate a coordinator with the tab bar controller and tab factory
-        
-        let appCoordinator = AppCoordinator(tabBarController: tabBarController, factory: factory)
-        appCoordinator.notificationService = notificationService
-        
-        window.rootViewController = tabBarController
-   //     appCoordinator.start()
-        window.makeKeyAndVisible()
-        self.window = window
-    }
     func sceneDidEnterBackground(_ scene: UIScene) {
 
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        let currentTheme = UIApplication.shared.windows.first?.rootViewController?.traitCollection.userInterfaceStyle ?? .light
+
+        UserDefaults.standard.set(window?.traitCollection.userInterfaceStyle == currentTheme, forKey: "isDarkModeEnabled")
     }
 
 }

@@ -22,7 +22,7 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var registerButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Register", for: .normal)
+        btn.setTitle("Register"~, for: .normal)
         btn.setCustomStyle(style: .main)
         btn.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         return btn
@@ -30,7 +30,7 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var hasAccountButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Have an account", for: .normal)
+        btn.setTitle("Have an account"~, for: .normal)
         btn.setTitleColor(.black, for: .normal)
         btn.addTarget(self, action: #selector(hasAccountTapped), for: .touchUpInside)
         return btn
@@ -73,10 +73,10 @@ class LandingViewController: UIViewController, CoordinatedProtocol {
     }
     
     @objc private func registerButtonTapped() {
-        coordinator?.ivent(action: .showRegisterPage, iniciator: self)
+        coordinator?.event(action: .showRegisterPage, iniciator: self)
     }
     
     @objc private func hasAccountTapped() {
-        coordinator?.ivent(action: .hasAccount, iniciator: self)
+        coordinator?.event(action: .hasAccount, iniciator: self)
     }
 }

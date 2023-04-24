@@ -32,14 +32,14 @@ class PostsHeaderTableViewCell: UITableViewCell {
                 return
             }
             self.isLogged = user.isLogged
-            titleLabel.text = "\(user.posts?.count ?? 0) Posts"
+            titleLabel.text = "\(user.posts?.count ?? 0) " + "Posts"~
         }
     }
     
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.setCustomStyle(style: .feedTitle)
-        view.text = "Posts"
+        view.text = "Posts"~
         return view
     }()
     

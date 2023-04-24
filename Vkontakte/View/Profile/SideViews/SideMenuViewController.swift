@@ -22,7 +22,6 @@ class SideMenuViewController: UIViewController {
         case liked = "Liked posts"
         case photos = "PhotoGallery"
         case settings = "Settings"
-        case logOut = "Log out"
         
         var imageName: String {
             switch self {
@@ -32,8 +31,6 @@ class SideMenuViewController: UIViewController {
                 return "photo.on.rectangle.angled"
             case .settings:
                 return "gear"
-            case .logOut:
-                return "rectangle.portrait.and.arrow.right"
             case.home:
                 return ""
             }

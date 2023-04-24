@@ -30,7 +30,7 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.text = "Registration confirmation"
+        label.text = "Registration confirmation"~
         label.textColor = .orange
         return label
     }()
@@ -38,7 +38,7 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Sending SMS on your phone"
+        label.text = "Sending SMS on your phone"~
         label.textColor = .systemGray
         label.textAlignment = .center
         return label
@@ -156,15 +156,15 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
     
     @objc private func confirmButtonTapped() {
         if self.delegate.checkConfirmationCode(code: self.codeEnteringTextView.text) == true {
-            self.coordinator?.ivent(action: .addGeneralInfo, iniciator: self)
+            self.coordinator?.event(action: .addGeneralInfo, iniciator: self)
         } else {
-            //resolve problem
+            //resolve problem Alert
             print ("Code is not valid")
         }
     }
     
     @objc private func sendNotification(notification: NSNotification) {
-        coordinator?.ivent(action: .sendNotification, iniciator: self)
+        coordinator?.event(action: .sendNotification, iniciator: self)
     }
     
     @objc private func textFieldChanged() {

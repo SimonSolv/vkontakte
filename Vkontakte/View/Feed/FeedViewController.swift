@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, CoordinatedProtocol {
+class FeedViewController: ThemeViewController, CoordinatedProtocol {
 
     let coreManager = CoreDataManager.shared
     
@@ -18,21 +18,24 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
         return table
     }()
     
+    var refreshControl = UIRefreshControl()
+    
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = AppColor().background
         setupViews()
         setupConstraints()
+        refreshControl.addTarget(self, action: #selector(updateTable), for: UIControl.Event.valueChanged)
+        tableView.addSubview(refreshControl)
         let notificationName = Notification.Name("ShowProfile")
-        // Add observer for the notification
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tableView.reloadData()
+        tableView.reloadData()
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -61,7 +64,14 @@ class FeedViewController: UIViewController, CoordinatedProtocol {
             let id = userInfo["id"] as! String
             let user = coreManager.getUser(id: id)
             guard let user = user else { return }
-            self.coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
+            self.coordinator?.event(action: .showProfile(user: user), iniciator: self)
+        }
+    }
+    
+    @objc private func updateTable(sender: UIRefreshControl) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
 }
@@ -95,11 +105,11 @@ extension FeedViewController: PostTableViewCellDelegate {
     }
     
     func openPost(source: Post) {
-        coordinator?.ivent(action: .openPost(post: source), iniciator: self)
+        coordinator?.event(action: .openPost(post: source), iniciator: self)
     }
     
     func openAuthor(user: UserData) {
-        coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
+        coordinator?.event(action: .showProfile(user: user), iniciator: self)
     }
     
     func liked(status: Bool) {

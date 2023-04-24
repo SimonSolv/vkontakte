@@ -27,16 +27,16 @@ class Factory: FactoryProtocol {
         case .feed:
             let controller = FeedViewController()
             controller.coordinator = coordinator
-            controller.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "book.fill"), tag: 0)
+            controller.tabBarItem = UITabBarItem(title: "News"~, image: UIImage(systemName: "book.fill"), tag: 0)
             return controller
         case .profile(let user):
             let controller = ProfileViewController(user: user)
-            controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            controller.tabBarItem = UITabBarItem(title: "Profile"~, image: UIImage(systemName: "person.fill"), tag: 1)
             controller.coordinator = coordinator
             return controller
         case .liked:
             let controller = LikedViewController()
-            controller.tabBarItem = UITabBarItem(title: "Liked", image: UIImage(systemName: "heart.fill"), tag: 2)
+            controller.tabBarItem = UITabBarItem(title: "Liked"~, image: UIImage(systemName: "heart.fill"), tag: 2)
             controller.coordinator = coordinator
             return controller
         case .confirmation:
@@ -46,7 +46,7 @@ class Factory: FactoryProtocol {
         case .landing:
             let controller = LandingViewController()
             controller.coordinator = coordinator
-            controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            controller.tabBarItem = UITabBarItem(title: "Profile"~, image: UIImage(systemName: "person.fill"), tag: 1)
             let navController = UINavigationController(rootViewController: controller)
             return navController
         case .registration:
@@ -65,7 +65,7 @@ class Factory: FactoryProtocol {
         case .login:
             let controller = LoginViewController()
             controller.coordinator = coordinator
-            controller.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            controller.tabBarItem = UITabBarItem(title: "Profile"~, image: UIImage(systemName: "person.fill"), tag: 1)
             return controller
         case .additionalInfo(let user):
             let controller = AdditionalInfoViewController()
@@ -79,7 +79,7 @@ class Factory: FactoryProtocol {
         case .profileContainer(let user):
             let containerVC = ContainerViewController()
             containerVC.coordinator = coordinator
-            containerVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            containerVC.tabBarItem = UITabBarItem(title: "Profile"~, image: UIImage(systemName: "person.fill"), tag: 1)
             let sideVC = SideMenuViewController()
             sideVC.delegate = containerVC
             let profileViewController = self.createController(type: .profile(user: user), coordinator: coordinator) as? ProfileViewController

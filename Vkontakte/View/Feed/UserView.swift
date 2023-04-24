@@ -12,6 +12,7 @@ class UserView: UIView {
     
     var userId: String? {
         didSet {
+            backgroundColor = .clear
             guard let id = userId else {
                 print("Id, provided in UserView is nil")
                 return
@@ -23,7 +24,8 @@ class UserView: UIView {
             }
             self.name.text = currentUser.name
             self.job.text = currentUser.jobTitle ?? ""
-            self.avatar.image = CoreDataManager.shared.unpackPicture(picture: currentUser.avatar!) ?? UIImage(named: "DefaultAvatar")!
+            self.avatar.image = UIImage(data: (currentUser.avatar?.img)!) ?? UIImage(named: "DefaultAvatar")
+            setupView()
         }
     }
     
@@ -46,27 +48,15 @@ class UserView: UIView {
         image.setCustomStyle(style: .avatar)
         return image
     }()
-
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private func setupView() {
-        backgroundColor = .systemGray
         addSubview(avatar)
         addSubview(name)
         addSubview(job)
         
         avatar.snp.makeConstraints {make in
-            make.top.equalToSuperview().offset(5)
             make.height.equalTo(60)
             make.width.equalTo(60)
-            make.leading.equalToSuperview().offset(20)
         }
         
         name.snp.makeConstraints {make in
@@ -80,7 +70,6 @@ class UserView: UIView {
             make.height.equalTo(20)
             make.leading.equalTo(name.snp.leading)
         }
-    }
-    
+    } 
 }
 

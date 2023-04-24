@@ -36,27 +36,27 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var name: UILabel = {
         let label = UILabel()
-        label.setCustomStyle(style: .feedTitle)
+        label.setCustomStyle(style: .title)
         return label
     }()
     
     private lazy var job: UILabel = {
         let label = UILabel()
-        label.setCustomStyle(style: .grayBig)
+        label.setCustomStyle(style: .title)
         label.numberOfLines = 2
         return label
     }()
     
     private lazy var dateOfBirth: UILabel = {
         let label = UILabel()
-        label.setCustomStyle(style: .miniTitle)
+        label.setCustomStyle(style: .title)
         label.numberOfLines = 2
         return label
     }()
     
     private lazy var city: UILabel = {
         let label = UILabel()
-        label.setCustomStyle(style: .miniTitle)
+        label.setCustomStyle(style: .title)
         label.numberOfLines = 2
         return label
     }()
@@ -65,7 +65,7 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor().background
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,23 +90,21 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
         avatar.layer.cornerRadius = 15
         avatar.clipsToBounds = true
         name.text = "\(user.name ?? "User") \(user.lastName ?? "")"
-        job.text = "Job title \n\(user.jobTitle ?? "Unknown")"
-        
-        //formate date to show in view
+        job.text = "Job title"~ + " \n\(user.jobTitle ?? "Unknown"~)"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM yyyy"
         
         if user.dateOfBirth != nil {
             let dateString = dateFormatter.string(from: user.dateOfBirth!)
-            dateOfBirth.text = "Date of birth\n\(dateString)"
+            dateOfBirth.text = "Date of birth"~ + "\n\(dateString)"
         } else {
-            dateOfBirth.text = "Date of birth\n Unknown"
+            dateOfBirth.text = "Date of birth"~ + "\n" + "Unknown"~
         }
         
         if user.city != nil {
-            city.text = "City:\n\(user.city!)"
+            city.text = "City:"~ + "\n\(user.city!)"
         } else {
-            city.text = "City:\nUnknown"
+            city.text = "City:"~ + "\n" + "Unknown"~
         }
     }
     
@@ -150,5 +148,4 @@ class AdditionalInfoViewController: UIViewController, CoordinatedProtocol {
             make.trailing.equalTo(scroll.snp.trailing).offset(-25)
         }
     }
-    
 }

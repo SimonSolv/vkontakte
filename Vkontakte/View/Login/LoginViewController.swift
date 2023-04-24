@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     
     lazy var useAuthButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Press to use biometry", for: .normal)
+        btn.setTitle("Press to use biometry"~, for: .normal)
         btn.setTitleColor(UIColor.systemBlue, for: .normal)
         btn.addTarget(self, action: #selector(authButtonTapped), for: .touchUpInside)
         return btn
@@ -95,6 +95,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        navigationItem.hidesBackButton = true
         setupViews()
         setupConstraits()
     }
@@ -195,7 +196,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
         
         useAuthButton.snp.makeConstraints { (make) in
             make.centerX.equalTo(view.snp.centerX)
-            make.width.equalTo(200)
+            make.width.equalTo(400)
             make.top.equalTo(signInLineButton.snp.bottom).offset(10)
             make.height.equalTo(30)
             make.bottom.equalTo(contentView.snp.bottom).offset(-10)
@@ -247,9 +248,9 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
 
         biometricIDAuthentification.canEvaluate { (canEvaluate, type, canEvaluateError) in
             guard canEvaluate else {
-                let alertController = UIAlertController (title: "Setup your biometry", message: "Go to Settings?", preferredStyle: .alert)
+                let alertController = UIAlertController (title: "Setup your biometry"~, message: "Go to Settings?"~, preferredStyle: .alert)
 
-                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                let settingsAction = UIAlertAction(title: "Settings"~, style: .default) { (_) -> Void in
 
                     guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                         return
@@ -262,7 +263,7 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
                     }
                 }
                 alertController.addAction(settingsAction)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                let cancelAction = UIAlertAction(title: "Cancel"~, style: .default, handler: nil)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
                 return
@@ -275,12 +276,15 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
             biometricIDAuthentification.evaluate { [weak self] (success, error) in
                 guard success else {
                     self?.alert(
-                        title: "Error",
-                        message: error?.localizedDescription ?? "Face ID/Touch ID may not be configured",
-                        okActionTitle: "Confirm")
+                        title: "Error"~,
+                        message: error?.localizedDescription ?? "Face ID/Touch ID may not be configured"~,
+                        okActionTitle: "Confirm"~)
                     return
                 }
-//                self!.coordinator?.ivent(action: .loginSuccess, iniciator: self!)
+                let user = CoreDataManager.shared.getUserByName(name: "Leonardo")!
+                self!.coordinator?.event(action: .loginSuccess(user: user), iniciator: self!)
+                CoreDataManager.shared.setUserOnline(user: user)
+                CoreDataManager.shared.getCurrentUser()
             }
         }
     }
@@ -349,7 +353,6 @@ private extension LoginViewController {
         contentView.contentInset.bottom = .zero
         contentView.verticalScrollIndicatorInsets = .zero
     }
-    
 }
 
  

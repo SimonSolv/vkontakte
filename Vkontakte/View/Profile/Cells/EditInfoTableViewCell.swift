@@ -19,16 +19,13 @@ class EditInfoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Set up title label
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = .darkText
         contentView.addSubview(titleLabel)
         
-        // Set up text field
         textField.borderStyle = .roundedRect
         contentView.addSubview(textField)
         
-        // Set up constraints for title label and text field
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(10)

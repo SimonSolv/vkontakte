@@ -2,7 +2,7 @@ import UIKit
 
 protocol CoordinatorProtocol {
     func start(scene: SceneStatus)
-    func ivent(action: ActionType, iniciator: UIViewController)
+    func event(action: ActionType, iniciator: UIViewController)
     func setTabTo(tab: AppTab)
 }
 
@@ -25,6 +25,7 @@ enum ActionType {
     case createPostTapped
     case editProfileTapped
     case openSettings
+    case logOut
 }
 
 enum AppTab {
@@ -43,20 +44,18 @@ class AppCoordinator: CoordinatorProtocol {
 
     init(tabBarController: UITabBarController, factory: Factory) {
         self.tabBarController = tabBarController
-        tabBarController.view.backgroundColor = .white
+        tabBarController.view.backgroundColor = AppColor().background
         tabBarController.tabBar.tintColor = .orange
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.backgroundColor = .clear
         self.factory = factory
     }
 
     func start(scene: SceneStatus) {
-        // Create and add view controllers for each tab
         let newsViewController = factory.createController(type: .feed, coordinator: self)
-        
         let feedNavVc = UINavigationController(rootViewController: newsViewController)
-
         let likedViewController = factory.createController(type: .liked, coordinator: self)
         let likesNavVc = UINavigationController(rootViewController: likedViewController)
+        
         switch scene {
         case .firstTime:
             let landing = factory.createController(type: .landing, coordinator: self)
@@ -74,9 +73,8 @@ class AppCoordinator: CoordinatorProtocol {
         }
     }
 
-    // Implement methods for navigating between screens
     
-    func ivent(action: ActionType, iniciator: UIViewController) {
+    func event(action: ActionType, iniciator: UIViewController) {
         switch action {
         case .showRegisterPage:
             let registerViewController = factory.createController(type: .registration, coordinator: self)
@@ -95,7 +93,12 @@ class AppCoordinator: CoordinatorProtocol {
             let controller = factory.createController(type: .post(source: post), coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .loginSuccess(let user):
-            let controller = factory.createController(type: .profileContainer(user: user), coordinator: self)
+            let controller = factory.createController(type: .profileContainer(user: user), coordinator: self) as! ContainerViewController
+            coreManager.currentUser = user
+            controller.profileVC?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            controller.profileVC?.navigationController?.navigationBar.isHidden = true
+            controller.navigationController?.navigationBar.isHidden = true
+            iniciator.navigationController?.navigationBar.isHidden = true
             iniciator.navigationController?.pushViewController(controller, animated: true)
             self.tabBarController.tabBar.isHidden = false
         case .showProfile(let user):
@@ -122,6 +125,11 @@ class AppCoordinator: CoordinatorProtocol {
         case .editProfileTapped:
             let controller = factory.createController(type: .editProfile, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
+        case .logOut:
+            coreManager.logOut()
+            let controller = factory.createController(type: .login, coordinator: self)
+            controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            iniciator.navigationController?.pushViewController(controller, animated: false)
         }
     }
     

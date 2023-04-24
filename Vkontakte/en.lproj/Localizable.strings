@@ -1,0 +1,103 @@
+/*
+  Localizable.strings
+  Navigation
+
+  Created by Simon Pegg on 18.01.2023.
+  
+*/
+
+//TabBar
+"News" = "News";
+"Profile" = "Profile";
+"Liked" = "Liked";
+
+//Login
+"Press to use biometry" = "Press to use biometry";
+"Log in" = "Log in";
+"Email or phone" = "Email or phone";
+"Password" = "Password";
+"Incorrect login or password" = "Incorrect login or password";
+"Cancel" = "Cancel";
+"Settings" = "Settings";
+"Go to Settings?" = "Go to Settings?";
+"Setup your biometry" = "Setup your biometry";
+"Error" = "Error";
+"Face ID/Touch ID may not be configured" = "Face ID/Touch ID may not be configured";
+"Confirm" = "Confirm";
+" Use FaceID" = " Use FaceID";
+" Use TouchID" = " Use TouchID";
+"Setup your biometry" = "Setup your biometry";
+
+//Settings
+"Settings" = "Settings";
+"Dark Mode" = "Dark Mode";
+"Language" = "Language";
+"Log Out" = "Log Out";
+"Select language" = "Select language";
+"English" = "English";
+"Russian" = "Russian";
+
+//Profile
+"\nposts" = "\nposts";
+"\nsubscriptions" = "\nsubscriptions";
+"\nsubscribers" = "\nsubscribers";
+"Additional info" = "Additional info";
+"Edit" = "Edit";
+"Message" = "Message";
+"Call" = "Call";
+
+//Additional info
+"Job title" = "Job title";
+"Unknown" = "Unknown";
+"Date of birth" = "Date of birth";
+"City:" = "City:";
+
+//Create post
+"Enter title here..." = "Enter title here...";
+"Enter text here..." = "Enter text here...";
+"Create" = "Create";
+"Create post" = "Create post";
+
+//Edit profile
+"Edit profile" = "Edit profile";
+"Save" = "Save";
+"First Name" = "First Name";
+"Last Name" = "Last Name";
+"Nick-name" = "Nick-name";
+"Job title" = "Job title";
+"Are you sure?" = "Are you sure?";
+"This saves all changes" = "This saves all changes";
+
+//Photos
+"Photos" = "Photos";
+" photos" = " photos";
+"Posts" = "Posts";
+
+//Landing
+"Register" = "Register";
+"Have an account" = "Have an account";
+"Registration" = "Registration";
+"Phone number" = "Phone number";
+"To use your phone number for entering the app" = "To use your phone number for entering the app";
+"Next" = "Next";
+"Pressing Next you are agree with our Agreement Licence and Privacy Policy" = "Pressing Next you are agree with our Agreement Licence and Privacy Policy";
+"Registration confirmation" = "Registration confirmation";
+"Sending SMS on your phone" = "Sending SMS on your phone";
+"Please, enter code from SMS" = "Please, enter code from SMS";
+"Confirm" = "Confirm";
+"Please, tell about yourself" = "Please, tell about yourself";
+"* Fields are neccessary to fill" = "* Fields are neccessary to fill";
+"Nickname*" = "Nickname*";
+"Name*" = "Name*";
+"Date of Birth*" = "Date of Birth*";
+
+//Registration alerts
+"Warning!" = "Warning!";
+"Sorry, this Nickname is taken by other user" = "Sorry, this Nickname is taken by other user";
+"Please, fill all neccessary fields" = "Please, fill all neccessary fields";
+"Success!" = "Success!";
+"You have now account in our app" = "You have now account in our app";
+
+
+
+

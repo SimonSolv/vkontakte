@@ -82,10 +82,7 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     @objc private func handleTap() {
         let notificationName = Notification.Name("ShowProfile")
-        // Create the notification
         let notification = Notification(name: notificationName, object: nil, userInfo: ["id": user!.id!])
-        // Post the notification to the notification center
         NotificationCenter.default.post(notification)
-
     }
 }

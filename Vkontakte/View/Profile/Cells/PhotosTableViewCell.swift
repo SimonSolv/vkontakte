@@ -14,14 +14,14 @@ class PhotosTableViewCell: UITableViewCell {
     
     var user: UserData? {
         didSet {
-            self.titleLabel.text = "\(user?.posts?.count ?? 0) photos"
+            self.titleLabel.text = "\(user?.posts?.count ?? 0)" + " photos"~
         }
     }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedTitle)
-        label.text = "Photos"
+        label.text = "Photos"~
         return label
     }()
     

@@ -32,9 +32,9 @@ class ProfileUserView: UIView {
             avatar.image = coreManager.unpackPicture(picture: user.avatar!) ?? UIImage(named: "DefaultAvatar")!
             name.text = "\(user.name ?? "Unknown User") \(user.lastName ?? "")"
             job.text = "\(user.jobTitle ?? "  ")"
-            publicationsLabel.text = "\(user.posts?.count ?? 0)\nposts"
-            subscriptionsLabel.text = "\(user.subscriptions?.count ?? 0)\nsubscriptions"
-            subscribersLabel.text = "\(user.subscribers?.count ?? 0)\nsubscribers"
+            publicationsLabel.text = "\(user.posts?.count ?? 0)" + "\nposts"~
+            subscriptionsLabel.text = "\(user.subscriptions?.count ?? 0)" + "\nsubscriptions"~
+            subscribersLabel.text = "\(user.subscribers?.count ?? 0)" + "\nsubscribers"~
         }
     }
     
@@ -62,9 +62,9 @@ class ProfileUserView: UIView {
     
     private lazy var additionalInfoButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Additional info", for: .normal)
+        btn.setTitle("Additional info"~, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 15)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(AppColor().textMain, for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(additionalTapped), for: .touchUpInside)
         return btn
@@ -81,7 +81,7 @@ class ProfileUserView: UIView {
     private lazy var editButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .orangeish)
-        btn.setTitle("Edit", for: .normal)
+        btn.setTitle("Edit"~, for: .normal)
         btn.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
         return btn
     }()
@@ -89,7 +89,7 @@ class ProfileUserView: UIView {
     private lazy var messageButton: UIButton = {
         let view = UIButton()
         view.setCustomStyle(style: .main)
-        view.setTitle("Message", for: .normal)
+        view.setTitle("Message"~, for: .normal)
         view.addTarget(self, action: #selector(messageTapped), for: .touchUpInside)
         return view
     }()
@@ -97,7 +97,7 @@ class ProfileUserView: UIView {
     private lazy var callButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .main)
-        btn.setTitle("Call", for: .normal)
+        btn.setTitle("Call"~, for: .normal)
         btn.isEnabled = false
         return btn
     }()
@@ -199,7 +199,7 @@ class ProfileUserView: UIView {
         if isCurrentUser == true {
             
             editButton.snp.makeConstraints {make in
-                make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
+                make.top.equalTo(avatar.snp.bottom).offset(10)
                 make.height.equalTo(50)
                 make.leading.equalTo(snp.leading).offset(20)
                 make.trailing.equalTo(snp.trailing).offset(-20)
@@ -215,7 +215,7 @@ class ProfileUserView: UIView {
         } else {
             
             messageButton.snp.makeConstraints {make in
-                make.top.equalTo(additionalInfoButton.snp.bottom).offset(5)
+                make.top.equalTo(additionalInfoButton.snp.bottom).offset(10)
                 make.leading.equalTo(snp.leading).offset(20)
                 make.trailing.equalTo(callButton.snp.leading).offset(-20)
                 make.height.equalTo(50)
@@ -259,6 +259,4 @@ class ProfileUserView: UIView {
         }
         delegate?.messageButtonTapped(user: user)
     }
-    
-    
 }

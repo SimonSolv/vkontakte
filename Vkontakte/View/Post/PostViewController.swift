@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCellDelegate {
+class PostViewController: ThemeViewController, CoordinatedProtocol, PostTableViewCellDelegate {
 
     var coordinator: CoordinatorProtocol?
     
@@ -90,7 +90,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor().background
         setupViews()
         setupConstraints()
     }
@@ -98,7 +98,7 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.backItem?.title = "Feed"
+        self.navigationController?.navigationBar.backItem?.title = "Feed"~
         self.navigationController?.navigationBar.tintColor = .orange
     }
     
@@ -136,13 +136,13 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
         }
         
         userView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(5)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-15)
         }
         
         postTitle.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(70)
+            make.top.equalTo(contentView.snp.top).offset(75)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.trailing.equalTo(contentView.snp.trailing).offset(-20)
         }
@@ -211,11 +211,11 @@ class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCe
     }
     
     func openPost(source post: Post) {
-        self.coordinator?.ivent(action: .openPost(post: post), iniciator: self)
+        self.coordinator?.event(action: .openPost(post: post), iniciator: self)
     }
     
     func openAuthor(user: UserData) {
-        self.coordinator?.ivent(action: .showProfile(user: user), iniciator: self)
+        self.coordinator?.event(action: .showProfile(user: user), iniciator: self)
     }
     
     func liked(status: Bool) {

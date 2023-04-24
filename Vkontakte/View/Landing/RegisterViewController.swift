@@ -24,14 +24,14 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .title)
-        label.text = "Registration"
+        label.text = "Registration"~
         return label
     }()
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .grayBig)
-        label.text = "Phone number"
+        label.text = "Phone number"~
         return label
     }()
     
@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
         let label = UILabel()
         label.setCustomStyle(style: .subtitle)
         label.numberOfLines = 0
-        label.text = "To use your phone number for entering the app"
+        label.text = "To use your phone number for entering the app"~
         return label
     }()
     
@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var nextButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Next", for: .normal)
+        btn.setTitle("Next"~, for: .normal)
         btn.setCustomStyle(style: .main)
         btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         btn.isEnabled = false
@@ -65,7 +65,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
     private lazy var annotationTextView: UITextView = {
         let label = UITextView()
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "Pressing Next you are agree with our Agreement Licence and Privacy Policy"
+        label.text = "Pressing Next you are agree with our Agreement Licence and Privacy Policy"~
         label.textAlignment = .center
         label.textColor = .black
         return label
@@ -138,17 +138,17 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
             make.top.equalTo(nextButton.snp.bottom).offset(10)
             make.centerX.equalTo(scroll.snp.centerX)
             make.width.equalTo(scroll.snp.width).offset(-100)
-            make.height.equalTo(80)
+            make.height.equalTo(200)
             make.bottom.equalTo(scroll.snp.bottom)
         }
     }
     
     @objc private func nextButtonTapped() {
-        coordinator?.ivent(action: .requestNotifications, iniciator: self)
+        coordinator?.event(action: .requestNotifications, iniciator: self)
         let service = LocalNotificationManager()
         service.registerNotificationTimeInterval(title: "Verification code", body: "Your code: 0000", interval: 2)
 
-        coordinator?.ivent(action: .showRegistrationConfirmation, iniciator: self)
+        coordinator?.event(action: .showRegistrationConfirmation, iniciator: self)
     }
     
     deinit {

@@ -38,7 +38,7 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
         view.setStyle(.plain)
         view.delegate = self
         view.textColor = UIColor.systemGray
-        view.text = "Enter title here..."
+        view.text = "Enter title here..."~
         return view
     }()
     
@@ -46,8 +46,7 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
         let view = UITextView()
         view.setStyle(.plain)
         view.delegate = self
-        view.textColor = UIColor.systemGray
-        view.text = "Enter text here..."
+        view.text = "Enter text here..."~
         return view
     }()
     
@@ -66,7 +65,7 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
     private lazy var createPostButton: UIButton = {
         let view = UIButton()
         view.setCustomStyle(style: .orangeish)
-        view.setTitle("Create", for: .normal)
+        view.setTitle("Create"~, for: .normal)
         view.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -75,9 +74,9 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Create post"
+        title = "Create post"~
         view.backgroundColor = .systemGray5
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        let cancelButton = UIBarButtonItem(title: "Cancel"~, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationController?.navigationItem.rightBarButtonItem = cancelButton
         setupViews()
         setupConstraits()
@@ -107,13 +106,6 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
             make.leading.equalTo(view.snp.leading).offset(20)
             make.trailing.equalTo(view.snp.trailing).offset(-20)
         }
-        
-//        contentView.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            make.leading.equalTo(view.snp.leading).offset(20)
-//            make.trailing.equalTo(view.snp.trailing).offset(-20)
-//            make.bottom.equalTo(view.snp.bottom)
-//        }
         
         titleTextField.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(20)
@@ -163,10 +155,13 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
     @objc private func createButtonTapped() {
         let picture = getPictureForPost()
         var bodyText: String? = nil
-        if bodyTextField.text != "Enter text here..." {
+        if bodyTextField.text != "Enter text here..."~ {
             bodyText = bodyTextField.text
         }
-        coreManager.createPost(title: titleTextField.text, body: bodyText, image: picture, authorId: coreManager.currentUser!.id!)
+        if let user = coreManager.getCurrentUser() {
+            coreManager.createPost(title: titleTextField.text, body: bodyText, image: picture, authorId: user.id!)
+        }
+        
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -178,24 +173,8 @@ class CreatePostViewController: UIViewController, CoordinatedProtocol, UITextFie
         var answer: Picture? = nil
         if let binaryData = postImageView.image?.jpegData(compressionQuality: 0.9) {
             answer = coreManager.savePicture(at: binaryData)
-            
         }
         return answer
-        
-        
-        
-//        if imageURL != nil  {
-//            let picture: Picture? = coreManager.checkExistance(picURL: imageURL!)
-//            if picture != nil {
-//                return picture
-//            } else {
-//                let picture = coreManager.createPicture(name: imageSaveName, path: imageURL!, user: coreManager.currentUser, album: nil)
-//                return picture
-//            }
-//        } else {
-//            print("Something is nil to create picture")
-//            return nil
-//        }
     }
     
     private func addImageView() {
@@ -230,9 +209,9 @@ extension CreatePostViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Enter text here..." || textView.text == "Enter title here..." {
+        if textView.text == "Enter text here..."~ || textView.text == "Enter title here..."~ {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = AppColor().textMain
         }
     }
 }

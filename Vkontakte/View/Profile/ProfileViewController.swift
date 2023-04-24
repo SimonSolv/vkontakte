@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol {
     init(user: UserData) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor().background
         self.title = "@\(self.user.nickName ?? "nickName")"
         setupView()
     }
@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController, CoordinatedProtocol {
         tableView.reloadData()
         if user.isLogged == false {
             self.navigationController?.navigationBar.isHidden = false
-            self.navigationController?.navigationBar.backItem?.title = "Feed"
+            self.navigationController?.navigationBar.backItem?.title = "Feed"~
             self.navigationController?.navigationBar.tintColor = .orange
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(menuButtonTapped))
@@ -132,7 +132,7 @@ extension ProfileViewController: PostTableViewCellDelegate {
     }
     
     func openPost(source: Post) {
-        coordinator?.ivent(action: .openPost(post: source), iniciator: self)
+        coordinator?.event(action: .openPost(post: source), iniciator: self)
     }
     
     func openAuthor(user: UserData) {
@@ -148,20 +148,20 @@ extension ProfileViewController: PostTableViewCellDelegate {
 extension ProfileViewController: ProfileUserViewDelegate, PostsHeaderTableViewCellDelegate {
     
     func createPost() {
-        coordinator?.ivent(action: .createPostTapped, iniciator: self)
+        coordinator?.event(action: .createPostTapped, iniciator: self)
     }
     
     
     func additionalInfoTapped(user: UserData) {
-        coordinator?.ivent(action: .showAdditionalInfo(user: user), iniciator: self)
+        coordinator?.event(action: .showAdditionalInfo(user: user), iniciator: self)
     }
     
     func messageButtonTapped(user: UserData) {
-        coordinator?.ivent(action: .messageTapped, iniciator: self)
+        coordinator?.event(action: .messageTapped, iniciator: self)
     }
     
     func editButtonTapped(user: UserData) {
-        coordinator?.ivent(action: .editProfileTapped, iniciator: self)
+        coordinator?.event(action: .editProfileTapped, iniciator: self)
     }
     
     func postsTapped(user: UserData) {

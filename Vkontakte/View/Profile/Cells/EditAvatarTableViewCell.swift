@@ -18,14 +18,18 @@ class EditAvatarTableViewCell: UITableViewCell {
     
     var delegate: EditAvatarTableViewCellDelegate?
     
-    let manager = CoreDataManager.shared
+    var data: UIImage? {
+        didSet {
+            if let image = data {
+                avatar.image = image
+            }
+            setupView()
+        }
+    }
     
     private lazy var avatar: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
-        let picture = manager.currentUser!.avatar!
-        let image = manager.unpackPicture(picture: picture)
-        view.image = image
         return view
     }()
     
@@ -40,15 +44,6 @@ class EditAvatarTableViewCell: UITableViewCell {
         view.clipsToBounds = true
         return view
     }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private func setupView() {
         contentView.backgroundColor = .systemGray4

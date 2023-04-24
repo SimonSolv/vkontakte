@@ -16,7 +16,17 @@ class EditProfileViewController: UIViewController, CoordinatedProtocol, EditAvat
     
     let coreManager = CoreDataManager.shared
     
-    var avatar: UIImage?
+    var avatar: UIImage? = UIImage(data: (CoreDataManager.shared.currentUser?.avatar?.img)!)
+    
+    private lazy var saveButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Save"~, for: .normal)
+        view.backgroundColor = .orange
+        view.layer.cornerRadius = 15
+        view.clipsToBounds = true
+        view.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        return view
+    }()
     
     var user: UserData? {
         didSet {
@@ -25,20 +35,16 @@ class EditProfileViewController: UIViewController, CoordinatedProtocol, EditAvat
             }
             let name = user.name!
             let lastName = user.lastName ?? ""
-            let city = user.city ?? ""
+            let job = user.jobTitle ?? ""
             let nickName = user.nickName!
-            self.userInputs = [name, lastName, nickName, city]
-            self.avatar = coreManager.unpackPicture(picture: user.avatar!)
+            self.userInputs = [name, lastName, nickName, job]
         }
     }
     
-    // Array to hold field titles
-    let fieldTitles = ["First Name", "Last Name", "Nick-name", "City"]
+    let fieldTitles = ["First Name"~, "Last Name"~, "Nick-name"~, "Job title"~]
     
-    // Array to hold user inputs
     var userInputs: [String?] = []
     
-    // Table view
     let tableView = UITableView()
     
     // MARK: - LifeCycle
@@ -63,14 +69,13 @@ class EditProfileViewController: UIViewController, CoordinatedProtocol, EditAvat
     // MARK: - Setup
     
     private func setupView() {
-        title = "Edit profile"
+        title = "Edit profile"~
         view.backgroundColor = .systemGray4
         view.addSubview(tableView)
         setupConstraits()
     }
     
     private func setupConstraits() {
-
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -94,6 +99,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
             let imageData = try! Data(contentsOf: imageUrl)
             let image = UIImage(data: imageData)
+            avatar = image
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -129,6 +135,8 @@ extension EditProfileViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: EditAvatarTableViewCell.identifier, for: indexPath) as! EditAvatarTableViewCell
             cell.delegate = self
+            cell.data = avatar
+            cell.contentView.backgroundColor = .systemGray4
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: EditInfoTableViewCell.identifier, for: indexPath) as! EditInfoTableViewCell
@@ -140,17 +148,10 @@ extension EditProfileViewController: UITableViewDataSource {
             return cell
         case 2:
             let cell = UITableViewCell(frame: CGRect(origin: .zero, size: CGSize(width: 300, height: 50)))
-            let button: UIButton = {
-                let view = UIButton(frame: CGRect(origin: CGPoint(x: super.view.bounds.midX - 150, y: 10), size: CGSize(width: 300, height: 50)))
-                view.setTitle("Save", for: .normal)
-                view.backgroundColor = .orange
-                view.layer.cornerRadius = 15
-                view.clipsToBounds = true
-                view.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-                cell.contentView.backgroundColor = .systemGray4
-                return view
-            }()
+            let button = saveButton
+            button.frame = CGRect(origin: CGPoint(x: super.view.bounds.midX - 150, y: 10), size: CGSize(width: 300, height: 50))
             cell.contentView.addSubview(button)
+            cell.contentView.backgroundColor = .systemGray4
             return cell
         default:
             return UITableViewCell()
@@ -158,19 +159,18 @@ extension EditProfileViewController: UITableViewDataSource {
     }
     
     @objc func saveButtonTapped() {
-        let alert = UIAlertController(title: "Are you sure?", message: "This saves all changes", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Save", style: .cancel) { UIAlertAction in
+        let alert = UIAlertController(title: "Are you sure?"~, message: "This saves all changes"~, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Save"~, style: .cancel) { UIAlertAction in
             self.saveEdited()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-        alert.addAction(action)
+        let cancelAction = UIAlertAction(title: "Cancel"~, style: .default)
         alert.addAction(cancelAction)
+        alert.addAction(action)
         self.present(alert, animated: true)
         
     }
     private func saveEdited() {
-        coreManager.editUserData(newData: userInputs)
-        
+        coreManager.editUserData(newData: userInputs, avatar: avatar)
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

@@ -35,7 +35,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var confirmButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Confirm", for: .normal)
+        btn.setTitle("Confirm"~, for: .normal)
         btn.setCustomStyle(style: .main)
         btn.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return btn
@@ -43,7 +43,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Please, tell about yourself"
+        label.text = "Please, tell about yourself"~
         label.setCustomStyle(style: .title)
         label.textAlignment = .left
         return label
@@ -51,7 +51,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var annotationLabel: UILabel = {
         let label = UILabel()
-        label.text = "* Fields are neccessary to fill"
+        label.text = "* Fields are neccessary to fill"~
         label.setCustomStyle(style: .grayMedium)
         label.textAlignment = .left
         return label
@@ -59,7 +59,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Nickname*"
+        label.text = "Nickname*"~
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -67,7 +67,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var lastNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Last name"
+        label.text = "Last name"~
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -75,7 +75,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var jobLabel: UILabel = {
         let label = UILabel()
-        label.text = "Job title"
+        label.text = "Job title"~
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -83,7 +83,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name*"
+        label.text = "Name*"~
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -91,7 +91,7 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var dateOfBirthLabel: UILabel = {
         let label = UILabel()
-        label.text = "Date of Birth*"
+        label.text = "Date of Birth*"~
         label.setCustomStyle(style: .subtitle)
         label.textAlignment = .left
         return label
@@ -269,19 +269,19 @@ class GeneralInfoViewController: UIViewController, CoordinatedProtocol {
         let isAllFilled = checkNeccessaryFields()
         switch isAllFilled {
         case .wrongNickName:
-            CustomAlert.showAlert(title: "Warning!", message: "Sorry, this Nickname is taken by other user", okActionTitle: "Ok", viewController: self)
+            CustomAlert.showAlert(title: "Warning!"~, message: "Sorry, this Nickname is taken by other user"~, okActionTitle: "Ok", viewController: self)
         case .notAllFilled:
-            CustomAlert.showAlert(title: "Warning!", message: "Please, fill all neccessary fields", okActionTitle: "Ok", viewController: self)
+            CustomAlert.showAlert(title: "Warning!"~, message: "Please, fill all neccessary fields"~, okActionTitle: "Ok", viewController: self)
         case .wrongName:
-            CustomAlert.showAlert(title: "Warning!", message: "Please, fill all neccessary fields", okActionTitle: "Ok", viewController: self)
+            CustomAlert.showAlert(title: "Warning!"~, message: "Please, fill all neccessary fields"~, okActionTitle: "Ok", viewController: self)
         case .allGood:
             let coreManager = CoreDataManager.shared
             coreManager.createUser(name: nameTextField.text!, lastName: lastNameTextField.text ?? "", jobTitle: jobTextField.text ?? "", nickName: nickNameTextField.text!, dateOfBirth: datePicker.date, avatar: coreManager.defaultAvatar, isLogged: true)
             let current = coreManager.getUserByNick(nickName: nickNameTextField.text!)
             coreManager.currentUser = current
             coreManager.fetchUsers()
-            CustomAlert.showAlert(title: "Success!", message: "You have now account in our app", okActionTitle: "Ok",okActionHandler: {
-                self.coordinator?.ivent(action: .loginSuccess(user: current!), iniciator: self)
+            CustomAlert.showAlert(title: "Success!"~, message: "You have now account in our app"~, okActionTitle: "Ok",okActionHandler: {
+                self.coordinator?.event(action: .loginSuccess(user: current!), iniciator: self)
             }, viewController: self)
         }
     }

@@ -38,7 +38,6 @@ class PostTableViewCell: UITableViewCell {
             }
             userView.userId = post.author?.id
             title.text = post.title
-            
             if post.body != nil && post.image != nil {
                 setupWithOption(option: .bodyAndImage)
             } else if post.body != nil && post.image == nil {
@@ -58,6 +57,9 @@ class PostTableViewCell: UITableViewCell {
     
     lazy var userView: UserView = {
         let view = UserView()
+        view.isUserInteractionEnabled = true
+        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(userTapped))
+        view.addGestureRecognizer(tapOnUser)
         return view
     }()
     
@@ -65,13 +67,19 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.setCustomStyle(style: .feedTitle)
         label.numberOfLines = 2
+        label.isUserInteractionEnabled = true
         return label
     }()
     
     lazy var body: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
-        label.numberOfLines = 4
+        label.lineBreakMode = .byTruncatingTail
+        label.sizeToFit()
+        label.numberOfLines = 0
+        let tapOnBody = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
+        label.addGestureRecognizer(tapOnBody)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -80,18 +88,27 @@ class PostTableViewCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
+        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
+        view.addGestureRecognizer(tapOnImage)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
     lazy var likes: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
+        label.isUserInteractionEnabled = true
+        let tapOnLikes = UITapGestureRecognizer(target: self, action: #selector(likesTapped))
+        label.addGestureRecognizer(tapOnLikes)
         return label
     }()
     
     lazy var comments: UILabel = {
         let label = UILabel()
         label.setCustomStyle(style: .feedBody)
+        label.isUserInteractionEnabled = true
+        let tapOnComment = UITapGestureRecognizer(target: self, action: #selector(commentsTapped))
+        label.addGestureRecognizer(tapOnComment)
         return label
     }()
     
@@ -107,6 +124,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
+        self.contentView.backgroundColor = AppColor().background
     }
     
     required init?(coder: NSCoder) {
@@ -131,52 +149,43 @@ class PostTableViewCell: UITableViewCell {
     
     private func addBodyAndImage() {
         contentView.addSubview(image)
-        image.isUserInteractionEnabled = true
-        image.image = coreManager.unpackPicture(picture: post!.image!)
-        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
-        image.addGestureRecognizer(tapOnImage)
+        image.image = UIImage(data: (post?.image?.img)!)
         body.text = post!.body
+        setupBodyLines()
         contentView.addSubview(body)
-        body.isUserInteractionEnabled = true
         contentView.addSubview(image)
-        let tapOnBody = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
-        body.addGestureRecognizer(tapOnBody)
         setupConstraints(option: .bodyAndImage)
     }
     
     private func addBody() {
         contentView.addSubview(body)
-        body.isUserInteractionEnabled = true
         body.text = post!.body
-        let tapOnBody = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
-        body.addGestureRecognizer(tapOnBody)
+        setupBodyLines()
         setupConstraints(option: .onlyBody)
+    }
+    
+    private func setupBodyLines() {
+        // Calculate the required number of lines
+        let maxSize = CGSize(width: body.frame.width, height: CGFloat.greatestFiniteMagnitude)
+        let requiredSize = body.sizeThatFits(maxSize)
+        let requiredLines = Int(ceil(requiredSize.height / body.font.lineHeight))
+
+        // Set the label's number of lines to the required number of lines (up to a maximum of 3)
+        body.numberOfLines = min(requiredLines, 3)
+
     }
     
     private func addMain() {
         contentView.addSubview(userView)
-        userView.isUserInteractionEnabled = true
-        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(userTapped))
-        userView.addGestureRecognizer(tapOnUser)
         contentView.addSubview(title)
         contentView.addSubview(likes)
         contentView.addSubview(comments)
-        title.isUserInteractionEnabled = true
-        likes.isUserInteractionEnabled = true
-        comments.isUserInteractionEnabled = true
-        let tapOnLikes = UITapGestureRecognizer(target: self, action: #selector(likesTapped))
-        let tapOnComment = UITapGestureRecognizer(target: self, action: #selector(commentsTapped))
-        let tapOnTitle = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
-        title.addGestureRecognizer(tapOnTitle)
-        likes.addGestureRecognizer(tapOnLikes)
-        comments.addGestureRecognizer(tapOnComment)
-        setupConstraints(option: .onlyMain)
     }
     
     private func addImage() {
         contentView.addSubview(image)
         image.isUserInteractionEnabled = true
-        image.image = coreManager.unpackPicture(picture: post!.image!)
+        image.image = UIImage(data: (post?.image?.img)!) 
         let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(bodyTapped))
         image.addGestureRecognizer(tapOnImage)
         setupConstraints(option: .onlyImage)
@@ -185,13 +194,14 @@ class PostTableViewCell: UITableViewCell {
     
     private func setupMainConstraints() {
         userView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(5)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
+            make.top.equalTo(contentView.snp.top).offset(15)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-15)
+            make.height.equalTo(70)
         }
         
         title.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(75)
+            make.top.equalTo(userView.snp.bottom).offset(10)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.trailing.equalTo(contentView.snp.trailing).offset(-20)
         }
@@ -215,13 +225,14 @@ class PostTableViewCell: UITableViewCell {
     private func setupConstraints(option: SetupOption) {
         
         userView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(5)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
+            make.top.equalTo(contentView.snp.top).offset(15)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-15)
+            make.height.equalTo(60)
         }
         
         title.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(75)
+            make.top.equalTo(userView.snp.bottom).offset(10)
             make.leading.equalTo(contentView.snp.leading).offset(20)
             make.trailing.equalTo(contentView.snp.trailing).offset(-20)
         }
@@ -336,22 +347,14 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc private func userTapped() {
-        guard (self.post != nil) else
-        {
-            print("Error to get PostId in PostTableViewCell")
-            return
+        if let author = post!.author {
+            delegate?.openAuthor(user: author)
         }
-        let author = post!.author
-        guard let author = author else {
-            return
-        }
-        delegate?.openAuthor(user: author)
     }
     
     @objc private func commentsTapped() {
         print("Comments tapped for PostTableViewCell")
-        guard (self.post != nil) else
-        {
+        guard (self.post != nil) else {
             print("Error to get PostId in PostTableViewCell")
             return
         }

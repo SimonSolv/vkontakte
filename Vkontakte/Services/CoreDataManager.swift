@@ -60,21 +60,16 @@ class CoreDataManager {
     }
     
     func createDefaults() {
-        let picture = Picture(context: persistentContainer.viewContext)
         if let path = Bundle.main.path(forResource: "DefaultAvatar", ofType: "jpg") {
             if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-                self.defaultAvatar = savePicture(at: imageData))
+                self.defaultAvatar = savePicture(at: imageData)
             }
         }
-        
-        let picture2 = Picture(context: persistentContainer.viewContext)
-        if let imagePath = Bundle.main.path(forResource: "DefaultPostImage", ofType: "jpg") {
-            picture2.path = URL(fileURLWithPath: imagePath).deletingLastPathComponent()
+        if let path = Bundle.main.path(forResource: "DefaultPostImage", ofType: "jpg") {
+            if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+                self.defaultPostPicture = savePicture(at: imageData)
+            }
         }
-        picture2.name = "DefaultAvatar"
-        saveContext()
-        self.defaultPostPicture = picture2
-        
     }
     
     //MARK: - Users
@@ -121,7 +116,7 @@ class CoreDataManager {
         return answer
     }
     
-    func editUserData(newData: [String?] ) {
+    func editUserData(newData: [String?], avatar: UIImage? ) {
         for i in newData.indices {
             guard let value = newData[i] else {
                 return
@@ -135,14 +130,16 @@ class CoreDataManager {
             case 2:
                 currentUser?.nickName = value
             case 3:
-                currentUser?.city = value
+                currentUser?.jobTitle = value
             default:
                 break
             }
         }
+        if let newAvatar = avatar {
+            currentUser?.avatar?.img = newAvatar.jpegData(compressionQuality: 0.9)
+        }
         saveContext()
         fetchUsers()
-        //currentUser = getCurrentUser()
     }
     
     func deleteUser(userId: String) {
@@ -195,6 +192,18 @@ class CoreDataManager {
         case.name:
             return users.sorted(by: {$0.name! > $1.name!})
         }
+    }
+    
+    func setUserOnline(user: UserData) {
+        user.isLogged = true
+        saveContext()
+        fetchUsers()
+    }
+    
+    func logOut() {
+        currentUser?.isLogged = false
+        saveContext()
+        fetchUsers()
     }
     
     
@@ -340,22 +349,12 @@ class CoreDataManager {
     func fillPictures(names: [String]) -> [Picture] {
         var answer: [Picture] = []
         for name in names {
-            guard let sourceURL = Bundle.main.url(forResource: name, withExtension: "jpg") else {
-                print("Cannot get sourcw url for name \(name)")
-                return answer
-            }
             
-            if let path = Bundle.main.path(forResource: name, ofType: "jpeg") {
+            if let path = Bundle.main.path(forResource: name, ofType: "jpg") {
                 if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
                     answer.append(savePicture(at: imageData))
                 }
             }
-//            let picture = Picture(context: persistentContainer.viewContext)
-//            picture.path = sourceURL
-//            print("\(String(describing: picture.path))")
-//            picture.name = name
-//            saveContext()
-//            answer.append(picture)
         }
         return answer
     }
@@ -389,37 +388,34 @@ class CoreDataManager {
     
     func unpackPicture(picture: Picture) -> UIImage? {
         var answer: UIImage?
-        do {
-            let imageData = try Data(contentsOf: picture.path!)
+        if let imageData = picture.img {
             answer = UIImage(data: imageData)
-        } catch {
-            print("Ошибка при получении данных из файла: \(error)")
         }
         return answer
     }
     
-    func showPicture(url: URL) -> UIImage? {
-        var answer: UIImage?
-        do {
-            let imageData = try Data(contentsOf: url)
-            answer = UIImage(data: imageData)
-        } catch {
-            print("Ошибка при получении данных из файла: \(error)")
-        }
-        return answer
-    }
+//    func showPicture(url: URL) -> UIImage? {
+//        var answer: UIImage?
+//        do {
+//            let imageData = try Data(contentsOf: url)
+//            answer = UIImage(data: imageData)
+//        } catch {
+//            print("Ошибка при получении данных из файла: \(error)")
+//        }
+//        return answer
+//    }
     
-    func checkExistance(picURL: URL) -> Picture? {
-        var answer: Picture? = nil
-        let request = Picture.fetchRequest()
-        let pictures = (try? persistentContainer.viewContext.fetch(request)) ?? []
-        for picture in pictures {
-            if picture.path == picURL {
-                answer = picture
-            }
-        }
-        return answer
-    }
+//    func checkExistance(picURL: URL) -> Picture? {
+//        var answer: Picture? = nil
+//        let request = Picture.fetchRequest()
+//        let pictures = (try? persistentContainer.viewContext.fetch(request)) ?? []
+//        for picture in pictures {
+//            if picture.path == picURL {
+//                answer = picture
+//            }
+//        }
+//        return answer
+//    }
     
     func getPicture(named: String) -> Picture? {
         var answer: Picture? = nil
