@@ -43,6 +43,7 @@
         <relationship name="avatar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Picture"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Picture" inverseName="user" inverseEntity="Picture"/>
+        <relationship name="likedPosts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="author" inverseEntity="Post"/>
         <relationship name="subscribers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserData"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserData"/>

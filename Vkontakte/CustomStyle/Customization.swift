@@ -225,3 +225,7 @@ struct AppColor {
     let textGray = UIColor(named: "textGray")
     let secondaryBackground = UIColor(named: "secondaryBackground")
 }
+
+class CustomJestureRecognizer: UITapGestureRecognizer {
+    var post: Post?
+}

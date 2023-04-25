@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol EditProfileDelegate: AnyObject {
+    func updateSideView()
+}
+
 class EditProfileViewController: UIViewController, CoordinatedProtocol, EditAvatarTableViewCellDelegate {
     
     var parentVC: ContainerViewController?
@@ -15,6 +19,8 @@ class EditProfileViewController: UIViewController, CoordinatedProtocol, EditAvat
     var coordinator: CoordinatorProtocol?
     
     let coreManager = CoreDataManager.shared
+    
+    var delegate: EditProfileDelegate?
     
     var avatar: UIImage? = UIImage(data: (CoreDataManager.shared.currentUser?.avatar?.img)!)
     
@@ -162,6 +168,7 @@ extension EditProfileViewController: UITableViewDataSource {
         let alert = UIAlertController(title: "Are you sure?"~, message: "This saves all changes"~, preferredStyle: .alert)
         let action = UIAlertAction(title: "Save"~, style: .cancel) { UIAlertAction in
             self.saveEdited()
+            self.delegate!.updateSideView()
         }
         let cancelAction = UIAlertAction(title: "Cancel"~, style: .default)
         alert.addAction(cancelAction)

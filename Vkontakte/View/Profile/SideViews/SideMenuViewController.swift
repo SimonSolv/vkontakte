@@ -74,6 +74,10 @@ class SideMenuViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    func updateTableView() {
+        tableView.reloadData()
+    }
 }
 
 //MARK: - TableViewDelegate / DataSource

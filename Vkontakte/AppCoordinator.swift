@@ -26,6 +26,7 @@ enum ActionType {
     case editProfileTapped
     case openSettings
     case logOut
+    case signIn
 }
 
 enum AppTab {
@@ -123,13 +124,20 @@ class AppCoordinator: CoordinatorProtocol {
             let controller = factory.createController(type: .settings, coordinator: self)
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .editProfileTapped:
-            let controller = factory.createController(type: .editProfile, coordinator: self)
+            let controller = factory.createController(type: .editProfile, coordinator: self) as! EditProfileViewController
+            controller.delegate = iniciator as? any EditProfileDelegate
             iniciator.navigationController?.pushViewController(controller, animated: true)
         case .logOut:
             coreManager.logOut()
             let controller = factory.createController(type: .login, coordinator: self)
             controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             iniciator.navigationController?.pushViewController(controller, animated: false)
+        case .signIn:
+            let controller = factory.createController(type: .landing, coordinator: self)
+            controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            iniciator.addChild(controller)
+            iniciator.view.addSubview(controller.view)
+            tabBarController.tabBar.isHidden = true
         }
     }
     

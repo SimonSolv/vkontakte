@@ -24,6 +24,8 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
     lazy var signInLineButton: UIButton = {
         let btn = UIButton()
         btn.setCustomStyle(style: .line)
+        btn.setTitle("Registration"~, for: .normal)
+        btn.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -229,10 +231,8 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
         inputSourceView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
-    func signInButtonTapped() {
-        let controller = LandingViewController()
-      //  controller.delegate = self.inspector
-        self.present(controller, animated: true)
+    @objc private func signInButtonTapped() {
+        coordinator?.event(action: .signIn, iniciator: self)
     }
     
     @objc func loginButtonTapped() {
@@ -243,6 +243,8 @@ class LoginViewController: UIViewController, CoordinatedProtocol {
             return
         }
     }
+    
+    
     
     @objc func authButtonTapped() {
 

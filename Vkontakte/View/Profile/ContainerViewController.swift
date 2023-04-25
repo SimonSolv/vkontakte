@@ -106,6 +106,10 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
 //MARK: - ProfileViewControllerDelegate
 
 extension ContainerViewController: ProfileViewControllerDelegate {
+    func updeteSideMenu() {
+        sideMenuVC?.updateTableView()
+    }
+    
     
     func menuButtonTapped() {
         toggleMenu(completion: nil)

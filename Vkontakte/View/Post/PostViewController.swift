@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class PostViewController: ThemeViewController, CoordinatedProtocol, PostTableViewCellDelegate {
-
+    
     var coordinator: CoordinatorProtocol?
     
     let scrollView = UIScrollView()
@@ -220,6 +220,12 @@ class PostViewController: ThemeViewController, CoordinatedProtocol, PostTableVie
     
     func liked(status: Bool) {
         
+    }
+    
+    func postLiked(state: Bool, post: Post) {
+        if state == true {
+            coreManager.addPost(post: post)
+        }
     }
 }
 

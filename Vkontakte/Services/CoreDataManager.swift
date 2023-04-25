@@ -301,13 +301,32 @@ class CoreDataManager {
         return data
     }
     
+    func addPost(post: Post) {
+        let user = getCurrentUser()
+        if let user {
+            user.addToLikedPosts(post)
+            print("Adding post to liked. Current liked = \(user.likedPosts?.count ?? 99988)")
+        }
+        saveContext()
+    }
+    
+    func getLikedPosts() -> [Post] {
+        var answer: [Post] = []
+        let user = getCurrentUser()
+        if let user {
+            answer = user.likedPosts?.allObjects as? [Post] ?? []
+            print(user.likedPosts?.count)
+        }
+        return answer
+    }
+    
     
     //MARK: - Comments
     
     func fetchComments() {
-        let request = Post.fetchRequest()
-        let posts = (try? persistentContainer.viewContext.fetch(request)) ?? []
-        self.posts = posts
+        let request = Comment.fetchRequest()
+        let comments = (try? persistentContainer.viewContext.fetch(request)) ?? []
+        self.comments = comments
     }
     
     func addComment(postId: String, authorId: String, body: String) {
@@ -359,10 +378,6 @@ class CoreDataManager {
         return answer
     }
     
-    func fetchPictures() {
-        
-    }
-    
     func savePicture(at imgData: Data) -> Picture {
         let picture = Picture(context: persistentContainer.viewContext)
         picture.name = imageSaveName
@@ -372,20 +387,6 @@ class CoreDataManager {
         return picture
     }
     
-//    func createPicture(name: String, path: URL, user: UserData?, album: Album?) -> Picture {
-//        let picture = Picture(context: persistentContainer.viewContext)
-//        picture.path = path
-//        picture.name = name
-//        if user != nil {
-//            picture.user = user
-//        }
-//        if album != nil {
-//            picture.album = album
-//        }
-//        saveContext()
-//        return picture
-//    }
-    
     func unpackPicture(picture: Picture) -> UIImage? {
         var answer: UIImage?
         if let imageData = picture.img {
@@ -393,29 +394,6 @@ class CoreDataManager {
         }
         return answer
     }
-    
-//    func showPicture(url: URL) -> UIImage? {
-//        var answer: UIImage?
-//        do {
-//            let imageData = try Data(contentsOf: url)
-//            answer = UIImage(data: imageData)
-//        } catch {
-//            print("Ошибка при получении данных из файла: \(error)")
-//        }
-//        return answer
-//    }
-    
-//    func checkExistance(picURL: URL) -> Picture? {
-//        var answer: Picture? = nil
-//        let request = Picture.fetchRequest()
-//        let pictures = (try? persistentContainer.viewContext.fetch(request)) ?? []
-//        for picture in pictures {
-//            if picture.path == picURL {
-//                answer = picture
-//            }
-//        }
-//        return answer
-//    }
     
     func getPicture(named: String) -> Picture? {
         var answer: Picture? = nil

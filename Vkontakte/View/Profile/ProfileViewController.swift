@@ -10,6 +10,7 @@ import SnapKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func menuButtonTapped()
+    func updeteSideMenu()
 }
 
 class ProfileViewController: UIViewController, CoordinatedProtocol {
@@ -126,6 +127,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ProfileViewController: PostTableViewCellDelegate {
+    func postLiked(state: Bool, post: Post) {
+        if state == true {
+            coreManager.addPost(post: post)
+        }
+    }
+    
     
     func postMenuButtonTapped() {
         print("Menu Tapped")
@@ -176,4 +183,14 @@ extension ProfileViewController: ProfileUserViewDelegate, PostsHeaderTableViewCe
         print("Subscriptions tapped")
     }
     
+}
+
+extension ProfileViewController: EditProfileDelegate {
+    func updateSideView() {
+        updateSideMenu()
+    }
+    
+    func updateSideMenu() {
+        delegate?.updeteSideMenu()
+    }
 }

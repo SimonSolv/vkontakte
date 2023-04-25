@@ -13,6 +13,7 @@ protocol PostTableViewCellDelegate: AnyObject {
     func openAuthor(user: UserData)
     func liked(status: Bool)
     func postMenuButtonTapped()
+    func postLiked(state: Bool, post: Post)
 }
 
 enum SetupOption {
@@ -165,14 +166,10 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupBodyLines() {
-        // Calculate the required number of lines
         let maxSize = CGSize(width: body.frame.width, height: CGFloat.greatestFiniteMagnitude)
         let requiredSize = body.sizeThatFits(maxSize)
         let requiredLines = Int(ceil(requiredSize.height / body.font.lineHeight))
-
-        // Set the label's number of lines to the required number of lines (up to a maximum of 3)
         body.numberOfLines = min(requiredLines, 3)
-
     }
     
     private func addMain() {
@@ -344,6 +341,9 @@ class PostTableViewCell: UITableViewCell {
     
     @objc private func likesTapped() {
         updateLikes(state: true)
+        if let post = post {
+            delegate?.postLiked(state: true, post: post)
+        }
     }
     
     @objc private func userTapped() {
