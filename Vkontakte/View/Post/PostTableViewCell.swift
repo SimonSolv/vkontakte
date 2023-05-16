@@ -126,6 +126,7 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         self.contentView.backgroundColor = AppColor().background
+        self.backgroundColor = AppColor().background
     }
     
     required init?(coder: NSCoder) {

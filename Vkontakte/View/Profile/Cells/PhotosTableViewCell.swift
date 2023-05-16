@@ -12,8 +12,19 @@ class PhotosTableViewCell: UITableViewCell {
     
     static let identifier = "PhotosTableViewCell"
     
+    var hasPhotos: Bool?
+    
     var user: UserData? {
         didSet {
+            if let images = user?.images {
+                if images.count > 0 {
+                    hasPhotos = true
+                } else {
+                    hasPhotos = false
+                }
+            } else {
+                hasPhotos = false
+            }
             self.titleLabel.text = "\(user?.posts?.count ?? 0)" + " photos"~
         }
     }

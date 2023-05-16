@@ -19,7 +19,11 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
     
     var localNotification: LocalNotificationManager?
     
-    var scroll = UIScrollView()
+    var scroll: UIScrollView = {
+        let view = UIScrollView()
+        view.keyboardDismissMode = .onDrag
+        return view
+    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -47,6 +51,7 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
         let textField = UITextField()
         textField.placeholder = "    +7 987 654 32 10"
         textField.setCustomStyle(.phoneField)
+        textField.returnKeyType = .done
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldChanged), for: .valueChanged)
         textField.addTarget(self, action: #selector(textFieldTapped), for: .editingDidBegin)
@@ -160,50 +165,56 @@ class RegisterViewController: UIViewController, CoordinatedProtocol {
 extension RegisterViewController: UITextFieldDelegate {
 
 
-        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            // Check if the user pressed the delete key
-            if string.isEmpty {
-                // Remove the last character from the phone number string
-                if phoneNumber.count > 0 {
-                    phoneNumber = String(phoneNumber.dropLast())
-                }
-            } else {
-                // Add the new character to the phone number string
-                phoneNumber += string
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Check if the user pressed the delete key
+        if string.isEmpty {
+            // Remove the last character from the phone number string
+            if phoneNumber.count > 0 {
+                phoneNumber = String(phoneNumber.dropLast())
             }
-            // Format the phone number string
-            let formattedNumber = formatPhoneNumber(phoneNumber)
-            textField.text = formattedNumber
-            
-            return false
+        } else {
+            // Add the new character to the phone number string
+            phoneNumber += string
         }
+        // Format the phone number string
+        let formattedNumber = formatPhoneNumber(phoneNumber)
+        textField.text = formattedNumber
         
-        func formatPhoneNumber(_ phoneNumber: String) -> String {
-            var formattedNumber = phoneNumber
-            // Remove all non-numeric characters
-            formattedNumber = formattedNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-            
-            // Check if the number is too long to format
-            guard formattedNumber.count <= 10 else { return "   +7 \(formattedNumber.prefix(10))" }
-            
-            // Format the number with spaces
-            var index = formattedNumber.startIndex
-            var formattedString = "    +7 "
-            for i in 0..<formattedNumber.count {
-                if i == 3 || i == 6 || i == 8 {
-                    formattedString += " "
-                }
-                formattedString.append(formattedNumber[index])
-                index = formattedNumber.index(after: index)
-                if i == 9 {
-                    self.nextButton.makeEnable()
-                }
-                if i != 9 {
-                    self.nextButton.makeDisable()
-                }
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Скрываем клавиатуру
+        return true
+    }
+
+        
+    func formatPhoneNumber(_ phoneNumber: String) -> String {
+        var formattedNumber = phoneNumber
+        // Remove all non-numeric characters
+        formattedNumber = formattedNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        
+        // Check if the number is too long to format
+        guard formattedNumber.count <= 10 else { return "   +7 \(formattedNumber.prefix(10))" }
+        
+        // Format the number with spaces
+        var index = formattedNumber.startIndex
+        var formattedString = "    +7 "
+        for i in 0..<formattedNumber.count {
+            if i == 3 || i == 6 || i == 8 {
+                formattedString += " "
             }
-            return formattedString
+            formattedString.append(formattedNumber[index])
+            index = formattedNumber.index(after: index)
+            if i == 9 {
+                self.nextButton.makeEnable()
+            }
+            if i != 9 {
+                self.nextButton.makeDisable()
+            }
         }
+        return formattedString
+    }
     
     @objc private func textFieldChanged() {
         if phoneEnteringTextView.text?.count == 10 {

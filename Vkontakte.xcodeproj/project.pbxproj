@@ -15,7 +15,6 @@
 		CE1498AC29ED8358003E3FA7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1498AB29ED8358003E3FA7 /* SettingsViewController.swift */; };
 		CE1498B229F31A5E003E3FA7 /* LocalizationShortCutString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1498B129F31A5E003E3FA7 /* LocalizationShortCutString.swift */; };
 		CE1498B529F31AB5003E3FA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE1498B729F31AB5003E3FA7 /* Localizable.strings */; };
-		CE1498BA29F506EB003E3FA7 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1498B929F506EB003E3FA7 /* ThemeViewController.swift */; };
 		CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */; };
 		CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */; };
 		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
@@ -66,11 +65,9 @@
 		CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279529B12263001F2DDE /* RegisterViewModel.swift */; };
 		CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */; };
 		CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */; };
-		CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279E29B27322001F2DDE /* UserStorage.swift */; };
 		CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A029B27448001F2DDE /* FeedViewController.swift */; };
 		CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */; };
 		CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */; };
-		CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A629B27BE2001F2DDE /* PostModel.swift */; };
 		CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A829B27CD5001F2DDE /* PostStorage.swift */; };
 		CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */; };
 		CEB027AD29B28411001F2DDE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AC29B28411001F2DDE /* UserView.swift */; };
@@ -106,7 +103,6 @@
 		CE1498B129F31A5E003E3FA7 /* LocalizationShortCutString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationShortCutString.swift; sourceTree = "<group>"; };
 		CE1498B629F31AB5003E3FA7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE1498B829F31ACD003E3FA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CE1498B929F506EB003E3FA7 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFiller.swift; sourceTree = "<group>"; };
 		CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -160,11 +156,9 @@
 		CEB0279529B12263001F2DDE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoViewController.swift; sourceTree = "<group>"; };
 		CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
-		CEB0279E29B27322001F2DDE /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		CEB027A029B27448001F2DDE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionHeaderView.swift; sourceTree = "<group>"; };
 		CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
-		CEB027A629B27BE2001F2DDE /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		CEB027A829B27CD5001F2DDE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
 		CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CEB027AC29B28411001F2DDE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -299,7 +293,6 @@
 				CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */,
 				CE0B0F7329CEE70B00357BF0 /* Main.storyboard */,
 				CE1498B729F31AB5003E3FA7 /* Localizable.strings */,
-				CE1498B929F506EB003E3FA7 /* ThemeViewController.swift */,
 			);
 			path = Vkontakte;
 			sourceTree = "<group>";
@@ -324,8 +317,6 @@
 		CEB0278129B07990001F2DDE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0279E29B27322001F2DDE /* UserStorage.swift */,
-				CEB027A629B27BE2001F2DDE /* PostModel.swift */,
 				CEB027A829B27CD5001F2DDE /* PostStorage.swift */,
 			);
 			path = Model;
@@ -595,13 +586,11 @@
 				CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */,
 				CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */,
 				CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */,
-				CEB027A729B27BE2001F2DDE /* PostModel.swift in Sources */,
 				CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */,
 				CE4D3A3929BDCD2C00A2E09A /* ProfileUserTableViewCell.swift in Sources */,
 				CE4D3A4529C10A3A00A2E09A /* PhotoCollectionViewCell.swift in Sources */,
 				CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */,
 				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
-				CEB0279F29B27322001F2DDE /* UserStorage.swift in Sources */,
 				CE95C19B29D4BC5F00477424 /* EditInfoTableViewCell.swift in Sources */,
 				CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */,
 				CE1498B229F31A5E003E3FA7 /* LocalizationShortCutString.swift in Sources */,
@@ -618,7 +607,6 @@
 				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
 				CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */,
 				CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */,
-				CE1498BA29F506EB003E3FA7 /* ThemeViewController.swift in Sources */,
 				CEB0279229B0B644001F2DDE /* Customization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

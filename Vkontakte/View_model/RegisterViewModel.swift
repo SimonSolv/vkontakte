@@ -6,28 +6,6 @@
 //
 
 import Foundation
-import UIKit
-
-//class PersonViewModel {
-//    
-//    private let user: UserData?
-//    
-//    let coreManager = CoreDataManager.shared
-//    
-//    var userId: String
-//    
-//    init(userId: String) {
-//        self.user = coreManager.getUser(id: userId)
-//    }
-//    
-//    var fullName: String {
-//        let myUser = self.user
-//        if myUser != nil {
-//            return "\(myUser!.name) \(myUser?.lastName ?? "")"
-//        }
-//        return ""
-//    }
-//}
 
 class RegisterViewModel {
     func checkConfirmationCode(code: String?) -> Bool {

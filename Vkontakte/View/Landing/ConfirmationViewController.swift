@@ -56,7 +56,7 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
     private lazy var enterCodeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Please, enter code from SMS"
+        label.text = "Please, enter code from SMS"~
         label.textColor = .systemGray2
         label.textAlignment = .center
         return label
@@ -72,7 +72,7 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
     
     private lazy var confirmButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Confirm", for: .normal)
+        btn.setTitle("Confirm"~, for: .normal)
         btn.setCustomStyle(style: .main)
         btn.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         btn.isEnabled = false
@@ -158,7 +158,10 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
         if self.delegate.checkConfirmationCode(code: self.codeEnteringTextView.text) == true {
             self.coordinator?.event(action: .addGeneralInfo, iniciator: self)
         } else {
-            //resolve problem Alert
+            let view = UIAlertController(title: "Warning"~, message: "Code is not accepted"~, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok"~, style: .default)
+            view.addAction(action)
+            self.present(view, animated: true)
             print ("Code is not valid")
         }
     }
@@ -174,5 +177,4 @@ class ConfirmationViewController: UIViewController, CoordinatedProtocol {
             self.confirmButton.makeDisable()
         }
     }
-
 }

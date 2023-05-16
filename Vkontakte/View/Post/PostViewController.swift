@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PostViewController: ThemeViewController, CoordinatedProtocol, PostTableViewCellDelegate {
+class PostViewController: UIViewController, CoordinatedProtocol, PostTableViewCellDelegate {
     
     var coordinator: CoordinatorProtocol?
     

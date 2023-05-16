@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedViewController: ThemeViewController, CoordinatedProtocol {
+class FeedViewController: UIViewController, CoordinatedProtocol {
 
     let coreManager = CoreDataManager.shared
     
@@ -15,6 +15,7 @@ class FeedViewController: ThemeViewController, CoordinatedProtocol {
     
     lazy var tableView: UITableView = {
         let table = UITableView()
+        table.layer.backgroundColor = AppColor().background?.cgColor
         return table
     }()
     
@@ -92,10 +93,8 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         let source: [Post] = coreManager.getSortedPosts(by: .date)
-//        let doubleTapp = CustomJestureRecognizer(target: self, action: #selector(FeedViewController.handleTap(_:)))
-//        doubleTapp.numberOfTapsRequired = 2
-//        cell.addGestureRecognizer(doubleTapp)
-//        doubleTapp.post = source[indexPath.row]
+        cell.contentView.backgroundColor = AppColor().background
+        cell.backgroundColor = AppColor().background
         cell.post = source[indexPath.row]
         cell.delegate = self
         return cell

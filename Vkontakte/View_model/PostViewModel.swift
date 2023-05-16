@@ -8,5 +8,7 @@
 import Foundation
 
 class PostViewModel {
-    
+    func tappedOnUser() {
+        
+    }
 }
