@@ -7,16 +7,72 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0B0F7029CEDC7E00357BF0 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */; };
+		CE0B0F7429CEE70B00357BF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0B0F7329CEE70B00357BF0 /* Main.storyboard */; };
+		CE0B0F7629CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */; };
+		CE0B0F7829D0369B00357BF0 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */; };
+		CE0B0F7A29D0507100357BF0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */; };
+		CE1498AC29ED8358003E3FA7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1498AB29ED8358003E3FA7 /* SettingsViewController.swift */; };
+		CE1498B229F31A5E003E3FA7 /* LocalizationShortCutString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1498B129F31A5E003E3FA7 /* LocalizationShortCutString.swift */; };
+		CE1498B529F31AB5003E3FA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE1498B729F31AB5003E3FA7 /* Localizable.strings */; };
+		CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */; };
+		CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */; };
+		CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2529B5234600A2E09A /* PostViewController.swift */; };
+		CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */; };
+		CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */; };
+		CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */; };
+		CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */; };
+		CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */; };
+		CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */; };
+		CE4D3A3929BDCD2C00A2E09A /* ProfileUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */; };
+		CE4D3A4129C09B1300A2E09A /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */; };
+		CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */; };
+		CE4D3A4529C10A3A00A2E09A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */; };
+		CE7C6DD629DD99E900874BB2 /* PostImage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DC729DD99E800874BB2 /* PostImage2.jpg */; };
+		CE7C6DD729DD99E900874BB2 /* PeterAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DC829DD99E900874BB2 /* PeterAvatar.jpg */; };
+		CE7C6DD829DD99E900874BB2 /* PostImage4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DC929DD99E900874BB2 /* PostImage4.jpg */; };
+		CE7C6DD929DD99E900874BB2 /* SelenaAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCA29DD99E900874BB2 /* SelenaAvatar.jpg */; };
+		CE7C6DDA29DD99E900874BB2 /* PostImage0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCB29DD99E900874BB2 /* PostImage0.jpg */; };
+		CE7C6DDB29DD99E900874BB2 /* LeoAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCC29DD99E900874BB2 /* LeoAvatar.jpg */; };
+		CE7C6DDC29DD99E900874BB2 /* PostImage8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCD29DD99E900874BB2 /* PostImage8.jpg */; };
+		CE7C6DDD29DD99E900874BB2 /* PostImage6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCE29DD99E900874BB2 /* PostImage6.jpg */; };
+		CE7C6DDE29DD99E900874BB2 /* PostImage5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DCF29DD99E900874BB2 /* PostImage5.jpg */; };
+		CE7C6DDF29DD99E900874BB2 /* MarkAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD029DD99E900874BB2 /* MarkAvatar.jpg */; };
+		CE7C6DE029DD99E900874BB2 /* KateAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD129DD99E900874BB2 /* KateAvatar.jpg */; };
+		CE7C6DE129DD99E900874BB2 /* DefaultAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD229DD99E900874BB2 /* DefaultAvatar.jpg */; };
+		CE7C6DE229DD99E900874BB2 /* PostImage3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD329DD99E900874BB2 /* PostImage3.jpg */; };
+		CE7C6DE329DD99E900874BB2 /* MikeAvatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD429DD99E900874BB2 /* MikeAvatar.jpg */; };
+		CE7C6DE429DD99E900874BB2 /* DefaultPostImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD529DD99E900874BB2 /* DefaultPostImage.jpg */; };
+		CE95C19B29D4BC5F00477424 /* EditInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C19A29D4BC5F00477424 /* EditInfoTableViewCell.swift */; };
+		CE95C19F29D4C91400477424 /* EditAvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C19E29D4C91400477424 /* EditAvatarTableViewCell.swift */; };
+		CE95C1A129D6E71400477424 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C1A029D6E71400477424 /* PostViewModel.swift */; };
+		CE95C1A329DD769100477424 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C1A229DD769100477424 /* FileManager.swift */; };
 		CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274429B002EA001F2DDE /* AppDelegate.swift */; };
 		CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274629B002EA001F2DDE /* SceneDelegate.swift */; };
-		CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274829B002EA001F2DDE /* ViewController.swift */; };
-		CEB0274C29B002EA001F2DDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0274A29B002EA001F2DDE /* Main.storyboard */; };
 		CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */; };
 		CEB0275129B002EC001F2DDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0275029B002EC001F2DDE /* Assets.xcassets */; };
 		CEB0275429B002EC001F2DDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */; };
 		CEB0275F29B002EC001F2DDE /* VkontakteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0275E29B002EC001F2DDE /* VkontakteTests.swift */; };
 		CEB0276929B002EC001F2DDE /* VkontakteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0276829B002EC001F2DDE /* VkontakteUITests.swift */; };
 		CEB0276B29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0276A29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift */; };
+		CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */; };
+		CEB0278029B007F5001F2DDE /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0277F29B007F5001F2DDE /* Factory.swift */; };
+		CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0278929B07B1D001F2DDE /* LandingViewController.swift */; };
+		CEB0278D29B07C3C001F2DDE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEB0278C29B07C3C001F2DDE /* SnapKit */; };
+		CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */; };
+		CEB0279229B0B644001F2DDE /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279129B0B644001F2DDE /* Customization.swift */; };
+		CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */; };
+		CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279529B12263001F2DDE /* RegisterViewModel.swift */; };
+		CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */; };
+		CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */; };
+		CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A029B27448001F2DDE /* FeedViewController.swift */; };
+		CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */; };
+		CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */; };
+		CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027A829B27CD5001F2DDE /* PostStorage.swift */; };
+		CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */; };
+		CEB027AD29B28411001F2DDE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB027AC29B28411001F2DDE /* UserView.swift */; };
+		CEC0F93529CC72130065FFCE /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F93429CC72130065FFCE /* LikedViewController.swift */; };
+		CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,11 +93,51 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		CE0B0F7329CEE70B00357BF0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		CE1498AB29ED8358003E3FA7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CE1498B029F31998003E3FA7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		CE1498B129F31A5E003E3FA7 /* LocalizationShortCutString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationShortCutString.swift; sourceTree = "<group>"; };
+		CE1498B629F31AB5003E3FA7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE1498B829F31ACD003E3FA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFiller.swift; sourceTree = "<group>"; };
+		CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
+		CE4D3A2529B5234600A2E09A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
+		CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserTableViewCell.swift; sourceTree = "<group>"; };
+		CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE7C6DC729DD99E800874BB2 /* PostImage2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage2.jpg; path = Vkontakte/Assets.xcassets/PostImage2.imageset/PostImage2.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DC829DD99E900874BB2 /* PeterAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PeterAvatar.jpg; path = Vkontakte/Assets.xcassets/PeterAvatar.imageset/PeterAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DC929DD99E900874BB2 /* PostImage4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage4.jpg; path = Vkontakte/Assets.xcassets/PostImage3.imageset/PostImage4.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCA29DD99E900874BB2 /* SelenaAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SelenaAvatar.jpg; path = Vkontakte/Assets.xcassets/SelenaAvatar.imageset/SelenaAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCB29DD99E900874BB2 /* PostImage0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage0.jpg; path = Vkontakte/Assets.xcassets/PostImage0.imageset/PostImage0.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCC29DD99E900874BB2 /* LeoAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LeoAvatar.jpg; path = Vkontakte/Assets.xcassets/LeoAvatar.imageset/LeoAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCD29DD99E900874BB2 /* PostImage8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage8.jpg; path = Vkontakte/Assets.xcassets/PostImage8.imageset/PostImage8.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCE29DD99E900874BB2 /* PostImage6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage6.jpg; path = Vkontakte/Assets.xcassets/PostImage7.imageset/PostImage6.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DCF29DD99E900874BB2 /* PostImage5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage5.jpg; path = Vkontakte/Assets.xcassets/PostImage5.imageset/PostImage5.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD029DD99E900874BB2 /* MarkAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = MarkAvatar.jpg; path = Vkontakte/Assets.xcassets/MarkAvatar.imageset/MarkAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD129DD99E900874BB2 /* KateAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = KateAvatar.jpg; path = Vkontakte/Assets.xcassets/KateAvatar.imageset/KateAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD229DD99E900874BB2 /* DefaultAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DefaultAvatar.jpg; path = Vkontakte/Assets.xcassets/DefaultAvatar.imageset/DefaultAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD329DD99E900874BB2 /* PostImage3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PostImage3.jpg; path = Vkontakte/Assets.xcassets/PostImage4.imageset/PostImage3.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD429DD99E900874BB2 /* MikeAvatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = MikeAvatar.jpg; path = Vkontakte/Assets.xcassets/MikeAvatar.imageset/MikeAvatar.jpg; sourceTree = SOURCE_ROOT; };
+		CE7C6DD529DD99E900874BB2 /* DefaultPostImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DefaultPostImage.jpg; path = Vkontakte/Assets.xcassets/DefaultPostImage.imageset/DefaultPostImage.jpg; sourceTree = SOURCE_ROOT; };
+		CE95C19A29D4BC5F00477424 /* EditInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoTableViewCell.swift; sourceTree = "<group>"; };
+		CE95C19E29D4C91400477424 /* EditAvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAvatarTableViewCell.swift; sourceTree = "<group>"; };
+		CE95C1A029D6E71400477424 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		CE95C1A229DD769100477424 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CEB0274129B002EA001F2DDE /* Vkontakte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vkontakte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0274429B002EA001F2DDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0274629B002EA001F2DDE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEB0274829B002EA001F2DDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CEB0274B29B002EA001F2DDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEB0274E29B002EA001F2DDE /* Vkontakte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vkontakte.xcdatamodel; sourceTree = "<group>"; };
 		CEB0275029B002EC001F2DDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB0275329B002EC001F2DDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +147,23 @@
 		CEB0276429B002EC001F2DDE /* VkontakteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VkontakteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0276829B002EC001F2DDE /* VkontakteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkontakteUITests.swift; sourceTree = "<group>"; };
 		CEB0276A29B002EC001F2DDE /* VkontakteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkontakteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		CEB0277F29B007F5001F2DDE /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		CEB0278929B07B1D001F2DDE /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CEB0279129B0B644001F2DDE /* Customization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		CEB0279529B12263001F2DDE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoViewController.swift; sourceTree = "<group>"; };
+		CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		CEB027A029B27448001F2DDE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionHeaderView.swift; sourceTree = "<group>"; };
+		CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEB027A829B27CD5001F2DDE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
+		CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		CEB027AC29B28411001F2DDE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		CEC0F93429CC72130065FFCE /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB0278D29B07C3C001F2DDE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +192,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE1498AD29ED836C003E3FA7 /* SideViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE1498AB29ED8358003E3FA7 /* SettingsViewController.swift */,
+				CE0B0F7729D0369B00357BF0 /* SideMenuViewController.swift */,
+			);
+			path = SideViews;
+			sourceTree = "<group>";
+		};
+		CE4D3A2D29BA1C1200A2E09A /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2529B5234600A2E09A /* PostViewController.swift */,
+				CEB027AA29B281B2001F2DDE /* PostTableViewCell.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		CE4D3A2E29BB457400A2E09A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2F29BB459C00A2E09A /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CE4D3A3729BDCD0100A2E09A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A3829BDCD2C00A2E09A /* ProfileUserTableViewCell.swift */,
+				CE4D3A4229C106AC00A2E09A /* PhotosTableViewCell.swift */,
+				CE4D3A4429C10A3A00A2E09A /* PhotoCollectionViewCell.swift */,
+				CE0B0F7529CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift */,
+				CE95C19A29D4BC5F00477424 /* EditInfoTableViewCell.swift */,
+				CE95C19E29D4C91400477424 /* EditAvatarTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CE7C6DC629DD994300874BB2 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				CE7C6DD229DD99E900874BB2 /* DefaultAvatar.jpg */,
+				CE7C6DD529DD99E900874BB2 /* DefaultPostImage.jpg */,
+				CE7C6DD129DD99E900874BB2 /* KateAvatar.jpg */,
+				CE7C6DCC29DD99E900874BB2 /* LeoAvatar.jpg */,
+				CE7C6DD029DD99E900874BB2 /* MarkAvatar.jpg */,
+				CE7C6DD429DD99E900874BB2 /* MikeAvatar.jpg */,
+				CE7C6DC829DD99E900874BB2 /* PeterAvatar.jpg */,
+				CE7C6DCB29DD99E900874BB2 /* PostImage0.jpg */,
+				CE7C6DC729DD99E800874BB2 /* PostImage2.jpg */,
+				CE7C6DD329DD99E900874BB2 /* PostImage3.jpg */,
+				CE7C6DC929DD99E900874BB2 /* PostImage4.jpg */,
+				CE7C6DCF29DD99E900874BB2 /* PostImage5.jpg */,
+				CE7C6DCE29DD99E900874BB2 /* PostImage6.jpg */,
+				CE7C6DCD29DD99E900874BB2 /* PostImage8.jpg */,
+				CE7C6DCA29DD99E900874BB2 /* SelenaAvatar.jpg */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
 		CEB0273829B002EA001F2DDE = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +276,23 @@
 		CEB0274329B002EA001F2DDE /* Vkontakte */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
 				CEB0274629B002EA001F2DDE /* SceneDelegate.swift */,
-				CEB0274829B002EA001F2DDE /* ViewController.swift */,
-				CEB0274A29B002EA001F2DDE /* Main.storyboard */,
-				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
+				CEB0274429B002EA001F2DDE /* AppDelegate.swift */,
+				CEB0277A29B0064D001F2DDE /* AppCoordinator.swift */,
+				CEB0277F29B007F5001F2DDE /* Factory.swift */,
+				CE18E4BF29C70B5D006AC8FA /* DataFiller.swift */,
+				CEB0279B29B22979001F2DDE /* Services */,
+				CEB0279029B0B630001F2DDE /* CustomStyle */,
+				CEB0278429B07AAD001F2DDE /* View */,
+				CEB0278329B07A94001F2DDE /* View_model */,
+				CEB0278129B07990001F2DDE /* Model */,
+				CE7C6DC629DD994300874BB2 /* Resourses */,
 				CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */,
+				CEB0275029B002EC001F2DDE /* Assets.xcassets */,
 				CEB0275529B002EC001F2DDE /* Info.plist */,
 				CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */,
+				CE0B0F7329CEE70B00357BF0 /* Main.storyboard */,
+				CE1498B729F31AB5003E3FA7 /* Localizable.strings */,
 			);
 			path = Vkontakte;
 			sourceTree = "<group>";
@@ -130,6 +314,103 @@
 			path = VkontakteUITests;
 			sourceTree = "<group>";
 		};
+		CEB0278129B07990001F2DDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB027A829B27CD5001F2DDE /* PostStorage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEB0278329B07A94001F2DDE /* View_model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279529B12263001F2DDE /* RegisterViewModel.swift */,
+				CE4D3A3529BCF8A800A2E09A /* LoginViewModel.swift */,
+				CE95C1A029D6E71400477424 /* PostViewModel.swift */,
+			);
+			path = View_model;
+			sourceTree = "<group>";
+		};
+		CEB0278429B07AAD001F2DDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2E29BB457400A2E09A /* Login */,
+				CE4D3A2D29BA1C1200A2E09A /* Post */,
+				CEB0278829B07AF5001F2DDE /* Feed */,
+				CEB0278729B07AEC001F2DDE /* Liked */,
+				CEB0278629B07AD8001F2DDE /* Profile */,
+				CEB0278529B07ACE001F2DDE /* Landing */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEB0278529B07ACE001F2DDE /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0278929B07B1D001F2DDE /* LandingViewController.swift */,
+				CEB0278E29B0A522001F2DDE /* RegisterViewController.swift */,
+				CEB0279329B0B91A001F2DDE /* ConfirmationViewController.swift */,
+				CEB0279929B13190001F2DDE /* GeneralInfoViewController.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		CEB0278629B07AD8001F2DDE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE1498AD29ED836C003E3FA7 /* SideViews */,
+				CE0B0F7929D0507100357BF0 /* ContainerViewController.swift */,
+				CE4D3A2729B5CB6F00A2E09A /* ProfileViewController.swift */,
+				CE4D3A2929B5CC2200A2E09A /* ProfileUserView.swift */,
+				CE18E4C129C99D75006AC8FA /* AdditionalInfoViewController.swift */,
+				CE0B0F6F29CEDC7E00357BF0 /* CreatePostViewController.swift */,
+				CEC0F93629CD9DEC0065FFCE /* EditProfileViewController.swift */,
+				CE4D3A3729BDCD0100A2E09A /* Cells */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CEB0278729B07AEC001F2DDE /* Liked */ = {
+			isa = PBXGroup;
+			children = (
+				CEC0F93429CC72130065FFCE /* LikedViewController.swift */,
+			);
+			path = Liked;
+			sourceTree = "<group>";
+		};
+		CEB0278829B07AF5001F2DDE /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				CEB027A029B27448001F2DDE /* FeedViewController.swift */,
+				CEB027A229B275FC001F2DDE /* UsersCollectionHeaderView.swift */,
+				CEB027A429B276AA001F2DDE /* UserCollectionViewCell.swift */,
+				CEB027AC29B28411001F2DDE /* UserView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		CEB0279029B0B630001F2DDE /* CustomStyle */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0279129B0B644001F2DDE /* Customization.swift */,
+				CE4D3A4029C09B1300A2E09A /* CustomAlert.swift */,
+				CE1498B129F31A5E003E3FA7 /* LocalizationShortCutString.swift */,
+			);
+			path = CustomStyle;
+			sourceTree = "<group>";
+		};
+		CEB0279B29B22979001F2DDE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D3A2B29B7A0F500A2E09A /* CoreDataManager.swift */,
+				CEB0279C29B229A0001F2DDE /* LocalNotificationManager.swift */,
+				CE4D3A3329BCF2DE00A2E09A /* LocalAuthorizationService.swift */,
+				CE95C1A229DD769100477424 /* FileManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +427,9 @@
 			dependencies = (
 			);
 			name = Vkontakte;
+			packageProductDependencies = (
+				CEB0278C29B07C3C001F2DDE /* SnapKit */,
+			);
 			productName = Vkontakte;
 			productReference = CEB0274129B002EA001F2DDE /* Vkontakte.app */;
 			productType = "com.apple.product-type.application";
@@ -216,8 +500,12 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CEB0273829B002EA001F2DDE;
+			packageReferences = (
+				CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CEB0274229B002EA001F2DDE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,9 +522,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7C6DDF29DD99E900874BB2 /* MarkAvatar.jpg in Resources */,
+				CE7C6DE429DD99E900874BB2 /* DefaultPostImage.jpg in Resources */,
+				CE7C6DD829DD99E900874BB2 /* PostImage4.jpg in Resources */,
+				CE7C6DD629DD99E900874BB2 /* PostImage2.jpg in Resources */,
+				CE7C6DDC29DD99E900874BB2 /* PostImage8.jpg in Resources */,
+				CE7C6DE129DD99E900874BB2 /* DefaultAvatar.jpg in Resources */,
+				CE0B0F7429CEE70B00357BF0 /* Main.storyboard in Resources */,
+				CE7C6DE329DD99E900874BB2 /* MikeAvatar.jpg in Resources */,
 				CEB0275429B002EC001F2DDE /* LaunchScreen.storyboard in Resources */,
+				CE7C6DD729DD99E900874BB2 /* PeterAvatar.jpg in Resources */,
 				CEB0275129B002EC001F2DDE /* Assets.xcassets in Resources */,
-				CEB0274C29B002EA001F2DDE /* Main.storyboard in Resources */,
+				CE7C6DE229DD99E900874BB2 /* PostImage3.jpg in Resources */,
+				CE7C6DDA29DD99E900874BB2 /* PostImage0.jpg in Resources */,
+				CE7C6DE029DD99E900874BB2 /* KateAvatar.jpg in Resources */,
+				CE7C6DD929DD99E900874BB2 /* SelenaAvatar.jpg in Resources */,
+				CE7C6DDD29DD99E900874BB2 /* PostImage6.jpg in Resources */,
+				CE1498B529F31AB5003E3FA7 /* Localizable.strings in Resources */,
+				CE7C6DDB29DD99E900874BB2 /* LeoAvatar.jpg in Resources */,
+				CE7C6DDE29DD99E900874BB2 /* PostImage5.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +565,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB0274929B002EA001F2DDE /* ViewController.swift in Sources */,
+				CE4D3A4129C09B1300A2E09A /* CustomAlert.swift in Sources */,
+				CE0B0F7029CEDC7E00357BF0 /* CreatePostViewController.swift in Sources */,
+				CE4D3A3029BB459C00A2E09A /* LoginViewController.swift in Sources */,
+				CEB0278029B007F5001F2DDE /* Factory.swift in Sources */,
+				CE4D3A4329C106AC00A2E09A /* PhotosTableViewCell.swift in Sources */,
+				CEB0278F29B0A522001F2DDE /* RegisterViewController.swift in Sources */,
+				CEB0277B29B0064D001F2DDE /* AppCoordinator.swift in Sources */,
+				CE18E4C029C70B5D006AC8FA /* DataFiller.swift in Sources */,
+				CE4D3A2629B5234600A2E09A /* PostViewController.swift in Sources */,
+				CEB027A329B275FC001F2DDE /* UsersCollectionHeaderView.swift in Sources */,
+				CE4D3A2C29B7A0F500A2E09A /* CoreDataManager.swift in Sources */,
+				CE4D3A3629BCF8A800A2E09A /* LoginViewModel.swift in Sources */,
 				CEB0274F29B002EA001F2DDE /* Vkontakte.xcdatamodeld in Sources */,
+				CE0B0F7829D0369B00357BF0 /* SideMenuViewController.swift in Sources */,
+				CE95C19F29D4C91400477424 /* EditAvatarTableViewCell.swift in Sources */,
+				CEB0279429B0B91A001F2DDE /* ConfirmationViewController.swift in Sources */,
+				CE0B0F7A29D0507100357BF0 /* ContainerViewController.swift in Sources */,
 				CEB0274529B002EA001F2DDE /* AppDelegate.swift in Sources */,
+				CE4D3A2829B5CB6F00A2E09A /* ProfileViewController.swift in Sources */,
+				CEB027A929B27CD5001F2DDE /* PostStorage.swift in Sources */,
+				CEB027A529B276AA001F2DDE /* UserCollectionViewCell.swift in Sources */,
+				CEB0279629B12263001F2DDE /* RegisterViewModel.swift in Sources */,
+				CE4D3A3929BDCD2C00A2E09A /* ProfileUserTableViewCell.swift in Sources */,
+				CE4D3A4529C10A3A00A2E09A /* PhotoCollectionViewCell.swift in Sources */,
+				CEB027AB29B281B2001F2DDE /* PostTableViewCell.swift in Sources */,
+				CEB027A129B27448001F2DDE /* FeedViewController.swift in Sources */,
+				CE95C19B29D4BC5F00477424 /* EditInfoTableViewCell.swift in Sources */,
+				CEC0F93729CD9DEC0065FFCE /* EditProfileViewController.swift in Sources */,
+				CE1498B229F31A5E003E3FA7 /* LocalizationShortCutString.swift in Sources */,
+				CEB0279A29B13190001F2DDE /* GeneralInfoViewController.swift in Sources */,
+				CE95C1A329DD769100477424 /* FileManager.swift in Sources */,
 				CEB0274729B002EA001F2DDE /* SceneDelegate.swift in Sources */,
+				CE0B0F7629CF3BFD00357BF0 /* PostsHeaderTableViewCell.swift in Sources */,
+				CEB027AD29B28411001F2DDE /* UserView.swift in Sources */,
+				CE1498AC29ED8358003E3FA7 /* SettingsViewController.swift in Sources */,
+				CE18E4C229C99D76006AC8FA /* AdditionalInfoViewController.swift in Sources */,
+				CEB0279D29B229A0001F2DDE /* LocalNotificationManager.swift in Sources */,
+				CE95C1A129D6E71400477424 /* PostViewModel.swift in Sources */,
+				CEC0F93529CC72130065FFCE /* LikedViewController.swift in Sources */,
+				CEB0278A29B07B1D001F2DDE /* LandingViewController.swift in Sources */,
+				CE4D3A3429BCF2DE00A2E09A /* LocalAuthorizationService.swift in Sources */,
+				CE4D3A2A29B5CC2300A2E09A /* ProfileUserView.swift in Sources */,
+				CEB0279229B0B644001F2DDE /* Customization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,18 +644,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CEB0274A29B002EA001F2DDE /* Main.storyboard */ = {
+		CE1498B729F31AB5003E3FA7 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CEB0274B29B002EA001F2DDE /* Base */,
+				CE1498B629F31AB5003E3FA7 /* ru */,
+				CE1498B829F31ACD003E3FA7 /* en */,
 			);
-			name = Main.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		CEB0275229B002EC001F2DDE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CEB0275329B002EC001F2DDE /* Base */,
+				CE1498B029F31998003E3FA7 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -324,6 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -384,6 +730,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -444,6 +791,7 @@
 				DEVELOPMENT_TEAM = TDYKKCNQAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vkontakte/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use your biometry to give you fast and easy access to enter the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -472,6 +820,7 @@
 				DEVELOPMENT_TEAM = TDYKKCNQAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vkontakte/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use your biometry to give you fast and easy access to enter the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -606,6 +955,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CEB0278C29B07C3C001F2DDE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEB0278B29B07C3C001F2DDE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CEB0274D29B002EA001F2DDE /* Vkontakte.xcdatamodeld */ = {
